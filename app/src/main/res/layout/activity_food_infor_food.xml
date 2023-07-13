@@ -13,6 +13,7 @@
         android:background="@color/main_red"
         >
         <ImageButton
+            android:id="@+id/btn_infor_food_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -30,61 +31,63 @@
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/banner_infor_food"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:orientation="vertical"
-            android:background="@drawable/boder_radius_infor_item">
-            <LinearLayout
+        android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_infor_food_img"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tv_infor_food_name"
-                    android:textStyle="bold"
-                    android:textSize="20dp"
+                android:layout_height="200dp"
+                android:background="@drawable/boder_radius_banner"
+                android:scaleType="fitXY"
+                />
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="150dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical"
+                android:background="@drawable/boder_radius_infor_item">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bún chả khánh pro"
-                    />
-                <TextView
-                    android:id="@+id/tv_infor_food_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="50.000đ"
-                    android:textColor="@color/main_red"
-                    android:textStyle="italic"
-                    android:textSize="20dp"
-                    />
-                <TextView
-                    android:id="@+id/tv_infor_food_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, ..."
-                    />
+                    android:layout_margin="30dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tv_infor_food_name"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bún chả khánh pro"
+                        />
+                    <TextView
+                        android:id="@+id/tv_infor_food_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="50.000đ"
+                        android:textColor="@color/main_red"
+                        android:textStyle="italic"
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_infor_food_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, ..."
+                        />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
     </RelativeLayout>
     <Button
         android:id="@+id/btn_infor_food_addToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Thêm vào giỏ hàng"
-        android:layout_margin="30dp"
+        android:layout_marginHorizontal="30dp"
         android:textColor="@color/white"
         android:backgroundTint="@color/main_red"
         />
