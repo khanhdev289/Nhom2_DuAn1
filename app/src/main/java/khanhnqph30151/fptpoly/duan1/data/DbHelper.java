@@ -14,12 +14,13 @@ public class DbHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
     public static final String TABLE_USER_CREATE = "CREATE TABLE IF NOT EXISTS " +
-            "tbl_usser (" +
-            "user_name TEXT PRIMARY KEY , " +
+            "tbl_user (" +
+            "user_name TEXT PRIMARY KEY," +
             "user_pass TEXT NOT NULL," +
             "user_role TEXT" +
             ")";
-
+    public static final String insert_admin="Insert into tbl_user(user_name,user_pass,user_role) values" +
+            "('admin','123','admin')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -68,9 +69,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
-        db.execSQL("INSERT INTO tbl_user VALUES ('admin', '123123', 'admin'),('user','123123', 'user')");
-        db.execSQL("INSERT INTO tbl_food VALUES (1, 'link1', 'ten1', 'mota1', 20000), (2, 'link2', 'ten2', 'mota2', 30000), (3, 'link3', 'ten3', 'mota3', 40000)");
-
+      db.execSQL(insert_admin);
 
     }
 
