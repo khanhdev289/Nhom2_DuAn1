@@ -7,6 +7,9 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -63,6 +66,9 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recy_fragment_home_listFood);
 
+        ImageButton img_tápearch = view.findViewById(R.id.btn_fragment_home_tapSearch);
+        EditText edSearch = view.findViewById(R.id.ed_fragment_home_search);
+
         viewPager = view.findViewById(R.id.viewPager);
         circleIndicator = view.findViewById(R.id.circle_indicator);
 
@@ -71,6 +77,24 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(slideAdapter);
         circleIndicator.setViewPager(viewPager);
         slideAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
+
+        img_tápearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edSearch.length()>0){
+                    String searchName = edSearch.getText().toString();
+                    LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    HomeDAO homeDAO1 = new HomeDAO(getContext());
+                    listHome = new ArrayList<>();
+                    listHome = homeDAO1.Search(searchName);
+                    adapter.setData(listHome);
+                    recyclerView.setAdapter(adapter);
+                }else {
+                    reloadData();
+                }
+            }
+        });
 
         autoSlideShow();
         reloadData();
@@ -130,4 +154,5 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     }
+
 }

@@ -69,7 +69,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
+
+        db.execSQL("INSERT INTO tbl_food VALUES (1, 'https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), (2, 'link2', 'ten2', 'mota2', 30000), " +
+                "(4, 'link3', 'ten3', 'mota3', 40000), (5, 'link3', 'ten3', 'mota3', 40000), (6, 'link3', 'ten3', 'mota3', 40000)," +
+                " (7, 'link3', 'ten3', 'mota3', 40000), (8, 'link3', 'ten3', 'mota3', 40000), (9, 'link3', 'ten3', 'mota3', 40000)");
+
+
       db.execSQL(insert_admin);
+
 
     }
 
