@@ -59,4 +59,26 @@ public class HomeDAO {
         return lst;
 
     }
+    @SuppressLint("Range")
+    public ArrayList<Home> Search(String ten) {
+        SQLiteDatabase sqLite = dbHelper.getWritableDatabase();
+        ArrayList<Home> list = new ArrayList<>();
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_food WHERE food_name LIKE '%"+ ten +"%' ", null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            do {
+                Home home = new Home();
+                home.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_id"))));
+                home.setImg(cursor.getString(cursor.getColumnIndex("food_img")));
+                home.setName(cursor.getString(cursor.getColumnIndex("food_name")));
+                home.setDes(cursor.getString(cursor.getColumnIndex("food_description")));
+                home.setPrice(Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_price"))));
+                list.add(home);
+
+            }
+            while (cursor.moveToNext());
+        }
+        return list;
+    }
+
 }
