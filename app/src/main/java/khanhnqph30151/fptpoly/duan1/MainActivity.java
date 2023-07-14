@@ -11,15 +11,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 
-import khanhnqph30151.fptpoly.duan1.Setting.UserFragment;
+import khanhnqph30151.fptpoly.duan1.setting.UserFragment;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodFragment;
 import khanhnqph30151.fptpoly.duan1.admin.list_history.ListHistoryFragment;
 import khanhnqph30151.fptpoly.duan1.admin.list_request.ListRequestFragment;
 import khanhnqph30151.fptpoly.duan1.admin.statis.StatisFragment;
-import khanhnqph30151.fptpoly.duan1.user.Cart.Cart_Fragment;
-import khanhnqph30151.fptpoly.duan1.user.History.HistoryFragment;
-import khanhnqph30151.fptpoly.duan1.user.Home.HomeFragment;
-import khanhnqph30151.fptpoly.duan1.user.Request.RequestFragment;
+import khanhnqph30151.fptpoly.duan1.user.cart.Cart_Fragment;
+import khanhnqph30151.fptpoly.duan1.user.history.HistoryFragment;
+import khanhnqph30151.fptpoly.duan1.user.home.HomeFragment;
+import khanhnqph30151.fptpoly.duan1.user.request.RequestFragment;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;

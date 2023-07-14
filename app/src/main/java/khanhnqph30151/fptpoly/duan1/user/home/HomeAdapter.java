@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.Home;
+package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.activity.ItemInforFood;

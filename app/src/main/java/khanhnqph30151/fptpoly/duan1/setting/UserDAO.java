@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.Setting;
+package khanhnqph30151.fptpoly.duan1.setting;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
-import khanhnqph30151.fptpoly.duan1.model.User;
 
 public class UserDAO {
     private final SQLiteDatabase sqLiteDatabase;

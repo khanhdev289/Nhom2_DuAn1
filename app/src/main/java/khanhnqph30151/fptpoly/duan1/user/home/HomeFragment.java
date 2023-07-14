@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.Home;
+package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

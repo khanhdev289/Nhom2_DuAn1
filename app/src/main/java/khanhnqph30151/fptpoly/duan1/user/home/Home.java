@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.Home;
+package khanhnqph30151.fptpoly.duan1.user.home;
 
 public class Home {
     private int id;

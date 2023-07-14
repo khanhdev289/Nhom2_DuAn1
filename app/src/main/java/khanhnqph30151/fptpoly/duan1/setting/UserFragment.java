@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.Setting;
+package khanhnqph30151.fptpoly.duan1.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
