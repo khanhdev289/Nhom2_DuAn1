@@ -13,13 +13,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     public static final String TABLE_USER_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_user (" +
             "user_name TEXT PRIMARY KEY," +
             "user_pass TEXT NOT NULL," +
             "user_role TEXT" +
             ")";
-    public static final String insert_admin="Insert into tbl_user(user_name,user_pass,user_role) values" +
+    public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
             "('admin','123','admin')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
@@ -69,13 +70,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
-      db.execSQL(insert_admin);
+        db.execSQL(insert_admin);
+        db.execSQL("INSERT INTO tbl_food VALUES (1, 'https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), (2, 'link2', 'ten2', 'mota2', 30000), " +
+                "(4, 'link3', 'ten3', 'mota3', 40000), (5, 'link3', 'ten3', 'mota3', 40000), (6, 'link3', 'ten3', 'mota3', 40000)," +
+                " (7, 'link3', 'ten3', 'mota3', 40000), (8, 'link3', 'ten3', 'mota3', 40000), (9, 'link3', 'ten3', 'mota3', 40000)");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion){
+        if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS tbl_thuThu");
             db.execSQL("DROP TABLE IF EXISTS tbl_thanhVien");
             db.execSQL("DROP TABLE IF EXISTS tbl_loaiSach");

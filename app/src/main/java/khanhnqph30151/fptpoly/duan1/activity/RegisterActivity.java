@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(dao.insert(user)>0){
                         Toast.makeText(getApplicationContext(), "thêm tai khoan thanh cong", Toast.LENGTH_SHORT).show();
                         Intent i=new Intent(RegisterActivity.this,LoginActivity.class);
+                        finish();
                         startActivity(i);
                     }else {
                         Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
