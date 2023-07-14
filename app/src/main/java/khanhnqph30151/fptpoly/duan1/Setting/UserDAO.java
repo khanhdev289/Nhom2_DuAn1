@@ -67,9 +67,9 @@ public int update(User user){
         }
         return 1;
     }
-    public String getRole(String  id) {
+    public String getRole(String  userName) {
         SQLiteDatabase database =helper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT user_role FROM tbl_user WHERE user_id = ?", new String[]{id});
+        Cursor cursor = database.rawQuery("SELECT user_role FROM tbl_user WHERE user_name = ?", new String[]{userName});
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             return cursor.getString(0);

@@ -6,13 +6,15 @@
         />
     <item android:id="@+id/action_ListRequestt"
         android:title="Phản Hồi"
-        android:icon="@drawable/baseline_shopping_cart_24"/>
-    <item android:id="@+id/action_List_Request"
-        android:title="Đơn Hàng"
         android:icon="@drawable/baseline_email_24"/>
+    <item android:id="@+id/action_List_Invo"
+        android:title="Đơn Hàng"
+
+        android:icon="@drawable/icon_invoice"
+        />
     <item android:id="@+id/action_Statis"
         android:title="Thống Kê"
-        android:icon="@drawable/baseline_history_24"/>
+        android:icon="@drawable/icon_statis"/>
     <item android:id="@+id/action_User"
         android:title="@string/User"
         android:icon="@drawable/baseline_account_circle_24"/>
