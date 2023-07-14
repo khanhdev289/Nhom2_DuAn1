@@ -11,12 +11,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.Setting.UserDAO;
-import khanhnqph30151.fptpoly.duan1.model.User;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.setting.User;
 
 public class ChangePassActivity extends AppCompatActivity {
     EditText edPassOld, edPass, edRePass;
-    Button btn_update;
+    Button btn_update, btn_back;
     UserDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,14 @@ public class ChangePassActivity extends AppCompatActivity {
         edPass=findViewById(R.id.edNewPass);
         edRePass=findViewById(R.id.edReNewPass);
         btn_update=findViewById(R.id.btn_changePass);
+        btn_back =findViewById(R.id.btn_changePass_cancel);
         dao=new UserDAO(this);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

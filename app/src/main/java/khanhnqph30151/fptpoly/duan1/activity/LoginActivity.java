@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import khanhnqph30151.fptpoly.duan1.MainActivity;
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.Setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_Register;
@@ -31,9 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         edPassword=findViewById(R.id.edPassword);
         btnLogin=findViewById(R.id.btn_login);
         dao=new UserDAO(this);
-
-
         tv_Register=findViewById(R.id.tv_Register);
+
         tv_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,9 +62,8 @@ public class LoginActivity extends AppCompatActivity {
             if (dao.checkLogin(strUser, strPass) > 0) {
                 Toast.makeText(this, "Login thanh cong", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
-
                 startActivity(i);
-                rememberUser(strUser, strPass);
+                rememberUser(strUser, strPass,dao.getRole(strUser));
                 finish();
             } else {
                 Toast.makeText(this, "Login k thanh cong", Toast.LENGTH_SHORT).show();
@@ -75,11 +73,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void rememberUser(String u, String p) {
+    public void rememberUser(String u, String p,String r) {
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor edit = pref.edit();
         edit.putString("USERNAME", u);
         edit.putString("PASSWORD", p);
+        edit.putString("ROLE",r);
         edit.commit();
     }
 }

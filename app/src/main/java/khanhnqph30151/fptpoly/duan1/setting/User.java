@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.model;
+package khanhnqph30151.fptpoly.duan1.setting;
 
 public class User {
 

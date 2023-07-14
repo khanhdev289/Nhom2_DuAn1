@@ -13,13 +13,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     public static final String TABLE_USER_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_user (" +
             "user_name TEXT PRIMARY KEY," +
             "user_pass TEXT NOT NULL," +
             "user_role TEXT" +
             ")";
-    public static final String insert_admin="Insert into tbl_user(user_name,user_pass,user_role) values" +
+    public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
             "('admin','123','admin')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
@@ -51,9 +52,12 @@ public class DbHelper extends SQLiteOpenHelper {
             "tbl_invoice (" +
             "invoice_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "cart_id INTEGER REFERENCES tbl_cart(cart_id), " +
+            "cart_phone TEXT NOT NULL, " +
+            "cart_name TEXT NOT NULL, " +
             "cart_address TEXT NOT NULL, " +
-            "invoice_time TEXT NOT NULL, " +
-            "invoice_status TEXT NOT NULL" +
+            "invoice_conten TEXT NOT NULL, " +
+            "invoice_sum DOUBLE NOT NULL, " +
+            "invoice_status TEXT " +
             ")";
 
 
@@ -69,18 +73,32 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
+
+
+        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán')");
+
+
+
+        db.execSQL("INSERT INTO tbl_food VALUES (1, 'https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), (2, 'link2', 'ten2', 'mota2', 30000), " +
+                "(4, 'link3', 'ten3', 'mota3', 40000), (5, 'link3', 'ten3', 'mota3', 40000), (6, 'link3', 'ten3', 'mota3', 40000)," +
+                " (7, 'link3', 'ten3', 'mota3', 40000), (8, 'link3', 'ten3', 'mota3', 40000), (9, 'link3', 'ten3', 'mota3', 40000)");
+
+
       db.execSQL(insert_admin);
+
+
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if(oldVersion != newVersion){
-            db.execSQL("DROP TABLE IF EXISTS tbl_thuThu");
-            db.execSQL("DROP TABLE IF EXISTS tbl_thanhVien");
-            db.execSQL("DROP TABLE IF EXISTS tbl_loaiSach");
-            db.execSQL("DROP TABLE IF EXISTS tbl_Sach");
-            db.execSQL("DROP TABLE IF EXISTS tbl_phieuMuon");
+            db.execSQL("DROP TABLE IF EXISTS tbl_usser");
+            db.execSQL("DROP TABLE IF EXISTS tbl_request");
+            db.execSQL("DROP TABLE IF EXISTS tbl_food");
+            db.execSQL("DROP TABLE IF EXISTS tbl_cart");
+            db.execSQL("DROP TABLE IF EXISTS tbl_invoice");
             onCreate(db);
         }
 

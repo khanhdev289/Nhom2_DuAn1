@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.Setting;
+package khanhnqph30151.fptpoly.duan1.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.activity.ChangePassActivity;
+import khanhnqph30151.fptpoly.duan1.activity.LoginActivity;
 
 
 /**
@@ -21,7 +22,7 @@ import khanhnqph30151.fptpoly.duan1.activity.ChangePassActivity;
  * create an instance of this fragment.
  */
 public class UserFragment extends Fragment {
-    TextView tv_userName,tv_changePass,tv_exit;
+    TextView tv_userName,tv_changePass,tv_exit, tv_logout;
 
     public UserFragment() {
         // Required empty public constructor
@@ -52,6 +53,17 @@ public class UserFragment extends Fragment {
 
         tv_changePass=view.findViewById(R.id.tv_changePass);
         tv_exit=view.findViewById(R.id.tv_exit);
+        tv_logout = view.findViewById(R.id.tv_logout);
+
+        tv_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), LoginActivity.class);
+                startActivity(i);
+                getActivity().finish();
+            }
+        });
+
         tv_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +75,8 @@ public class UserFragment extends Fragment {
             public void onClick(View view) {
                 Intent i=new Intent(getContext(), ChangePassActivity.class);
                 startActivity(i);
+
+
             }
         });
 
