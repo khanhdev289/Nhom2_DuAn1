@@ -1,11 +1,10 @@
-package khanhnqph30151.fptpoly.duan1.user.Home;
+package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class HomeDAO {
             home.setImg(cursor.getString(cursor.getColumnIndex("food_img")));
             home.setName(cursor.getString(cursor.getColumnIndex("food_name")));
             home.setDes(cursor.getString(cursor.getColumnIndex("food_description")));
-            home.setPrice(Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_price"))));
+            home.setPrice(cursor.getInt(cursor.getColumnIndex("food_price")));
             list.add(home);
         }
         return list;

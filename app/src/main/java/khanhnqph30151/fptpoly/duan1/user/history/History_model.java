@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.History;
+package khanhnqph30151.fptpoly.duan1.user.history;
 
 public class History_model {
     private int id_history;

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import khanhnqph30151.fptpoly.duan1.MainActivity;
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.Setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
 
 public class LoginActivity extends AppCompatActivity {
     TextView tv_Register;

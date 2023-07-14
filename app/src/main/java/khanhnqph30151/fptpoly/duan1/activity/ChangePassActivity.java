@@ -3,7 +3,6 @@ package khanhnqph30151.fptpoly.duan1.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.Setting.UserDAO;
-import khanhnqph30151.fptpoly.duan1.model.User;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.setting.User;
 
 public class ChangePassActivity extends AppCompatActivity {
     EditText edPassOld, edPass, edRePass;

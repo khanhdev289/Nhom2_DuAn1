@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.History;
+package khanhnqph30151.fptpoly.duan1.user.history;
 
 import android.app.Activity;
 import android.content.Context;

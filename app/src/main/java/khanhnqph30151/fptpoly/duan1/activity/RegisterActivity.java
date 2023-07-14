@@ -9,11 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.material.badge.BadgeUtils;
-
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.Setting.UserDAO;
-import khanhnqph30151.fptpoly.duan1.model.User;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.setting.User;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText edUsername_regis,edUserpass_regis,edUserRePass;

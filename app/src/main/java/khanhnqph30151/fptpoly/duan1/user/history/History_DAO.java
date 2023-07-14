@@ -1,7 +1,6 @@
-package khanhnqph30151.fptpoly.duan1.user.History;
+package khanhnqph30151.fptpoly.duan1.user.history;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

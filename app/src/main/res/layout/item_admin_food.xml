@@ -35,7 +35,7 @@
                         app:cardCornerRadius="10dp"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:id="@+id/iv_item_food_foodImg"
+                            android:id="@+id/iv_item_listFood_foodImg"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
                             />
@@ -44,10 +44,10 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="6"
+                        android:layout_weight="7"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/tv_item_food_foodName"
+                            android:id="@+id/tv_item_listFood_foodName"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -58,7 +58,7 @@
                             android:textStyle="bold|italic" />
 
                         <TextView
-                            android:id="@+id/tv_item_food_foodContent"
+                            android:id="@+id/tv_item_listFood_foodContent"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
@@ -68,43 +68,19 @@ chục miếng chả"
                             android:textColor="@color/black"
                             android:textSize="10dp"
                             android:textStyle="italic" />
-                        <LinearLayout
+
+                        <TextView
                             android:layout_weight="1"
+                            android:id="@+id/tv_item_listFood_foodPrice"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:id="@+id/tv_item_food_foodPrice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="50000"
-                                android:textColor="#C93142"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
-                            <TextView
-                                android:text="đ"
-                                android:textColor="@color/main_red"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </LinearLayout>
-
-
+                            android:layout_marginLeft="10dp"
+                            android:text="50000đ"
+                            android:textColor="#C93142"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
                     </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/btn_item_food_addCart"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_add" />
-
-
                 </LinearLayout>
-
             </LinearLayout>
         </LinearLayout>
 

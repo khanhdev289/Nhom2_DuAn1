@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.History;
+package khanhnqph30151.fptpoly.duan1.user.history;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

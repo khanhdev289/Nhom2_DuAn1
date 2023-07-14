@@ -1,4 +1,4 @@
-package khanhnqph30151.fptpoly.duan1.user.Home;
+package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;
