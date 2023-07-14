@@ -13,13 +13,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
+
     public static final String TABLE_USER_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_user (" +
             "user_name TEXT PRIMARY KEY," +
             "user_pass TEXT NOT NULL," +
             "user_role TEXT" +
             ")";
-    public static final String insert_admin="Insert into tbl_user(user_name,user_pass,user_role) values" +
+    public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
             "('admin','123','admin')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
@@ -73,6 +74,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_INVOICE_CREATE);
 
 
+
         db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán')");
 
 
@@ -83,6 +85,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
       db.execSQL(insert_admin);
+
 
 
 
