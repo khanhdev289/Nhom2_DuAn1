@@ -18,7 +18,7 @@ public class StatisDAO {
         sqLiteDatabase = helper.getWritableDatabase();
     }
     public int getDoanhThu(String tuNgay, String denNgay) {
-        String sql = "SELECT SUM(price) as doanhThu FROM tbl_invoice WHERE invoice_time BETWEEN ? AND ? ";
+        String sql = "SELECT SUM(invoice_sum) as doanhThu FROM tbl_invoice WHERE invoice_time BETWEEN ? AND ? ";
         ArrayList<Integer> list = new ArrayList<>();
         Cursor c = sqLiteDatabase.rawQuery(sql, new String[]{tuNgay,denNgay});
         while (c.moveToNext()) {

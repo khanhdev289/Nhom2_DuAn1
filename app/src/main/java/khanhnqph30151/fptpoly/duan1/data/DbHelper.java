@@ -55,9 +55,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "cart_phone TEXT NOT NULL, " +
             "cart_name TEXT NOT NULL, " +
             "cart_address TEXT NOT NULL, " +
-            "invoice_conten TEXT NOT NULL, " +
+            "invoice_content TEXT NOT NULL, " +
             "invoice_sum DOUBLE NOT NULL, " +
-            "invoice_status TEXT " +
+            "invoice_status TEXT ," +
+            "invoice_time TEXT NOT NULL" +
             ")";
 
 
@@ -75,7 +76,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), (3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán')");
+        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','22/07/2023'), (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','2023-07-13'), (3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','2023-07-31')");
 
 
 
