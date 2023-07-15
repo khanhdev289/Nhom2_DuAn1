@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,15 +32,14 @@ import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     Context context;
     private ArrayList<Cart> list;
-    private ArrayList<Cart> list1;
+
     private CartDAO cartDao;
     private FoodDAO foodDao;
     Cart cart;
-
-    int quanti = 1;
+    int number=0;
 
 
 
@@ -49,9 +49,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         this.cartDao = cartDao;
     }
 
-    public void setData(ArrayList<Cart> list){
+    public void setData(ArrayList<Cart> list) {
         this.list = list;
         notifyDataSetChanged();
+
     }
 
     @NonNull
@@ -63,13 +64,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
-
         foodDao = new FoodDAO(context);
         cartDao = new CartDAO(context);
+        list = cartDao.getAllData();
+        for (Cart cart : list){
+            number += cart.getSum();
+        }
+
 
         cart = list.get(position);
-
         Food food = foodDao.getById(cart.getIdFood());
         if (food != null) {
             holder.tv_name.setText(food.getName());
@@ -78,21 +81,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             holder.tv_des.setText(food.getDes());
             holder.tv_price.setText(String.valueOf(food.getPrice()));
         }
-
+        holder.tv_price.setText(food.getPrice()*cart.getQuanti()+"");
+        holder.tv_quanti.setText(cart.getQuanti()+"");
         holder.btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cart cart1 = new Cart();
+                int quanti=cart.getQuanti();
                 quanti += 1;
                 holder.tv_quanti.setText("" + quanti);
-                holder.tv_price.setText(""+food.getPrice() * quanti);
-                cart1.setSum(Double.parseDouble(""+food.getPrice()*quanti));
+                holder.tv_price.setText("" + food.getPrice() * quanti);
+                cart1.setSum(Double.parseDouble("" + food.getPrice() * quanti));
                 cart1.setQuanti(Integer.parseInt("" + quanti));
                 cart1.setIdFood(cart.getIdFood());
                 cart1.setIdCart(cart.getIdCart());
-                if (cartDao.updateSum(cart1)>=0){
+                if (cartDao.updateSum(cart1) >= 0) {
                     Toast.makeText(context, "Thanh cong hehe", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(context, "Ko thanh cong roi huhu", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,22 +105,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         holder.btn_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quanti > 1){
+                int quanti=cart.getQuanti();
+                if (quanti > 1) {
                     Cart cart1 = new Cart();
                     quanti -= 1;
                     holder.tv_quanti.setText("" + quanti);
-                    holder.tv_price.setText(""+food.getPrice() * quanti);
+                    holder.tv_price.setText("" + food.getPrice() * quanti);
                     cart1.setSum(Double.parseDouble(holder.tv_price.getText().toString()));
                     cart1.setQuanti(Integer.parseInt(holder.tv_quanti.getText().toString()));
                     cart1.setIdFood(cart.getIdFood());
                     cart1.setIdCart(cart.getIdCart());
-                    if (cartDao.updateSum(cart1)>0){
+                    if (cartDao.updateSum(cart1) > 0) {
 
                         Toast.makeText(context, "Thanh cong hehe", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Toast.makeText(context, "Ko thanh cong roi huhu", Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                } else {
                     quanti = 1;
                 }
             }
@@ -158,10 +164,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
         TextView tv_name, tv_des, tv_price, tv_quanti;
         ImageButton btn_up, btn_down;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_img = itemView.findViewById(R.id.iv_item_cart_foodImg);
@@ -173,7 +180,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             btn_down = itemView.findViewById(R.id.btn_item_cart_quantity_down);
         }
     }
-    public void showDele(int id){
+
+    public void showDele(int id) {
         AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
         dialogDL.setMessage("Bạn có muốn xóa không?");
         dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {

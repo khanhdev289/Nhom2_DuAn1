@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
+import khanhnqph30151.fptpoly.duan1.user.home.Home;
 
 public class CartDAO {
     DbHelper dbHelper;
@@ -66,6 +67,14 @@ public class CartDAO {
         values.put("cart_quantity", cart.getQuanti());
         values.put("cart_sum", cart.getSum());
         return sqLiteDatabase.update("tbl_cart", values, "cart_id = ?", new String[]{String.valueOf(cart.getIdCart())});
+    }
+    public boolean isFoodExists(Cart cart) {
+        String query = "SELECT * FROM tbl_cart WHERE food_id = ?";
+        String[] selectionArgs = {String.valueOf(cart.getIdFood())};
+        Cursor cursor = sqLiteDatabase.rawQuery(query, selectionArgs);
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
 }
