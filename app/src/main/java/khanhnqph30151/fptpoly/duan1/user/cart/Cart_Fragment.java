@@ -4,63 +4,83 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.admin.food.Food;
+import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
+import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
+import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Cart_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Cart_Fragment extends Fragment {
+    RecyclerView recyclerView;
+    CartDAO cartDAO;
+    ArrayList<Cart> listCart;
+    CartAdapter adapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    History_DAO historyDao;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+
+
 
     public Cart_Fragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Cart_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Cart_Fragment newInstance(String param1, String param2) {
+    public static Cart_Fragment newInstance() {
         Cart_Fragment fragment = new Cart_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart_, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart_, container, false);
+
+        return view;
+
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
+        TextView tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
+
+        double number = 0;
+        cartDAO = new CartDAO(getActivity());
+        historyDao = new History_DAO(getContext());
+        listCart = cartDAO.getAllData();
+
+        for (Cart cart : listCart){
+            number += cart.getSum();
+        }
+        tv_sumPrice.setText(""+number);
+
+        reloadData();
+    }
+    private void reloadData(){
+        cartDAO = new CartDAO(getActivity());
+        listCart = cartDAO.getAllData();
+        adapter = new CartAdapter(getContext(),listCart,cartDAO);
+        adapter.setData(listCart);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+    }
+
 }
