@@ -62,19 +62,15 @@ public class Cart_Fragment extends Fragment {
         recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
         TextView tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
 
-        double number = 0;
         cartDAO = new CartDAO(getActivity());
         historyDao = new History_DAO(getContext());
-        listCart = cartDAO.getAllData();
-
-        for (Cart cart : listCart){
-            number += cart.getSum();
-        }
-        tv_sumPrice.setText(""+number);
+        int sum=getActivity().getIntent().getIntExtra("sum",0);
+        tv_sumPrice.setText(""+sum);
 
         reloadData();
     }
     private void reloadData(){
+
         cartDAO = new CartDAO(getActivity());
         listCart = cartDAO.getAllData();
         adapter = new CartAdapter(getContext(),listCart,cartDAO);
