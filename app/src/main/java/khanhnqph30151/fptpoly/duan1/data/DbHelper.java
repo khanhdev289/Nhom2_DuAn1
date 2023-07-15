@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "user_role TEXT" +
             ")";
     public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
-            "('admin','123','admin')";
+            "('admin','123','admin'), ('khanh','123','hehe')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -79,12 +79,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("INSERT INTO tbl_food VALUES (1, 'https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), (2, 'link2', 'ten2', 'mota2', 30000), " +
-                "(4, 'link3', 'ten3', 'mota3', 40000), (5, 'link3', 'ten3', 'mota3', 40000), (6, 'link3', 'ten3', 'mota3', 40000)," +
-                " (7, 'link3', 'ten3', 'mota3', 40000), (8, 'link3', 'ten3', 'mota3', 40000), (9, 'link3', 'ten3', 'mota3', 40000)");
+        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), ('link2', 'ten2', 'mota2', 30000), " +
+                "('link3', 'ten3', 'mota3', 40000)");
 
 
-      db.execSQL(insert_admin);
+
+        db.execSQL(insert_admin);
 
 
 
