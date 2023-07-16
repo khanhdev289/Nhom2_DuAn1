@@ -73,7 +73,7 @@ public class StatisFragment extends Fragment {
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         Date selectedDate = myCalendar.getTime();
                         SimpleDateFormat dateFormatter = new SimpleDateFormat(
-                                "yyyy-MM-dd");
+                                "dd-MM-yyyy");
                         tv_tuNgay.setText(dateFormatter.format(selectedDate));
 
                     }
@@ -93,7 +93,7 @@ public class StatisFragment extends Fragment {
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         Date selectedDate = myCalendar.getTime();
                         SimpleDateFormat dateFormatter = new SimpleDateFormat(
-                                "yyyy-MM-dd");
+                                "dd-MM-yyyy");
                         tv_denNgay.setText(dateFormatter.format(selectedDate));
 
                     }

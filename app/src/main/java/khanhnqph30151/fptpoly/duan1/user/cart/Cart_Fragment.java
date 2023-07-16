@@ -17,7 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
@@ -30,7 +34,9 @@ import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpClickListener, CartAdapter.OnQuantityDownClickListener {
     RecyclerView recyclerView;
     CartDAO cartDAO;
+    FoodDAO foodDAO;
     ArrayList<Cart> listCart;
+    ArrayList<Food> listFood;
     CartAdapter adapter;
     TextView tv_sumPrice;
     ImageButton btn_confirm;
@@ -103,11 +109,48 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         dialog.setContentView(R.layout.dialog_confirm_invoice);
 
         EditText ed_address, ed_phone;
+        TextView tvDateTime, tvInvSum, tvContent;
         Button btnDialogAddCancel, btnDialogAddSubmit;
         ed_address = dialog.findViewById(R.id.ed_dialog_invoice_confirm_address);
         ed_phone = dialog.findViewById(R.id.ed_dialog_invoice_confirm_phone);
 
+        tvDateTime = dialog.findViewById(R.id.tv_dialog_invoice_confirm_date);
+        tvInvSum = dialog.findViewById(R.id.tv_dialog_invoice_confirm_priceSum);
+        tvContent = dialog.findViewById(R.id.tv_dialog_invoice_confirm_content);
 
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
+        String formattedDate = dateFormat.format(currentDate);
+        String formattedTime = timeFormat.format(currentDate);
+
+        tvDateTime.setText(formattedTime + " " + formattedDate);
+        double totalSum = calculateTotalSum();
+        tvInvSum.setText(String.valueOf(totalSum));
+
+        cartDAO = new CartDAO(getActivity());
+        foodDAO = new FoodDAO(getActivity());
+
+        listCart = cartDAO.getAllData();
+        listFood = foodDAO.getAllData();
+
+        String cartData = "";
+
+        for (Cart cart : listCart) {
+            for (Food food : listFood) {
+                if (food.getId() == cart.getIdFood()) {
+                    cartData += "Name: " + food.getName() + ", Số Lượng: " + cart.getQuanti() + ", Giá Tiền: " + cart.getSum() + "\n";
+                    break;
+                }
+            }
+        }
+
+        String content = cartData;
+
+        tvContent.setText(content);
 
         btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_invoice_add_cancel);
         btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_invoice_add_add);
@@ -124,6 +167,8 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                 String addrs = ed_address.getText().toString();
 
                 String phoneString = ed_phone.getText().toString();
+                String dateTime = tvDateTime.getText().toString();
+                String content = tvContent.getText().toString();
 
 
                 if (addrs.trim().isEmpty()) {
@@ -141,6 +186,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
                     history.setAddress(addrs);
                     history.setPhone(phone);
+                    history.setTime(dateTime);
+                    history.setSum(calculateTotalSum());
+
 
 //                    if (historyDao.insert(history) >= 0) {
 //                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
