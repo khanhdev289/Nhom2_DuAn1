@@ -78,12 +78,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-
-        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1, 'khanh','0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023')," +
-                " (2,2,'khanh' ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023'), " +
-                "(3,3, 'khai' ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023')," +
-                "(4,4, 'khanh' ,'0965656281','chu thị lan','25/5 đường trần hưng đạo - thanh xuân- hà nội','bun tra sl2 50000d',30000,'chưa thanh toán','07:00 SA 13/07/2023')");
-
+//        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
+//                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +
+//                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','06:06 2023-07-31')");
 
 
 
@@ -91,17 +88,14 @@ public class DbHelper extends SQLiteOpenHelper {
                 "('link3', 'ten3', 'mota3', 40000)");
 
 
-
         db.execSQL(insert_admin);
-
-
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion){
+        if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS tbl_usser");
             db.execSQL("DROP TABLE IF EXISTS tbl_request");
             db.execSQL("DROP TABLE IF EXISTS tbl_food");

@@ -31,6 +31,7 @@ public class CartDAO {
             cart.setIdFood(cursor.getInt(cursor.getColumnIndex("food_id")));
             cart.setQuanti(cursor.getInt(cursor.getColumnIndex("cart_quantity")));
             cart.setSum(cursor.getDouble(cursor.getColumnIndex("cart_sum")));
+            cart.setUsername(cursor.getString(cursor.getColumnIndex("user_name")));
             list.add(cart);
         }
 
@@ -42,7 +43,7 @@ public class CartDAO {
         values.put("food_id", cart.getIdFood());
         values.put("cart_quantity", cart.getQuanti());
         values.put("cart_sum", cart.getSum());
-
+        values.put("user_name",cart.getUsername());
         return sqLiteDatabase.insert("tbl_cart", null, values);
     }
     public ArrayList<Cart> getAllData() {
@@ -67,6 +68,7 @@ public class CartDAO {
         values.put("food_id", cart.getIdFood());
         values.put("cart_quantity", cart.getQuanti());
         values.put("cart_sum", cart.getSum());
+        values.put("user_name",cart.getUsername());
         return sqLiteDatabase.update("tbl_cart", values, "cart_id = ?", new String[]{String.valueOf(cart.getIdCart())});
     }
     public boolean isFoodExists(Cart cart) {
@@ -96,6 +98,10 @@ public class CartDAO {
         cursor.close();
 
         return userList;
+    }
+    public ArrayList<Cart> getByUser(String user) {
+        String sql = "SELECT * FROM tbl_cart  where user_name = ?";
+        return getData(sql, user);
     }
 
 }
