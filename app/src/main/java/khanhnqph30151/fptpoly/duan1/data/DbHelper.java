@@ -75,26 +75,23 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_INVOICE_CREATE);
 
 
-
-        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','22/07/2023'), (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','2023-07-13'), (3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','2023-07-31')");
-
+        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
+                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +
+                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','06:06 2023-07-31')");
 
 
         db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), ('link2', 'ten2', 'mota2', 30000), " +
                 "('link3', 'ten3', 'mota3', 40000)");
 
 
-
         db.execSQL(insert_admin);
-
-
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion != newVersion){
+        if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS tbl_usser");
             db.execSQL("DROP TABLE IF EXISTS tbl_request");
             db.execSQL("DROP TABLE IF EXISTS tbl_food");
