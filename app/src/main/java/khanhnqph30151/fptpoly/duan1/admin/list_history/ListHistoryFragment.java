@@ -5,56 +5,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.history.History_Adapter;
+import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
+import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListHistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListHistoryFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private invoce_DAO dao;
+    private ArrayList<invoice> list;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Invoice_Adapter adapter;
+    RecyclerView recyclerView;
+
 
     public ListHistoryFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ListHistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListHistoryFragment newInstance(String param1, String param2) {
+
+    public static ListHistoryFragment newInstance() {
         ListHistoryFragment fragment = new ListHistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -62,5 +50,16 @@ public class ListHistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin_list_history, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        recyclerView =view.findViewById(R.id.invoice_ry);
+        invoce_DAO dao = new invoce_DAO(getContext());
+        list = dao.getAllData();
+        adapter = new Invoice_Adapter(list, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        super.onViewCreated(view, savedInstanceState);
     }
 }
