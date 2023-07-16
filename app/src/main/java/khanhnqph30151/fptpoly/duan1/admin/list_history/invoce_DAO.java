@@ -44,7 +44,6 @@ public class invoce_DAO {
     }
     public long update(invoice i){
         ContentValues values = new ContentValues();
-
         values.put("invoice_status", i.getstatus());
         return sqLite.update("tbl_invoice", values, "invoice_id = ?", new String[]{String.valueOf(i.getId_history())});
     }
