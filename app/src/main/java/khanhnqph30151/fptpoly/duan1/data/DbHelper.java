@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "user_role TEXT" +
             ")";
     public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
-            "('admin','123','admin')";
+            "('admin','123','admin'), ('khanh','123','hehe')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -55,9 +55,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "cart_phone TEXT NOT NULL, " +
             "cart_name TEXT NOT NULL, " +
             "cart_address TEXT NOT NULL, " +
-            "invoice_conten TEXT NOT NULL, " +
+            "invoice_content TEXT NOT NULL, " +
             "invoice_sum DOUBLE NOT NULL, " +
-            "invoice_status TEXT " +
+            "invoice_status TEXT ," +
+            "invoice_time TEXT NOT NULL" +
             ")";
 
 
@@ -75,19 +76,21 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán')," +
-                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán'), " +
-                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán')," +
-                "(4,4 ,'0965656281','chu thị lan','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'chưa thanh toán')");
+
+        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023')," +
+                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023'), " +
+                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','bun tra sl2 50000d',30000,'đã thanh toán','07:00 SA 13/07/2023')," +
+                "(4,4 ,'0965656281','chu thị lan','25/5 đường trần hưng đạo - thanh xuân- hà nội','bun tra sl2 50000d',30000,'chưa thanh toán','07:00 SA 13/07/2023')");
 
 
 
-        db.execSQL("INSERT INTO tbl_food VALUES (1, 'https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), (2, 'link2', 'ten2', 'mota2', 30000), " +
-                "(4, 'link3', 'ten3', 'mota3', 40000), (5, 'link3', 'ten3', 'mota3', 40000), (6, 'link3', 'ten3', 'mota3', 40000)," +
-                " (7, 'link3', 'ten3', 'mota3', 40000), (8, 'link3', 'ten3', 'mota3', 40000), (9, 'link3', 'ten3', 'mota3', 40000)");
+
+        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), ('link2', 'ten2', 'mota2', 30000), " +
+                "('link3', 'ten3', 'mota3', 40000)");
 
 
-      db.execSQL(insert_admin);
+
+        db.execSQL(insert_admin);
 
 
 

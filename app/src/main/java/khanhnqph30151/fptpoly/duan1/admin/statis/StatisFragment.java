@@ -1,60 +1,48 @@
 package khanhnqph30151.fptpoly.duan1.admin.statis;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatisFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class StatisFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    Button btn_tuNgay,btn_denNgay,btn_doanhThu;
+    TextView tv_tuNgay,tv_denNgay,tv_doanhThu;
+    StatisDAO statisDAO;
+    private final Calendar myCalendar = Calendar.getInstance();
     public StatisFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StatisFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StatisFragment newInstance(String param1, String param2) {
+
+    public static StatisFragment newInstance() {
         StatisFragment fragment = new StatisFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -62,5 +50,65 @@ public class StatisFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin_statis, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btn_tuNgay=view.findViewById(R.id.btn_tuNgay);
+        btn_denNgay=view.findViewById(R.id.btn_denNgay);
+        btn_doanhThu=view.findViewById(R.id.btn_doanhThu);
+        tv_tuNgay=view.findViewById(R.id.tv_tuNgay);
+        tv_denNgay=view.findViewById(R.id.tv_denNgay);
+        tv_doanhThu=view.findViewById(R.id.tv_doanhThu);
+        statisDAO=new StatisDAO(getContext());
+        btn_tuNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        Date selectedDate = myCalendar.getTime();
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat(
+                                "yyyy-MM-dd");
+                        tv_tuNgay.setText(dateFormatter.format(selectedDate));
+
+                    }
+                };
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+        btn_denNgay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        Date selectedDate = myCalendar.getTime();
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat(
+                                "yyyy-MM-dd");
+                        tv_denNgay.setText(dateFormatter.format(selectedDate));
+
+                    }
+                };
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+        btn_doanhThu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tuNgay=tv_tuNgay.getText().toString();
+                String denNgay=tv_denNgay.getText().toString();
+                tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,denNgay)+""+" VND");
+            }
+        });
     }
 }

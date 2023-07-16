@@ -22,15 +22,23 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.activity.ItemInforFood;
+import khanhnqph30151.fptpoly.duan1.admin.food.Food;
+import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
+import khanhnqph30151.fptpoly.duan1.user.cart.CartAdapter;
+import khanhnqph30151.fptpoly.duan1.user.cart.CartDAO;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     Context context;
     private ArrayList<Home> list;
-    private HomeDAO dao;
-    public HomeAdapter(Context context, ArrayList<Home> list, HomeDAO dao) {
+    private ArrayList<Cart> listCart;
+    private HomeDAO homeDAO;
+    private CartDAO cartDAO;
+    private CartAdapter adapter;
+    public HomeAdapter(Context context, ArrayList<Home> list, HomeDAO homeDAO) {
         this.context = context;
         this.list = list;
-        this.dao = dao;
+        this.homeDAO=homeDAO;
+        cartDAO=new CartDAO(context);
     }
     public void setData(ArrayList<Home> list){
         this.list = list;
@@ -46,8 +54,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+       listCart=cartDAO.getAllData();
+        Home home = list.get(position);
         holder.tv_name.setText(list.get(position).getName());
-
         String img = list.get(position).getImg();
         Picasso.get().load(img).into(holder.iv_img);
 
@@ -56,7 +65,39 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.btn_addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogConfirm();
+                androidx.appcompat.app.AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
+                dialogDL.setMessage("Bạn có muốn thêm không?");
+                dialogDL.setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CartDAO cartDAO = new CartDAO(context);
+                        Cart cart = new Cart();
+                        cart.setIdFood(home.getId());
+                        cart.setQuanti(1);
+                        cart.setSum(home.getPrice());
+                        if(!cartDAO.isFoodExists(cart)){
+                            if (cartDAO.insert(cart)>0){
+                                Toast.makeText(context, "Đã Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+//                            listCart = cartDAO.getAllData();
+//                            adapter.setData(listCart);
+                            }else {
+                                Toast.makeText(context, "Đéo Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            Toast.makeText(context, "Món ăn đã được chọn", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                dialogDL.setPositiveButton("KHÔNG", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+                dialogDL.show();
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,24 +112,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             }
         });
     }
-    public void dialogConfirm(){
-        androidx.appcompat.app.AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn thêm không?");
-        dialogDL.setNegativeButton("Có", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, "Đã Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
-            }
-        });
-        dialogDL.setPositiveButton("KHÔNG", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                dialog.dismiss();
-            }
-        });
-        dialogDL.show();
-    }
 
     @Override
     public int getItemCount() {

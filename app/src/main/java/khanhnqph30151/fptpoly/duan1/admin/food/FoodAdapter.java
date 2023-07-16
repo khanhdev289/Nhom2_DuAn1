@@ -208,7 +208,6 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
             }
         });
         dialog.show();
-
     }
 
 }

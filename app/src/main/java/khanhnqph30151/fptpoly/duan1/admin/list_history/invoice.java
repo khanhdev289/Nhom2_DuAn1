@@ -7,6 +7,7 @@ public class invoice {
     private String name;
     private String address;
     private String time;
+    private String content;
     private double sum;
     private String status;
 
@@ -22,6 +23,14 @@ public class invoice {
         this.time = time;
         this.sum = sum;
         this.status = status;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getId_history() {

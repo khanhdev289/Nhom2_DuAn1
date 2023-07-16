@@ -3,16 +3,30 @@ package khanhnqph30151.fptpoly.duan1.user.history;
 public class History_model {
     private int id_history;
     private String id_cart;
-    private String phone;
+    private int phone;
     private String name;
     private String address;
     private String time;
+    private  String contten;
+    private String status;
     private double sum;
 
     public History_model() {
     }
 
-    public History_model(int id_history, String id_cart, String phone, String name, String address, String time, double sum) {
+    public History_model(int id_history, String id_cart, int phone, String name, String address, String time, String contten, String status, double sum) {
+        this.id_history = id_history;
+        this.id_cart = id_cart;
+        this.phone = phone;
+        this.name = name;
+        this.address = address;
+        this.time = time;
+        this.contten = contten;
+        this.status = status;
+        this.sum = sum;
+    }
+
+    public History_model(int id_history, String id_cart, int phone, String name, String address, String time, double sum) {
         this.id_history = id_history;
         this.id_cart = id_cart;
         this.phone = phone;
@@ -22,11 +36,27 @@ public class History_model {
         this.sum = sum;
     }
 
-    public String getPhone() {
+    public String getContten() {
+        return contten;
+    }
+
+    public void setContten(String contten) {
+        this.contten = contten;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 

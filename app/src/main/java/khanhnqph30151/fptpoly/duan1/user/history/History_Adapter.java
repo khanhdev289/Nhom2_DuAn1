@@ -36,12 +36,12 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.id_cart.setText(String.valueOf(list.get(position).getId_cart()));
-        holder.phone.setText(list.get(position).getPhone());
+        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()) );
-
+        holder.conten.setText(list.get(position).getContten());
     }
 
     @Override
@@ -52,7 +52,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView id_cart, phone, name,address,sum,time;
+        TextView id_cart, phone, name,address,sum,time,conten;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             id_cart =itemView.findViewById(R.id.id_cart);
@@ -61,6 +61,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
             address =itemView.findViewById(R.id.id_address);
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
+            conten=itemView.findViewById(R.id.id_noidung);
         }
     }
 }

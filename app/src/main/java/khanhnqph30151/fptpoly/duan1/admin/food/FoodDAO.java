@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
+import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
 
 public class FoodDAO {
@@ -91,6 +92,14 @@ public class FoodDAO {
     }
     public int delete(int ID) {
         return sqLiteDatabase.delete("tbl_food", "food_id = ?", new String[]{String.valueOf(ID)});
+    }
+    public Food getById(int id) {
+        Cursor cursor = sqLiteDatabase.query("tbl_food", null,"food_id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToNext()){
+            return new Food(cursor.getInt(0), cursor.getString(1),cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+        }else {
+            return null;
+        }
     }
 
 }
