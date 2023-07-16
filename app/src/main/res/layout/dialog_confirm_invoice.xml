@@ -161,14 +161,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_dialog_listfood_add_add"
+                android:id="@+id/btn_dialog_invoice_add_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/main_red"
                 android:text="Thêm" />
 
             <Button
-                android:id="@+id/btn_dialog_listfood_add_cancel"
+                android:id="@+id/btn_dialog_invoice_add_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/main_red"

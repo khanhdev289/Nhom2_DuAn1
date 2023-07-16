@@ -1,10 +1,15 @@
 package khanhnqph30151.fptpoly.duan1.user.cart;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,22 +24,19 @@ import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
+import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
 
-public class Cart_Fragment extends Fragment {
+public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpClickListener, CartAdapter.OnQuantityDownClickListener {
     RecyclerView recyclerView;
     CartDAO cartDAO;
     ArrayList<Cart> listCart;
     CartAdapter adapter;
-
+    TextView tv_sumPrice;
+    ImageButton btn_confirm;
     History_DAO historyDao;
 
-
-
-
-
     public Cart_Fragment() {
-
     }
 
     public static Cart_Fragment newInstance() {
@@ -43,40 +45,114 @@ public class Cart_Fragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart_, container, false);
-
-        return view;
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
-        TextView tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
+        tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
+        btn_confirm = view.findViewById(R.id.btn_fragment_cart_confirm);
 
-        cartDAO = new CartDAO(getActivity());
-        historyDao = new History_DAO(getContext());
-        int sum=getActivity().getIntent().getIntExtra("sum",0);
-        tv_sumPrice.setText(""+sum);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogConfirm();
+            }
+        });
 
         reloadData();
+
+        updateTotalSum();
+
+        return view;
     }
     private void reloadData(){
-
         cartDAO = new CartDAO(getActivity());
         listCart = cartDAO.getAllData();
-        adapter = new CartAdapter(getContext(),listCart,cartDAO);
-        adapter.setData(listCart);
+        adapter = new CartAdapter(getContext(), listCart, cartDAO);
+        adapter.setOnQuantityUpClickListener(this);
+        adapter.setOnQuantityDownClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     }
 
+    @Override
+    public void onQuantityUpClick(int position) {
+        updateTotalSum();
+    }
+
+    @Override
+    public void onQuantityDownClick(int position) {
+        updateTotalSum();
+    }
+
+    private void updateTotalSum() {
+        double totalSum = calculateTotalSum();
+        tv_sumPrice.setText(String.valueOf(totalSum));
+    }
+
+    private double calculateTotalSum() {
+        double totalSum = 0;
+        for (Cart cart : listCart) {
+            totalSum += cart.getSum();
+        }
+        return totalSum;
+    }
+    public void dialogConfirm(){
+        Dialog dialog = new Dialog(getContext());
+        History_model history = new History_model();
+        dialog.setContentView(R.layout.dialog_confirm_invoice);
+
+        EditText ed_address, ed_phone;
+        Button btnDialogAddCancel, btnDialogAddSubmit;
+        ed_address = dialog.findViewById(R.id.ed_dialog_invoice_confirm_address);
+        ed_phone = dialog.findViewById(R.id.ed_dialog_invoice_confirm_phone);
+
+
+
+        btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_invoice_add_cancel);
+        btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_invoice_add_add);
+
+        btnDialogAddCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String addrs = ed_address.getText().toString();
+
+                String phoneString = ed_phone.getText().toString();
+
+
+                if (addrs.trim().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (phoneString.trim().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập giá tiền", Toast.LENGTH_SHORT).show();
+                } else {
+                    int phone = 0;
+                    try {
+                        phone = Integer.parseInt(phoneString);
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getContext(), "Giá tiền phải là một số", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    history.setAddress(addrs);
+                    history.setPhone(phone);
+
+//                    if (historyDao.insert(history) >= 0) {
+//                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+//                        listFood = foodDAO.getAllData();
+//                        adapter.setData(listFood);
+//                        dialog.dismiss();
+//                    } else {
+//                        Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
+//                    }
+                }
+            }
+        });
+        dialog.show();
+    }
 }

@@ -31,130 +31,95 @@ import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
+import khanhnqph30151.fptpoly.duan1.user.home.Home;
+import khanhnqph30151.fptpoly.duan1.user.home.HomeDAO;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    Context context;
+    private Context context;
     private ArrayList<Cart> list;
-
     private CartDAO cartDao;
     private FoodDAO foodDao;
-    Cart cart;
-    int number=0;
 
-
+    private OnQuantityUpClickListener quantityUpClickListener;
+    private OnQuantityDownClickListener quantityDownClickListener;
 
     public CartAdapter(Context context, ArrayList<Cart> list, CartDAO cartDao) {
         this.context = context;
         this.list = list;
         this.cartDao = cartDao;
+        this.foodDao = new FoodDAO(context);
     }
 
     public void setData(ArrayList<Cart> list) {
         this.list = list;
         notifyDataSetChanged();
+    }
 
+    public void setOnQuantityUpClickListener(OnQuantityUpClickListener listener) {
+        this.quantityUpClickListener = listener;
+    }
+
+    public void setOnQuantityDownClickListener(OnQuantityDownClickListener listener) {
+        this.quantityDownClickListener = listener;
     }
 
     @NonNull
     @Override
-    public CartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_user_cart, null);
-        return new CartAdapter.ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_user_cart, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        foodDao = new FoodDAO(context);
-        cartDao = new CartDAO(context);
-        list = cartDao.getAllData();
-        for (Cart cart : list){
-            number += cart.getSum();
-        }
-
-
-        cart = list.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Cart cart = list.get(position);
         Food food = foodDao.getById(cart.getIdFood());
+
         if (food != null) {
             holder.tv_name.setText(food.getName());
-            String img = food.getImg();
-            Picasso.get().load(img).into(holder.iv_img);
+            Picasso.get().load(food.getImg()).into(holder.iv_img);
             holder.tv_des.setText(food.getDes());
             holder.tv_price.setText(String.valueOf(food.getPrice()));
         }
-        holder.tv_price.setText(food.getPrice()*cart.getQuanti()+"");
-        holder.tv_quanti.setText(cart.getQuanti()+"");
+
+        holder.tv_price.setText(String.valueOf(food.getPrice() * cart.getQuanti()));
+        holder.tv_quanti.setText(String.valueOf(cart.getQuanti()));
+
         holder.btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cart cart1 = new Cart();
-                int quanti=cart.getQuanti();
-                quanti += 1;
-                holder.tv_quanti.setText("" + quanti);
-                holder.tv_price.setText("" + food.getPrice() * quanti);
-                cart1.setSum(Double.parseDouble("" + food.getPrice() * quanti));
-                cart1.setQuanti(Integer.parseInt("" + quanti));
-                cart1.setIdFood(cart.getIdFood());
-                cart1.setIdCart(cart.getIdCart());
-                if (cartDao.updateSum(cart1) >= 0) {
-                    Toast.makeText(context, "Thanh cong hehe", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Ko thanh cong roi huhu", Toast.LENGTH_SHORT).show();
+                int quanti = cart.getQuanti() + 1;
+                holder.tv_quanti.setText(String.valueOf(quanti));
+                holder.tv_price.setText(String.valueOf(food.getPrice() * quanti));
+                cart.setQuanti(quanti);
+                cart.setSum(food.getPrice() * quanti);
+                cartDao.updateSum(cart);
+
+                if (quantityUpClickListener != null) {
+                    quantityUpClickListener.onQuantityUpClick(holder.getAdapterPosition());
                 }
             }
         });
+
         holder.btn_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int quanti=cart.getQuanti();
-                if (quanti > 1) {
-                    Cart cart1 = new Cart();
-                    quanti -= 1;
-                    holder.tv_quanti.setText("" + quanti);
-                    holder.tv_price.setText("" + food.getPrice() * quanti);
-                    cart1.setSum(Double.parseDouble(holder.tv_price.getText().toString()));
-                    cart1.setQuanti(Integer.parseInt(holder.tv_quanti.getText().toString()));
-                    cart1.setIdFood(cart.getIdFood());
-                    cart1.setIdCart(cart.getIdCart());
-                    if (cartDao.updateSum(cart1) > 0) {
+                int quanti = cart.getQuanti();
 
-                        Toast.makeText(context, "Thanh cong hehe", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "Ko thanh cong roi huhu", Toast.LENGTH_SHORT).show();
+                if (quanti > 1) {
+                    quanti -= 1;
+                    holder.tv_quanti.setText(String.valueOf(quanti));
+                    holder.tv_price.setText(String.valueOf(food.getPrice() * quanti));
+                    cart.setQuanti(quanti);
+                    cart.setSum(food.getPrice() * quanti);
+                    cartDao.updateSum(cart);
+
+                    if (quantityDownClickListener != null) {
+                        quantityDownClickListener.onQuantityDownClick(holder.getAdapterPosition());
                     }
                 } else {
-                    quanti = 1;
+                    Toast.makeText(context, "Số lượng không thể nhỏ hơn 1", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public boolean onLongClick(View v) {
-                @SuppressLint("RestrictedApi") MenuBuilder builder = new MenuBuilder(context);
-                MenuInflater inflater = new MenuInflater(context);
-                inflater.inflate(R.menu.menu_popup_delete, builder);
-                @SuppressLint("RestrictedApi") MenuPopupHelper optionmenu = new MenuPopupHelper(context, builder, v);
-                builder.setCallback(new MenuBuilder.Callback() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
-                        if (item.getItemId() == R.id.option_delete) {
-                            showDele(list.get(position).getIdCart());
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
-
-                    }
-                });
-                optionmenu.show();
-                return true;
             }
         });
     }
@@ -164,7 +129,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
         TextView tv_name, tv_des, tv_price, tv_quanti;
         ImageButton btn_up, btn_down;
@@ -181,33 +146,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
     }
 
-    public void showDele(int id) {
-        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn xóa không?");
-        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CartDAO dao = new CartDAO(context);
-                if (dao.delete(id) > 0) {
-                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                    list = dao.getAllData();
-                    setData(list);
-                } else {
-                    Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-
-                }
-                dialog.dismiss();
-
-            }
-        });
-        dialogDL.show();
+    public interface OnQuantityUpClickListener {
+        void onQuantityUpClick(int position);
     }
 
+    public interface OnQuantityDownClickListener {
+        void onQuantityDownClick(int position);
+    }
 
 }
