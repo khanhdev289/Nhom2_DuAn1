@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
+import khanhnqph30151.fptpoly.duan1.setting.User;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
 
 public class CartDAO {
@@ -75,6 +76,26 @@ public class CartDAO {
         boolean exists = cursor.getCount() > 0;
         cursor.close();
         return exists;
+    }
+    public ArrayList<User> getCartByUserId(String username) {
+        ArrayList<User> userList = new ArrayList<>();
+
+        String[] columns = {"user_name"};
+        String selection = "user_name=?";
+        String[] selectionArgs = {username};
+
+        Cursor cursor = sqLiteDatabase.query("tbl_user", columns, selection, selectionArgs, null, null, null);
+        while (cursor.moveToNext()) {
+
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("user_name"));
+
+
+            User user = new User(name);
+            userList.add(user);
+        }
+        cursor.close();
+
+        return userList;
     }
 
 }

@@ -31,12 +31,14 @@ import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
+import khanhnqph30151.fptpoly.duan1.setting.User;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
 import khanhnqph30151.fptpoly.duan1.user.home.HomeDAO;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private Context context;
     private ArrayList<Cart> list;
+    private ArrayList<User> users;
     private CartDAO cartDao;
     private FoodDAO foodDao;
 
@@ -71,9 +73,40 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Cart cart = list.get(position);
         Food food = foodDao.getById(cart.getIdFood());
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public boolean onLongClick(View v) {
+                @SuppressLint("RestrictedApi") MenuBuilder builder = new MenuBuilder(context);
+                MenuInflater inflater = new MenuInflater(context);
+                inflater.inflate(R.menu.menu_popup_delete, builder);
+                @SuppressLint("RestrictedApi") MenuPopupHelper optionmenu = new MenuPopupHelper(context, builder, v);
+                builder.setCallback(new MenuBuilder.Callback() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
+                        if (item.getItemId() == R.id.option_delete) {
+                            showDele(list.get(position).getIdCart());
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
+
+                    }
+                });
+                optionmenu.show();
+                return true;
+            }
+        });
 
         if (food != null) {
             holder.tv_name.setText(food.getName());
@@ -152,6 +185,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public interface OnQuantityDownClickListener {
         void onQuantityDownClick(int position);
+    }
+    public void showDele(int id){
+        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
+        dialogDL.setMessage("Bạn có muốn xóa không?");
+        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CartDAO dao = new CartDAO(context);
+                if (dao.delete(id) > 0) {
+                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+                    list = dao.getAllData();
+                    setData(list);
+                } else {
+                    Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+
+                }
+                dialog.dismiss();
+
+            }
+        });
+        dialogDL.show();
     }
 
 }
