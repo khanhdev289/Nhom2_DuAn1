@@ -1,5 +1,6 @@
 package khanhnqph30151.fptpoly.duan1.setting;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -39,6 +40,7 @@ public int update(User user){
         return sqLiteDatabase.delete("tbl_user", "user_name=?", new String[]{String.valueOf(ID)});
     }
 
+    @SuppressLint("Range")
     public ArrayList<User> getData(String sql, String... SelectAvgs) {
         ArrayList<User> lst = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sql, SelectAvgs);
@@ -78,4 +80,40 @@ public int update(User user){
         String sql = "SELECT * FROM tbl_user  where user_name=?";
         return getData(sql, id).get(0);
     }
+    public ArrayList<String> name() {
+        String name = "SELECT user_name FROM tbl_user";
+        return getName(name);
+    }
+    public ArrayList<String> getName(String sql, String... SelectAvgs) {
+        ArrayList<String> lst = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, SelectAvgs);
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("user_name"));
+            lst.add(name);
+        }
+        return lst;
+
+    }
+    public ArrayList<User> getUsersByName(String username) {
+        ArrayList<User> userList = new ArrayList<>();
+
+        String[] columns = {"user_name"};
+        String selection = "user_name=?";
+        String[] selectionArgs = {username};
+
+        Cursor cursor = sqLiteDatabase.query("tbl_user", columns, selection, selectionArgs, null, null, null);
+        while (cursor.moveToNext()) {
+
+            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("user_name"));
+
+
+            User user = new User(name);
+            userList.add(user);
+        }
+        cursor.close();
+
+        return userList;
+    }
+
+
 }

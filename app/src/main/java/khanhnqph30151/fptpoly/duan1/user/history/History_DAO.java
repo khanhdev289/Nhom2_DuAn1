@@ -29,9 +29,10 @@ public class History_DAO {
             history.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
             history.setName(cursor.getString(cursor.getColumnIndex("cart_name")));
             history.setAddress(cursor.getString(cursor.getColumnIndex("cart_address")));
-            history.setTime(cursor.getString(cursor.getColumnIndex("invoice_conten")));
+            history.setTime(cursor.getString(cursor.getColumnIndex("invoice_time")));
+            history.setContten(cursor.getString(cursor.getColumnIndex("invoice_content")));
             history.setSum(Double.parseDouble(cursor.getString(cursor.getColumnIndex("invoice_sum"))));
-
+            history.setStatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
             list.add(history);
         }
         return list;

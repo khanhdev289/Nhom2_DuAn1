@@ -24,7 +24,7 @@ public class StatisDAO {
              "        FROM tbl_invoice" +
              "        where date BETWEEN ? AND ?";
 
-        String sql = "SELECT SUM(invoice_sum) as doanhThu FROM tbl_invoice WHERE (invoice_time) BETWEEN ? AND ? ";
+//        String sql = "SELECT SUM(invoice_sum) as doanhThu FROM tbl_invoice WHERE (invoice_time) BETWEEN ? AND ? ";
         ArrayList<Integer> list = new ArrayList<>();
         Cursor c = sqLiteDatabase.rawQuery(sql1, new String[]{tuNgay,denNgay});
         while (c.moveToNext()) {
