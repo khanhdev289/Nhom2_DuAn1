@@ -78,9 +78,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
-                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +
-                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','06:06 2023-07-31')");
+//        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
+//                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +
+//                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','06:06 2023-07-31')");
 
 
 

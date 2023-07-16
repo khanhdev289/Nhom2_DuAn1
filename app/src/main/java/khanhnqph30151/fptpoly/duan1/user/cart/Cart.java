@@ -5,15 +5,14 @@ public class Cart {
     private int idFood;
     private int quanti;
     private double sum;
+    private  String username;
 
-    public Cart() {
+    public String getUsername() {
+        return username;
     }
 
-    public Cart(int idCart, int idFood, int quanti, double sum) {
-        this.idCart = idCart;
-        this.idFood = idFood;
-        this.quanti = quanti;
-        this.sum = sum;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getIdCart() {

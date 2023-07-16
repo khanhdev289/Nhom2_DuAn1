@@ -65,13 +65,10 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String InUsername1 = sharedPreferences.getString("USERNAME", "");
-
-//        userDAO = new UserDAO(getActivity());
-//        listUser = userDAO.getUsersByName(InUsername1);
-
+        cartDAO=new CartDAO(getContext());
+        listCart = cartDAO.getByUser(InUsername1);
         tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
         btn_confirm = view.findViewById(R.id.btn_fragment_cart_confirm);
-
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,9 +82,12 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
         return view;
     }
-    private void reloadData(){
+
+    private void reloadData() {
         cartDAO = new CartDAO(getActivity());
-        listCart = cartDAO.getAllData();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+        listCart = cartDAO.getByUser(loggedInUserName);
         adapter = new CartAdapter(getContext(), listCart, cartDAO);
         adapter.setOnQuantityUpClickListener(this);
         adapter.setOnQuantityDownClickListener(this);
@@ -117,7 +117,8 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         }
         return totalSum;
     }
-    public void dialogConfirm(){
+
+    public void dialogConfirm() {
         Dialog dialog = new Dialog(getContext());
         History_model history = new History_model();
 

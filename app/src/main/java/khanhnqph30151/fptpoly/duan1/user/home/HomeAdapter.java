@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                         cart.setIdFood(home.getId());
                         cart.setQuanti(1);
                         cart.setSum(home.getPrice());
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+                        String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+                        cart.setUsername(loggedInUserName);
                         if(!cartDAO.isFoodExists(cart)){
                             if (cartDAO.insert(cart)>0){
                                 Toast.makeText(context, "Đã Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
