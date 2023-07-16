@@ -2,13 +2,18 @@ package khanhnqph30151.fptpoly.duan1.admin.list_history;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ import khanhnqph30151.fptpoly.duan1.R;
 public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHolder>{
     private ArrayList<invoice> list;
     private Context context;
+    invoice inv;
 
     private invoce_DAO invoce_dao;
     public Invoice_Adapter(ArrayList<invoice> list, Context context){
@@ -55,34 +61,21 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         holder.sum.setText(String.valueOf(list.get(position).getSum()) );
         holder.content.setText(list.get(position).getContent());
         holder.status.setText(list.get(position).getstatus());
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @SuppressLint("RestrictedApi")
+        invoce_dao = new invoce_DAO(context);
+        inv=list.get(position);
+
+        holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                @SuppressLint("RestrictedApi") MenuBuilder builder = new MenuBuilder(context);
-                MenuInflater inflater = new MenuInflater(context);
-                inflater.inflate(R.menu.menu_status_invoice, builder);
-                @SuppressLint("RestrictedApi") MenuPopupHelper optionmenu = new MenuPopupHelper(context, builder, v);
-                builder.setCallback(new MenuBuilder.Callback() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
-                        if (item.getItemId() == R.id.option_ThanhToan) {
-                            updateDia(list.get(position), position);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
+            public void onClick(View v) {
 
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
-
-                    }
-                });
-                optionmenu.show();
-                return true;
+                inv.setstatus("Đã Thanh Toán");
+                if(invoce_dao.update(inv)>0){
+                    holder.status.setText("Đã Thanh Toán");
+                    holder.status.setBackgroundColor(Color.BLUE);
+                }else {
+                    holder.status.setText("Chua Thanh Toán");
+                    holder.status.setBackgroundColor(Color.BLACK);
+                }
             }
         });
     }
@@ -106,30 +99,9 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
             status=itemView.findViewById(R.id.status);
-            content=itemView.findViewById(R.id.id_noidung);        }
+            content=itemView.findViewById(R.id.id_noidung);
+
+        }
     }
-    public void updateDia(invoice invoice, int id){
-        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn thay đổi  không?");
-        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                invoce_DAO dao = new invoce_DAO(context);
 
-                    Toast.makeText(context, "updete Thành Công", Toast.LENGTH_SHORT).show();
-                    list = dao.getAllData();
-                    setData(list);
-
-                dialog.dismiss();
-
-            }
-        });
-        dialogDL.show();
-    }
 }
