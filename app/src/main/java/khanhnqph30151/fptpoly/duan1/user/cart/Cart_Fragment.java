@@ -66,8 +66,8 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String InUsername1 = sharedPreferences.getString("USERNAME", "");
 
-        userDAO = new UserDAO(getActivity());
-        listUser = userDAO.getUsersByName(InUsername1);
+//        userDAO = new UserDAO(getActivity());
+//        listUser = userDAO.getUsersByName(InUsername1);
 
         tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
         btn_confirm = view.findViewById(R.id.btn_fragment_cart_confirm);
@@ -141,9 +141,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
 
-        String loggedInUserId = "your_logged_in_user_id";
-
-        listUser = userDAO.getAllData();
+        listUser = userDAO.getUsersByName(loggedInUserName);
         for (User user : listUser) {
             if (user.getUser_name().equals(loggedInUserName)) {
                 loggedInUserName = user.getUser_name();
