@@ -1,6 +1,8 @@
 package khanhnqph30151.fptpoly.duan1.user.cart;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
+import khanhnqph30151.fptpoly.duan1.setting.User;
+import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
@@ -35,12 +39,16 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     RecyclerView recyclerView;
     CartDAO cartDAO;
     FoodDAO foodDAO;
+    UserDAO userDAO;
     ArrayList<Cart> listCart;
     ArrayList<Food> listFood;
+    ArrayList<User> listUser;
     CartAdapter adapter;
     TextView tv_sumPrice;
     ImageButton btn_confirm;
     History_DAO historyDao;
+    SharedPreferences sharedPreferences;
+
 
     public Cart_Fragment() {
     }
@@ -55,6 +63,12 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart_, container, false);
         recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String InUsername1 = sharedPreferences.getString("USERNAME", "");
+
+        userDAO = new UserDAO(getActivity());
+        listUser = userDAO.getUsersByName(InUsername1);
+
         tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
         btn_confirm = view.findViewById(R.id.btn_fragment_cart_confirm);
 
@@ -106,17 +120,38 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     public void dialogConfirm(){
         Dialog dialog = new Dialog(getContext());
         History_model history = new History_model();
+
+        cartDAO = new CartDAO(getActivity());
+        foodDAO = new FoodDAO(getActivity());
+        userDAO = new UserDAO(getActivity());
+
         dialog.setContentView(R.layout.dialog_confirm_invoice);
 
         EditText ed_address, ed_phone;
-        TextView tvDateTime, tvInvSum, tvContent;
+        TextView tvDateTime, tvInvSum, tvContent, tvUsername;
         Button btnDialogAddCancel, btnDialogAddSubmit;
         ed_address = dialog.findViewById(R.id.ed_dialog_invoice_confirm_address);
         ed_phone = dialog.findViewById(R.id.ed_dialog_invoice_confirm_phone);
 
+        tvUsername = dialog.findViewById(R.id.tv_dialog_invoice_confirm_user);
         tvDateTime = dialog.findViewById(R.id.tv_dialog_invoice_confirm_date);
         tvInvSum = dialog.findViewById(R.id.tv_dialog_invoice_confirm_priceSum);
         tvContent = dialog.findViewById(R.id.tv_dialog_invoice_confirm_content);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+
+        String loggedInUserId = "your_logged_in_user_id";
+
+        listUser = userDAO.getAllData();
+        for (User user : listUser) {
+            if (user.getUser_name().equals(loggedInUserName)) {
+                loggedInUserName = user.getUser_name();
+                break;
+            }
+        }
+
+        tvUsername.setText(loggedInUserName);
 
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
@@ -130,9 +165,6 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         tvDateTime.setText(formattedTime + " " + formattedDate);
         double totalSum = calculateTotalSum();
         tvInvSum.setText(String.valueOf(totalSum));
-
-        cartDAO = new CartDAO(getActivity());
-        foodDAO = new FoodDAO(getActivity());
 
         listCart = cartDAO.getAllData();
         listFood = foodDAO.getAllData();
