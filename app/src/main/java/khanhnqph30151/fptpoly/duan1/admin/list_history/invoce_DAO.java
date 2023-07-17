@@ -15,36 +15,40 @@ import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 public class invoce_DAO {
     DbHelper dbHelper;
     private SQLiteDatabase sqLite;
-    public invoce_DAO(Context context){
+
+    public invoce_DAO(Context context) {
         dbHelper = new DbHelper(context);
         sqLite = dbHelper.getWritableDatabase();
     }
+
     @SuppressLint("Range")
-    public ArrayList<invoice> getDaTaInvoice(String sql, String... SelectAvg){
+    public ArrayList<invoice> getDaTaInvoice(String sql, String... SelectAvg) {
         ArrayList<invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice", SelectAvg);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             invoice i = new invoice();
             i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
-            i.setId_cart(cursor.getString(cursor.getColumnIndex("cart_id")));
-            i.setPhone(cursor.getString(cursor.getColumnIndex("cart_phone")));
-            i.setName(cursor.getString(cursor.getColumnIndex("cart_name")));
+            i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
+            i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
+            i.setName(cursor.getString(cursor.getColumnIndex("user_name")));
             i.setAddress(cursor.getString(cursor.getColumnIndex("cart_address")));
-            i.setContent(cursor.getString(cursor.getColumnIndex("invoice_content")));
             i.setTime(cursor.getString(cursor.getColumnIndex("invoice_time")));
+            i.setContten(cursor.getString(cursor.getColumnIndex("invoice_content")));
             i.setSum(Double.parseDouble(cursor.getString(cursor.getColumnIndex("invoice_sum"))));
-            i.setstatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
+            i.setStatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
             list.add(i);
         }
         return list;
     }
+
     public ArrayList<invoice> getAllData() {
         String sql = "SELECT * FROM tbl_invoice";
         return getDaTaInvoice(sql);
     }
-    public long update(invoice i){
+
+    public long update(invoice i) {
         ContentValues values = new ContentValues();
-        values.put("invoice_status", i.getstatus());
+        values.put("invoice_status", i.getStatus());
         return sqLite.update("tbl_invoice", values, "invoice_id = ?", new String[]{String.valueOf(i.getId_history())});
     }
 }

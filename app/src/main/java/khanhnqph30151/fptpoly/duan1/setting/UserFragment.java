@@ -1,6 +1,8 @@
 package khanhnqph30151.fptpoly.duan1.setting;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,9 @@ import khanhnqph30151.fptpoly.duan1.activity.ChangePassActivity;
 import khanhnqph30151.fptpoly.duan1.activity.LoginActivity;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class UserFragment extends Fragment {
-    TextView tv_userName,tv_changePass,tv_exit, tv_logout;
+    TextView tv_userName,tv_changePass,tv_exit, tv_logout, tvUserName;
 
     public UserFragment() {
         // Required empty public constructor
@@ -54,6 +52,11 @@ public class UserFragment extends Fragment {
         tv_changePass=view.findViewById(R.id.tv_changePass);
         tv_exit=view.findViewById(R.id.tv_exit);
         tv_logout = view.findViewById(R.id.tv_logout);
+        tvUserName = view.findViewById(R.id.tv_user_userName);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+        tvUserName.setText(loggedInUserName);
 
         tv_logout.setOnClickListener(new View.OnClickListener() {
             @Override

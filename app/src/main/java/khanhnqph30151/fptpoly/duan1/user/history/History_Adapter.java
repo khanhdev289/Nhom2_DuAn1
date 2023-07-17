@@ -13,15 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
 
 public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHolder> {
     private ArrayList<History_model> list;
     private Context context;
 
     private History_DAO history_dao;
-    public History_Adapter(ArrayList<History_model> list, Context context){
+
+    public History_Adapter(ArrayList<History_model> list, Context context, History_DAO history_dao) {
         this.list = list;
         this.context = context;
+        this.history_dao = history_dao;
+    }
+
+    public void setData(ArrayList<History_model> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,7 +43,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.id_cart.setText(String.valueOf(list.get(position).getId_cart()));
+        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getAddress());

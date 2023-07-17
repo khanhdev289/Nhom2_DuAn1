@@ -79,16 +79,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                         SharedPreferences sharedPreferences = context.getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
                         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
                         cart.setUsername(loggedInUserName);
-                        if(!cartDAO.isFoodExists(cart)){
-                            if (cartDAO.insert(cart)>0){
+                        if (!cartDAO.isFoodExists(cart.getIdFood(), cart.getUsername())) {
+                            if (cartDAO.insert(cart) > 0) {
                                 Toast.makeText(context, "Đã Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
-//                            listCart = cartDAO.getAllData();
-//                            adapter.setData(listCart);
-                            }else {
+                            } else {
                                 Toast.makeText(context, "Đéo Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
                             }
-                        }else{
+                        } else {
                             Toast.makeText(context, "Món ăn đã được chọn", Toast.LENGTH_SHORT).show();
                         }
 

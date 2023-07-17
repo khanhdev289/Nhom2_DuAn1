@@ -31,6 +31,7 @@ import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
 import khanhnqph30151.fptpoly.duan1.setting.User;
 import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
+import khanhnqph30151.fptpoly.duan1.user.history.History_Adapter;
 import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
@@ -42,8 +43,10 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     UserDAO userDAO;
     ArrayList<Cart> listCart;
     ArrayList<Food> listFood;
+    ArrayList<History_model> listHis;
     ArrayList<User> listUser;
     CartAdapter adapter;
+    History_Adapter adapterHis;
     TextView tv_sumPrice;
     ImageButton btn_confirm;
     History_DAO historyDao;
@@ -125,6 +128,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         cartDAO = new CartDAO(getActivity());
         foodDAO = new FoodDAO(getActivity());
         userDAO = new UserDAO(getActivity());
+        historyDao = new History_DAO(getActivity());
 
         dialog.setContentView(R.layout.dialog_confirm_invoice);
 
@@ -165,11 +169,10 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         double totalSum = calculateTotalSum();
         tvInvSum.setText(String.valueOf(totalSum));
 
-        listCart = cartDAO.getAllData();
+        String InUsername2 = sharedPreferences.getString("USERNAME", "");
+        listCart = cartDAO.getByUser(InUsername2);
         listFood = foodDAO.getAllData();
-
         String cartData = "";
-
         for (Cart cart : listCart) {
             for (Food food : listFood) {
                 if (food.getId() == cart.getIdFood()) {
@@ -178,9 +181,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                 }
             }
         }
-
         String content = cartData;
-
         tvContent.setText(content);
 
         btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_invoice_add_cancel);
@@ -196,10 +197,13 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
             @Override
             public void onClick(View v) {
                 String addrs = ed_address.getText().toString();
-
                 String phoneString = ed_phone.getText().toString();
                 String dateTime = tvDateTime.getText().toString();
                 String content = tvContent.getText().toString();
+
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+                String name= sharedPreferences.getString("USERNAME", "");
 
 
                 if (addrs.trim().isEmpty()) {
@@ -215,20 +219,20 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                         return;
                     }
 
+                    history.setName(name);
                     history.setAddress(addrs);
                     history.setPhone(phone);
                     history.setTime(dateTime);
                     history.setSum(calculateTotalSum());
+                    history.setContten(content);
+                    history.setStatus("Chưa Thanh Toán");
 
-
-//                    if (historyDao.insert(history) >= 0) {
-//                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
-//                        listFood = foodDAO.getAllData();
-//                        adapter.setData(listFood);
-//                        dialog.dismiss();
-//                    } else {
-//                        Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
-//                    }
+                    if (historyDao.insert(history) >= 0) {
+                        Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

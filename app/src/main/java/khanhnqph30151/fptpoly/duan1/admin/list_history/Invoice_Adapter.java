@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -53,14 +54,14 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,@SuppressLint("RecyclerView") int position) {
-        holder.id_cart.setText(String.valueOf(list.get(position).getId_cart()));
-        holder.phone.setText(list.get(position).getPhone());
+        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
+        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
-        holder.sum.setText(String.valueOf(list.get(position).getSum()) );
-        holder.content.setText(list.get(position).getContent());
-        holder.status.setText(list.get(position).getstatus());
+        holder.sum.setText(String.valueOf(list.get(position).getSum()));
+        holder.content.setText(list.get(position).getContten());
+        holder.status.setText(list.get(position).getStatus());
         invoce_dao = new invoce_DAO(context);
         inv=list.get(position);
 
@@ -68,13 +69,20 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                inv.setstatus("Đã Thanh Toán");
-                if(invoce_dao.update(inv)>0){
-                    holder.status.setText("Đã Thanh Toán");
-                    holder.status.setBackgroundColor(Color.BLUE);
-                }else {
-                    holder.status.setText("Chua Thanh Toán");
-                    holder.status.setBackgroundColor(Color.BLACK);
+                if (inv.getStatus().equals("Đã Thanh Toán")) {
+                    inv.setStatus("Chưa Thanh Toán");
+                } else {
+                    inv.setStatus("Đã Thanh Toán");
+                }
+
+                if (invoce_dao.update(inv) > 0) {
+                    if (inv.getStatus().equals("Đã Thanh Toán")) {
+                        holder.status.setText("Đã Thanh Toán");
+                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
+                    } else {
+                        holder.status.setText("Chưa Thanh Toán");
+                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
+                    }
                 }
             }
         });
