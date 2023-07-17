@@ -52,10 +52,9 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABLE_INVOICE_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_invoice (" +
             "invoice_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "cart_id INTEGER REFERENCES tbl_cart(cart_id), " +
             "user_name TEXT REFERENCES tbl_user(user_name)," +
+            "cart_id INTEGER REFERENCES tbl_cart(cart_id), " +
             "cart_phone TEXT NOT NULL, " +
-            "cart_name TEXT NOT NULL, " +
             "cart_address TEXT NOT NULL, " +
             "invoice_content TEXT NOT NULL, " +
             "invoice_sum DOUBLE NOT NULL, " +

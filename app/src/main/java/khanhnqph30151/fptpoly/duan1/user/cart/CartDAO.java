@@ -71,9 +71,9 @@ public class CartDAO {
         values.put("user_name",cart.getUsername());
         return sqLiteDatabase.update("tbl_cart", values, "cart_id = ?", new String[]{String.valueOf(cart.getIdCart())});
     }
-    public boolean isFoodExists(Cart cart) {
-        String query = "SELECT * FROM tbl_cart WHERE food_id = ?";
-        String[] selectionArgs = {String.valueOf(cart.getIdFood())};
+    public boolean isFoodExists(int foodId, String username) {
+        String query = "SELECT * FROM tbl_cart WHERE food_id = ? AND user_name = ?";
+        String[] selectionArgs = {String.valueOf(foodId), username};
         Cursor cursor = sqLiteDatabase.rawQuery(query, selectionArgs);
         boolean exists = cursor.getCount() > 0;
         cursor.close();
