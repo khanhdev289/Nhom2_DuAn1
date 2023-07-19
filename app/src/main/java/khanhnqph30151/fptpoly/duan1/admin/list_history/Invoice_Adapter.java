@@ -32,7 +32,7 @@ import khanhnqph30151.fptpoly.duan1.R;
 public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHolder>{
     private ArrayList<invoice> list;
     private Context context;
-    invoice inv;
+
 
     private invoce_DAO invoce_dao;
     public Invoice_Adapter(ArrayList<invoice> list, Context context){
@@ -63,7 +63,7 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
         invoce_dao = new invoce_DAO(context);
-        inv=list.get(position);
+        invoice inv=list.get(position);
 
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override

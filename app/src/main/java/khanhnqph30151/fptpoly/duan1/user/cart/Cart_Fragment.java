@@ -48,7 +48,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     CartAdapter adapter;
     History_Adapter adapterHis;
     TextView tv_sumPrice;
-    ImageButton btn_confirm;
+    Button btn_confirm;
     History_DAO historyDao;
     SharedPreferences sharedPreferences;
 
@@ -109,12 +109,12 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     }
 
     private void updateTotalSum() {
-        double totalSum = calculateTotalSum();
-        tv_sumPrice.setText(String.valueOf(totalSum));
+        int totalSum = calculateTotalSum();
+        tv_sumPrice.setText(String.valueOf(totalSum)+" VND");
     }
 
-    private double calculateTotalSum() {
-        double totalSum = 0;
+    private int calculateTotalSum() {
+        int totalSum = 0;
         for (Cart cart : listCart) {
             totalSum += cart.getSum();
         }
@@ -229,6 +229,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
                     if (historyDao.insert(history) >= 0) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                        cartDAO.DelCart(name);
+                        listCart=cartDAO.getAllData();
+                        adapter.setData(listCart);
                         dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
