@@ -71,7 +71,7 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         Picasso.get().load(img).into(holder.iv_img);
 
         holder.tv_des.setText(list.get(position).getDes());
-        holder.tv_price.setText(String.valueOf(list.get(position).getPrice()));
+        holder.tv_price.setText(String.valueOf(list.get(position).getPrice())+" VND");
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("RestrictedApi")

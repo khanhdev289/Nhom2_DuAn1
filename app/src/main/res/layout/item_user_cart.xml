@@ -45,7 +45,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical">
                         <TextView
                             android:id="@+id/tv_item_cart_foodName"
                             android:layout_width="match_parent"
@@ -57,41 +58,15 @@
                             android:textSize="15dp"
                             android:textStyle="bold|italic" />
 
-                        <TextView
-                            android:id="@+id/tv_item_cart_foodContent"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:layout_marginLeft="10dp"
-                            android:text="Bao gồm nước chấm, bún và mấy
-chục miếng chả"
-                            android:textColor="@color/black"
-                            android:textSize="10dp"
-                            android:textStyle="italic" />
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:orientation="horizontal">
                             <TextView
                                 android:id="@+id/tv_item_cart_foodPrice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:text="50000"
+                                android:text="50000 VND"
                                 android:textColor="#C93142"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
-                            <TextView
-                                android:text="đ"
-                                android:textColor="@color/main_red"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
-                        </LinearLayout>
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -100,12 +75,12 @@ chục miếng chả"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:orientation="horizontal">
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/btn_item_cart_quantity_down"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/icon_remove"
+                            android:src="@drawable/baseline_indeterminate_check_box_24"
                             />
 
                         <TextView
@@ -115,15 +90,14 @@ chục miếng chả"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="1"
-                            android:textColor="#C93142"
                             android:textSize="15dp"
                             android:textStyle="bold" />
-                        <ImageButton
+                        <ImageView
                             android:id="@+id/btn_item_cart_quantity_up"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/icon_add_2"
+                            android:src="@drawable/icon_add"
                             />
                     </LinearLayout>
 

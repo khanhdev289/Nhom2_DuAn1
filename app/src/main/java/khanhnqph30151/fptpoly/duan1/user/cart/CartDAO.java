@@ -79,29 +79,16 @@ public class CartDAO {
         cursor.close();
         return exists;
     }
-    public ArrayList<User> getCartByUserId(String username) {
-        ArrayList<User> userList = new ArrayList<>();
-
-        String[] columns = {"user_name"};
-        String selection = "user_name=?";
-        String[] selectionArgs = {username};
-
-        Cursor cursor = sqLiteDatabase.query("tbl_user", columns, selection, selectionArgs, null, null, null);
-        while (cursor.moveToNext()) {
-
-            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("user_name"));
-
-
-            User user = new User(name);
-            userList.add(user);
-        }
-        cursor.close();
-
-        return userList;
-    }
     public ArrayList<Cart> getByUser(String user) {
         String sql = "SELECT * FROM tbl_cart  where user_name = ?";
         return getData(sql, user);
+    }
+    public void DelCart( String username){
+        String query = "DELETE  FROM tbl_cart WHERE  user_name = ?";
+        String[] selectionArgs = { username};
+        Cursor cursor = sqLiteDatabase.rawQuery(query, selectionArgs);
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
     }
 
 }
