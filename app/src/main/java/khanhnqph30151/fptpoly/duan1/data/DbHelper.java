@@ -25,10 +25,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "request_name TEXT NOT NULL," +
-            "request_email TEXT NOT NULL," +
-            "request_phone TEXT NOT NULL," +
-            "request_content TEXT NOT NULL" +
+            "request_name TEXT ," +
+            "request_email TEXT ," +
+            "request_phone TEXT ," +
+            "request_content TEXT " +
             ")";
 
     public static final String TABLE_FOOD_CREATE = "CREATE TABLE IF NOT EXISTS " +
@@ -75,7 +75,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
-
+        db.execSQL("INSERT INTO tbl_request VALUES (1, 'nhat','nhat@gmail.com','0985825597','abc')");
 
 //        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
 //                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +

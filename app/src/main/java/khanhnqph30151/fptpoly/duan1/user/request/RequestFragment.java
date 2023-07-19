@@ -14,14 +14,16 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 
 
 public class RequestFragment extends Fragment {
     Context context;
-    private DAO dao =new DAO(context);
-    private ArrayList<Request> arrayListRq = new ArrayList<>();
+    private DAO dao;
+    private ArrayList<Request> listRequest ;
     private EditText user_rq_name, user_rq_email, user_rq_phone, user_rq_content;
     private Button btn_user_rq_send;
+    AdapterRequest adapter;
     private View mView;
 
     public RequestFragment() {
@@ -46,7 +48,9 @@ public class RequestFragment extends Fragment {
         // Inflate the layout for this fragment
 
         mView = inflater.inflate(R.layout.fragment_request, container, false);
-
+        dao=new DAO(getContext());
+        listRequest=dao.getAllData();
+        adapter=new AdapterRequest(getContext(),listRequest);
         user_rq_name = mView.findViewById(R.id.user_rq_name);
         user_rq_email = mView.findViewById(R.id.user_rq_email);
         user_rq_phone = mView.findViewById(R.id.user_rq_phone);
@@ -63,6 +67,8 @@ public class RequestFragment extends Fragment {
         return mView;
          }
     private void sendRequestfromUserforAdmin() {
+        dao =new DAO(getContext());
+        Request request = new Request();
         String add_rq_name = user_rq_name.getText().toString();
         String add_rq_email = user_rq_email.getText().toString();
         String add_rq_phone = user_rq_phone.getText().toString();
@@ -80,11 +86,16 @@ public class RequestFragment extends Fragment {
             user_rq_content.requestFocus();
             user_rq_content.setError("Không được để trống nội dung");
         } else {
-            Request listResquest = new Request();
-            if (dao.AddRQ(listResquest) > 0) {
-                Toast.makeText(mView.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                dao = new DAO(context);
-                arrayListRq = dao.getDataRequest();
+
+
+            request.setTen(add_rq_name);
+            request.setEmail(add_rq_email);
+            request.setNoidung(add_rq_content);
+            request.setSodienthoai(add_rq_phone);
+
+            if (dao.AddRQ(request) >= 0) {
+                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+
             } else {
                 Toast.makeText(mView.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
             }

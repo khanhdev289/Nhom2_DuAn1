@@ -1,102 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="15dp"
+    android:backgroundTint="@color/gray">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/boder_radius_infor_item"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Số Điện Thoại:"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_request_phone"
+                android:textStyle="bold"
+                android:text="0983927037"
+                android:layout_margin="10dp"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Họ tên:"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_request_name"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="nguyễn hoàng nhật"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Email:"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_request_email"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="25/5 trần hưng đạo - thanh xuân- hà nội "
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
+            <TextView
+                android:text="Nội dung:"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_request_content"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="1 bún trả ngày 13/07/2023"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Tên: "
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/request_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Số Điện Thoại: "
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/request_phone"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Email: "
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/request_email"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Nội Dung: "
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/request_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5" />
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

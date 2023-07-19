@@ -9,6 +9,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 
 public class AdapterRequest extends BaseAdapter {
     private Context context;
@@ -18,6 +19,10 @@ public class AdapterRequest extends BaseAdapter {
     public AdapterRequest(Context context, ArrayList<Request> listrq) {
         this.context = context;
         this.listrq = listrq;
+    }
+    public void setData(ArrayList<Request> list){
+        this.listrq = list;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,15 +51,15 @@ public class AdapterRequest extends BaseAdapter {
         Request objRequest = listrq.get(i);
 //        EditText user_rq_name, user_rq_email, user_rq_phone, user_rq_content;
 
-        EditText request_name = row.findViewById(R.id.request_name);
-        EditText request_phone = row.findViewById(R.id.request_phone);
-        EditText request_email = row.findViewById(R.id.request_email);
-        EditText request_content = row.findViewById(R.id.request_content);
-
-        request_name.setText(objRequest.getTen());
-        request_phone.setText(objRequest.getSodienthoai());
-        request_email.setText(objRequest.getEmail());
-        request_content.setText(objRequest.getNoidung());
+//        EditText request_name = row.findViewById(R.id.request_name);
+//        EditText request_phone = row.findViewById(R.id.request_phone);
+//        EditText request_email = row.findViewById(R.id.request_email);
+//        EditText request_content = row.findViewById(R.id.request_content);
+//
+//        request_name.setText(objRequest.getTen());
+//        request_phone.setText(objRequest.getSodienthoai());
+//        request_email.setText(objRequest.getEmail());
+//        request_content.setText(objRequest.getNoidung());
         return row;
     }
 }

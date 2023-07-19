@@ -12,10 +12,10 @@ import khanhnqph30151.fptpoly.duan1.data.DbHelper;
 
 public class DAO {
     private DbHelper dbHelper;
-SQLiteDatabase sqLiteDatabase;
-    public DAO(Context context) {
-        dbHelper = new DbHelper(context);
-        sqLiteDatabase =dbHelper.getWritableDatabase();
+    private SQLiteDatabase sqLiteDatabase;
+    public DAO(Context contex){
+        dbHelper = new DbHelper(contex);
+        sqLiteDatabase = dbHelper.getWritableDatabase();
     }
     @SuppressLint("Range")
     public ArrayList<Request> getDataRequest(){
@@ -31,6 +31,10 @@ SQLiteDatabase sqLiteDatabase;
             list.add(request);
         }
         return list;
+    }
+    public ArrayList<Request> getAllData() {
+        String sql = "SELECT * FROM tbl_request";
+        return getDataRequest();
     }
 
 //    public ArrayList<Request> GetRequest() {
@@ -57,7 +61,6 @@ SQLiteDatabase sqLiteDatabase;
 //    }
 
     public long AddRQ(Request ph) {
-        SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("request_name", ph.getTen());
         contentValues.put("request_email", ph.getEmail());
