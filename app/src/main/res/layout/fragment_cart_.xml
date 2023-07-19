@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_margin="20dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#C93142"
@@ -18,6 +19,7 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
@@ -69,7 +71,7 @@
             android:textStyle="italic|bold" />
 
         <Button
-            android:backgroundTint="#80EA06"
+            android:backgroundTint="@color/main_red"
             android:id="@+id/btn_fragment_cart_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
