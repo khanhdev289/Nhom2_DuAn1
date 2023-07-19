@@ -60,9 +60,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.tv_name.setText(list.get(position).getName());
         String img = list.get(position).getImg();
         Picasso.get().load(img).into(holder.iv_img);
-
-        holder.tv_des.setText(list.get(position).getDes());
-        holder.tv_price.setText(String.valueOf(list.get(position).getPrice()));
+        holder.tv_des.setText(home.getDes());
+        holder.tv_price.setText(String.valueOf(list.get(position).getPrice())+" VND");
         holder.btn_addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +91,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
                     }
                 });
-                dialogDL.setPositiveButton("KHÔNG", new DialogInterface.OnClickListener() {
+                dialogDL.setPositiveButton("Không", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -123,15 +122,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView iv_img;
-        TextView tv_name, tv_des, tv_price;
-        ImageButton btn_addCart;
+        TextView tv_name,  tv_price,tv_des;
+        ImageView btn_addCart;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_img = itemView.findViewById(R.id.iv_item_food_foodImg);
             tv_name = itemView.findViewById(R.id.tv_item_food_foodName);
-            tv_des = itemView.findViewById(R.id.tv_item_food_foodContent);
             tv_price = itemView.findViewById(R.id.tv_item_food_foodPrice);
             btn_addCart = itemView.findViewById(R.id.btn_item_food_addCart);
+            tv_des=itemView.findViewById(R.id.tv_item_food_des);
         }
     }
 

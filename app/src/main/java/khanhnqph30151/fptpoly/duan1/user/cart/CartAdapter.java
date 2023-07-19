@@ -112,11 +112,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         if (food != null) {
             holder.tv_name.setText(food.getName());
             Picasso.get().load(food.getImg()).into(holder.iv_img);
-            holder.tv_des.setText(food.getDes());
+
             holder.tv_price.setText(String.valueOf(food.getPrice()));
         }
 
-        holder.tv_price.setText(String.valueOf(food.getPrice() * cart.getQuanti()));
+        holder.tv_price.setText(String.valueOf(food.getPrice() * cart.getQuanti())+" VND");
         holder.tv_quanti.setText(String.valueOf(cart.getQuanti()));
 
         holder.btn_up.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             public void onClick(View v) {
                 int quanti = cart.getQuanti() + 1;
                 holder.tv_quanti.setText(String.valueOf(quanti));
-                holder.tv_price.setText(String.valueOf(food.getPrice() * quanti));
+                holder.tv_price.setText(String.valueOf(food.getPrice() * quanti)+" VND");
                 cart.setQuanti(quanti);
                 cart.setSum(food.getPrice() * quanti);
                 cartDao.updateSum(cart);
@@ -143,7 +143,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 if (quanti > 1) {
                     quanti -= 1;
                     holder.tv_quanti.setText(String.valueOf(quanti));
-                    holder.tv_price.setText(String.valueOf(food.getPrice() * quanti));
+                    holder.tv_price.setText(String.valueOf(food.getPrice() * quanti)+" VND");
                     cart.setQuanti(quanti);
                     cart.setSum(food.getPrice() * quanti);
                     cartDao.updateSum(cart);
@@ -166,13 +166,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
         TextView tv_name, tv_des, tv_price, tv_quanti;
-        ImageButton btn_up, btn_down;
+        ImageView btn_up, btn_down;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_img = itemView.findViewById(R.id.iv_item_cart_foodImg);
             tv_name = itemView.findViewById(R.id.tv_item_cart_foodName);
-            tv_des = itemView.findViewById(R.id.tv_item_cart_foodContent);
+//            tv_des = itemView.findViewById(R.id.tv_item_cart_foodContent);
             tv_price = itemView.findViewById(R.id.tv_item_cart_foodPrice);
             tv_quanti = itemView.findViewById(R.id.tv_item_cart_quantity);
             btn_up = itemView.findViewById(R.id.btn_item_cart_quantity_up);

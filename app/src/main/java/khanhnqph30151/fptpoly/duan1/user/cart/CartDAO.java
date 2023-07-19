@@ -83,5 +83,12 @@ public class CartDAO {
         String sql = "SELECT * FROM tbl_cart  where user_name = ?";
         return getData(sql, user);
     }
+    public void DelCart( String username){
+        String query = "DELETE  FROM tbl_cart WHERE  user_name = ?";
+        String[] selectionArgs = { username};
+        Cursor cursor = sqLiteDatabase.rawQuery(query, selectionArgs);
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+    }
 
 }
