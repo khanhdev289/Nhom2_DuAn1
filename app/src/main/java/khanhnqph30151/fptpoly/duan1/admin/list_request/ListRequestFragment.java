@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,15 +54,20 @@ public class ListRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_admin_list_request, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.list_frag_admin_request);
-        DAO dao = new DAO(getContext());
+
+        reloadData();
+    }
+    private void reloadData(){
+        dao = new DAO(getContext());
         list = dao.getAllData();
         adapter = new ListReQuest_Adapter( getContext(),list,dao);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        adapter.setData(list);
         recyclerView.setAdapter(adapter);
-        super.onViewCreated(view, savedInstanceState);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     }
 }
