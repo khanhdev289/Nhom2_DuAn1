@@ -1,26 +1,13 @@
 package khanhnqph30151.fptpoly.duan1.admin.list_history;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +15,13 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
-
-public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHolder>{
+public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.ViewHolder> {
     private ArrayList<invoice> list;
     private Context context;
 
     invoice inv;
     private invoce_DAO invoce_dao;
-    public Invoice_Adapter(ArrayList<invoice> list, Context context){
+    public Dekivering_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
     }
@@ -43,6 +29,7 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         this.list = list;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,7 +40,7 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,@SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
@@ -70,53 +57,28 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                if (inv.getStatus().equals("DaDatHang")) {
-                    inv.setStatus("DangGiao");
+                if (inv.getStatus().equals("DangGiao")) {
+                    inv.setStatus("DaThanhToan");
                 } else {
-                    inv.setStatus("DangGiao");
+                    inv.setStatus("DaThanhToan");
                 }
 
                 if (invoce_dao.update(inv) > 0) {
-                    if (inv.getStatus().equals("DaDatHang")) {
-                        holder.status.setText("DangGiao");
+                    if (inv.getStatus().equals("DangGiao")) {
+                        holder.status.setText("DaThanhToan");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
                     } else {
-                        holder.status.setText("DangGiao");
+                        holder.status.setText("DaThanhToan");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
                     }
                 }
             }
         });
-//        holder.status.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (inv.getStatus().equals("DaDatHang")) {
-//                    inv.setStatus("DangGiao");
-//                }  else if (inv.getStatus().equals("DangGiao")) {
-//                    inv.setStatus("DaThanhToan");
-//                }
-//
-//                if (invoce_dao.update(inv) > 0) {
-//                    if (inv.getStatus().equals("DaDatHang")) {
-//                        holder.status.setText("DangGiao");
-//                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-//                    }if (inv.getStatus().equals("DangGiao")) {
-//                        holder.status.setText("DaThanhToan");
-//                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-//                    }
-//
-//                }
-//            }
-//        });
     }
-
 
     @Override
     public int getItemCount() {
-
-            return list.size();
-
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -134,5 +96,4 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
 
         }
     }
-
 }

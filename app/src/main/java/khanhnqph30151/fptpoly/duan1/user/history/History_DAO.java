@@ -42,6 +42,10 @@ public class History_DAO {
         String sql = "SELECT * FROM tbl_invoice";
         return getDataHistory(sql);
     }
+    public int delete(int ID) {
+        return sqLite.delete("tbl_invoice", "invoice_id = ?", new String[]{String.valueOf(ID)});
+    }
+
     public long insert(History_model history){
         ContentValues values = new ContentValues();
         values.put("cart_id", history.getId_cart());
@@ -55,23 +59,7 @@ public class History_DAO {
 
         return sqLite.insert("tbl_invoice", null, values);
     }
-//    public ArrayList<String> getName(String sql, String... SelectAvgs) {
-//        ArrayList<String> lst = new ArrayList<>();
-//        Cursor cursor = sqLite.rawQuery(sql, SelectAvgs);
-//        while (cursor.moveToNext()) {
-//            @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex("food_name"));
-//            lst.add(name);
-//        }
-//        return lst;
-//    }
 
-//    public long updateSum(Cart cart){
-//        ContentValues values = new ContentValues();
-//        values.put("food_id", cart.getIdFood());
-//        values.put("cart_quantity", cart.getQuanti());
-//        values.put("cart_sum", cart.getSum());
-//        return sqLiteDatabase.update("tbl_cart", values, "cart_id = ?", new String[]{String.valueOf(cart.getIdCart())});
-//    }
     public boolean isInvoiceExists(History_model history) {
         String query = "SELECT * FROM tbl_invoice WHERE invoice_id = ?";
         String[] selectionArgs = {String.valueOf(history.getId_history())};
@@ -80,10 +68,7 @@ public class History_DAO {
         cursor.close();
         return exists;
     }
-//    public ArrayList<History_model> getByUser(String user) {
-//        String sql = "SELECT * FROM tbl_cart where user_name = ?";
-//        return getDataHistory(sql, user);
-//    }
+
      @SuppressLint("Range")
      public ArrayList<History_model> getByUser(String username) {
         ArrayList<History_model> list = new ArrayList<>();

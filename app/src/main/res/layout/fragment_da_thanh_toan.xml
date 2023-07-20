@@ -5,19 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#C93142"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".admin.list_history.DaThanhToanFragment">
 
 
-    <TextView
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#C93142"
-        android:text="Lịch Sử Đăt Hàng"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+
+
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -34,13 +26,11 @@
             android:background="@drawable/boder_radius_banner">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/History_ry"
+                android:id="@+id/invoice_ry_da_thanh_toan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"/>
         </LinearLayout>
 
     </LinearLayout>
-
-
 </LinearLayout>
