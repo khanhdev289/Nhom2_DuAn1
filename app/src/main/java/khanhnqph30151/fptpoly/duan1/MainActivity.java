@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 
+import khanhnqph30151.fptpoly.duan1.admin.list_history.Quanly_StatusFragment;
 import khanhnqph30151.fptpoly.duan1.setting.UserFragment;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodFragment;
 import khanhnqph30151.fptpoly.duan1.admin.list_history.ListHistoryFragment;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new ListRequestFragment());
                     return true;
                 }else if(item.getItemId()==R.id.action_List_Invo){
-                    replaceFragment(new ListHistoryFragment());
+                    replaceFragment(new Quanly_StatusFragment());
                     return true;
                 }
                 else if(item.getItemId()==R.id.action_Statis){

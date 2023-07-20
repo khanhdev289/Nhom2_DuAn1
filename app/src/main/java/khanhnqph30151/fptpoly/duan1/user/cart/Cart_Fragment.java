@@ -225,7 +225,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                     history.setTime(dateTime);
                     history.setSum(calculateTotalSum());
                     history.setContten(content);
-                    history.setStatus("Chưa Thanh Toán");
+                    history.setStatus("Đã Đặt Hàng");
 
 
                     if (historyDao.insert(history) >= 0) {

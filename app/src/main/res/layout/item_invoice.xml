@@ -7,7 +7,7 @@
     android:background="#D5D5D5"
     android:layout_margin="15dp">
     <LinearLayout
-        android:background="#E8E6E6"
+        android:background="@drawable/custum_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
