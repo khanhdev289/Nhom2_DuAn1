@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -77,37 +78,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Cart cart = list.get(position);
         Food food = foodDao.getById(cart.getIdFood());
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public boolean onLongClick(View v) {
-                @SuppressLint("RestrictedApi") MenuBuilder builder = new MenuBuilder(context);
-                MenuInflater inflater = new MenuInflater(context);
-                inflater.inflate(R.menu.menu_popup_delete, builder);
-                @SuppressLint("RestrictedApi") MenuPopupHelper optionmenu = new MenuPopupHelper(context, builder, v);
-                builder.setCallback(new MenuBuilder.Callback() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public boolean onMenuItemSelected(@NonNull MenuBuilder menu, @NonNull MenuItem item) {
-                        if (item.getItemId() == R.id.option_delete) {
-                            showDele(list.get(position).getIdCart());
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onMenuModeChange(@NonNull MenuBuilder menu) {
-
-                    }
-                });
-                optionmenu.show();
-                return true;
-            }
-        });
 
         if (food != null) {
             holder.tv_name.setText(food.getName());
@@ -166,7 +136,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
         TextView tv_name, tv_des, tv_price, tv_quanti;
-        ImageView btn_up, btn_down;
+        ImageView btn_up, btn_down,btn_del;
+        CardView layout_foreground;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -177,6 +148,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             tv_quanti = itemView.findViewById(R.id.tv_item_cart_quantity);
             btn_up = itemView.findViewById(R.id.btn_item_cart_quantity_up);
             btn_down = itemView.findViewById(R.id.btn_item_cart_quantity_down);
+            btn_del=itemView.findViewById(R.id.btn_item_cart_delete);
+            layout_foreground=itemView.findViewById(R.id.layout_foreground);
+
         }
     }
 
@@ -187,32 +161,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public interface OnQuantityDownClickListener {
         void onQuantityDownClick(int position);
     }
-    public void showDele(int id){
-        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn xóa không?");
-        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                CartDAO dao = new CartDAO(context);
-                if (dao.delete(id) > 0) {
-                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                    list = dao.getAllData();
-                    setData(list);
-                } else {
-                    Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
 
-                }
-                dialog.dismiss();
-
-            }
-        });
-        dialogDL.show();
-    }
 
 }

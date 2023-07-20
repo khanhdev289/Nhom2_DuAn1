@@ -2,6 +2,7 @@ package khanhnqph30151.fptpoly.duan1.user.cart;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,8 +20,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -41,7 +45,7 @@ import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
 
-public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpClickListener, CartAdapter.OnQuantityDownClickListener {
+public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpClickListener, CartAdapter.OnQuantityDownClickListener, ItemTouchHelperListener {
     RecyclerView recyclerView;
     CartDAO cartDAO;
     FoodDAO foodDAO;
@@ -73,7 +77,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         recyclerView = view.findViewById(R.id.recy_fragment_cart_listFood);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String InUsername1 = sharedPreferences.getString("USERNAME", "");
-        cartDAO=new CartDAO(getContext());
+        cartDAO = new CartDAO(getContext());
         listCart = cartDAO.getByUser(InUsername1);
         tv_sumPrice = view.findViewById(R.id.tv_fragment_cart_sumPrice);
         btn_confirm = view.findViewById(R.id.btn_fragment_cart_confirm);
@@ -84,9 +88,15 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
             }
         });
 
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+        ItemTouchHelper.SimpleCallback simpleCallback = new RecycleViewItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
         reloadData();
 
+
         updateTotalSum();
+
 
         return view;
     }
@@ -101,7 +111,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         adapter.setOnQuantityDownClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+
     }
+
 
     @Override
     public void onQuantityUpClick(int position) {
@@ -115,7 +127,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
     private void updateTotalSum() {
         int totalSum = calculateTotalSum();
-        tv_sumPrice.setText(String.valueOf(totalSum)+" VND");
+        tv_sumPrice.setText(String.valueOf(totalSum) + " VND");
     }
 
     private int calculateTotalSum() {
@@ -181,7 +193,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         for (Cart cart : listCart) {
             for (Food food : listFood) {
                 if (food.getId() == cart.getIdFood()) {
-                    cartData += "- " + food.getName() + " (" + cart.getSum() + " VNĐ)"+ ", Số Lượng: " + cart.getQuanti() + "\n";
+                    cartData += "- " + food.getName() + " (" + cart.getSum() + " VNĐ)" + ", Số Lượng: " + cart.getQuanti() + "\n";
                     break;
                 }
             }
@@ -201,7 +213,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
 
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
-                String name= sharedPreferences.getString("USERNAME", "");
+                String name = sharedPreferences.getString("USERNAME", "");
 
 
                 if (addrs.trim().isEmpty()) {
@@ -228,7 +240,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                     if (historyDao.insert(history) >= 0) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
                         cartDAO.DelCart(name);
-                        listCart=cartDAO.getAllData();
+                        listCart = cartDAO.getAllData();
                         adapter.setData(listCart);
                         dialog.dismiss();
                         Intent i = new Intent(getContext(), ConfirmCart.class);
@@ -245,5 +257,21 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder) {
+        if (viewHolder instanceof CartAdapter.ViewHolder) {
+            int id = listCart.get(viewHolder.getAdapterPosition()).getIdCart();
+            if (cartDAO.delete(id) > 0) {
+                Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                reloadData();
+            } else {
+                Toast.makeText(getContext(), "Xóa không thành công", Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        }
     }
 }
