@@ -208,7 +208,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else if (phoneString.trim().isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (content.isEmpty()){
+                    Toast.makeText(getContext(), "Hãy chọn món ăn trước khi đặt hàng", Toast.LENGTH_SHORT).show();
+                }else {
                     int phone = 0;
                     try {
                         phone = Integer.parseInt(phoneString);
@@ -225,6 +227,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                     history.setContten(content);
                     history.setStatus("Đã Đặt Hàng");
 
+
                     if (historyDao.insert(history) >= 0) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
                         cartDAO.DelCart(name);
@@ -234,6 +237,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                         Intent i = new Intent(getContext(), ConfirmCart.class);
                         i.putExtra("address", history.getAddress());
                         getActivity().startActivity(i);
+                        updateTotalSum();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
                     }

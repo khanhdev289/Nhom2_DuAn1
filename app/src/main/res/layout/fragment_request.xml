@@ -4,173 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#C93142"
-        app:title="Giỏ Hàng"
+        android:background="@color/main_red"
+        app:title="Phản Hồi"
         app:titleTextColor="@color/white" />
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout
-            android:layout_weight="6"
+        android:layout_height="280dp"
+        android:background="@color/main_red"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="18dp"
+            android:background="@drawable/logo_facebook" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="17dp"
+            android:text="Chúng tôi luôn lắng nghe phản hồi của khách hàng. \n\nHãy cho chúng tôi biết trải nghiệm hoặc ý kiến của bạn."
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="-130dp"
+        android:layout_marginRight="18dp"
+        android:background="@drawable/boder_radius_cardview_request"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Phản Hồi"
+            android:textColor="@color/main_red"
+            android:textSize="20dp"
+            android:textStyle="bold|italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/boder_radius_cardview_bottom"
-                android:backgroundTint="@color/main_red"
-                >
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/banner_request"
-                    android:layout_margin="20dp"
-                    />
-            </LinearLayout>
+
+
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:textStyle="bold|italic"
-                android:textColor="@color/main_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên (*):"
                 android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/user_rq_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Liên Hệ"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/request_fb"
-                    />
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/request_call"
-                    />
-                <ImageView
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/request_insta"
-                    />
-            </LinearLayout>
+                android:background="@drawable/custom_request_edittext"
+                android:layout_margin="10dp"/>
             <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
-                android:textStyle="bold|italic"
-                android:textColor="@color/main_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại (*):"
                 android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/user_rq_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phản Hồi"
+                android:background="@drawable/custom_request_edittext"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email (*):"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 />
-            <LinearLayout
-                android:layout_marginHorizontal="30dp"
+
+            <EditText
+                android:id="@+id/user_rq_email"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/boder_radius_infor_item"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="20dp"
-                    >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Tên: "
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            />
-                        <EditText
-                            android:layout_weight="5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Số Điện Thoại: "
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            />
-                        <EditText
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Email: "
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            />
-                        <EditText
-                            android:layout_weight="5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Nội Dung: "
-                            android:textStyle="bold"
-                            android:textSize="20dp"
-                            />
-                        <EditText
-                            android:layout_weight="5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_request_edittext"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nội dung (*):"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/user_rq_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_request_edittext"
+                android:layout_margin="10dp"
+                android:lines="2"/>
+
         </LinearLayout>
 
-    </ScrollView>
 
+    </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_user_rq_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/main_red"
+        android:text="Gửi phản hồi" />
 
 </LinearLayout>
