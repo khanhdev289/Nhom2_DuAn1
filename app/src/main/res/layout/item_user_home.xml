@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#F8FBFF">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:outlineSpotShadowColor="@color/black"
         app:cardCornerRadius="8dp">
         <LinearLayout
@@ -33,8 +34,10 @@
                         android:layout_weight="3"
                         android:layout_margin="5dp"
                         app:cardCornerRadius="10dp"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content">
                         <ImageView
+                            android:scaleType="fitXY"
                             android:id="@+id/iv_item_food_foodImg"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
@@ -42,6 +45,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
+                        android:layout_gravity="center_vertical"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
@@ -50,26 +54,24 @@
                             android:id="@+id/tv_item_food_foodName"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:layout_marginLeft="10dp"
                             android:text="Bún Chả"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold|italic" />
-
                         <TextView
-                            android:id="@+id/tv_item_food_foodContent"
+                            android:id="@+id/tv_item_food_des"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_weight="4"
                             android:layout_marginLeft="10dp"
-                            android:text="Bao gồm nước chấm, bún và mấy
-chục miếng chả"
+                            android:text="Bún Chả"
                             android:textColor="@color/black"
                             android:textSize="10dp"
-                            android:textStyle="italic" />
+                            />
                         <LinearLayout
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:orientation="horizontal">
@@ -79,30 +81,20 @@ chục miếng chả"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:text="50000"
-                                android:textColor="#C93142"
+                                android:textColor="#FB001C"
                                 android:textSize="15dp"
                                 android:textStyle="bold" />
-                            <TextView
-                                android:text="đ"
-                                android:textColor="@color/main_red"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+
                         </LinearLayout>
-
-
                     </LinearLayout>
-
-                    <ImageButton
+                    <ImageView
+                        android:layout_marginLeft="5dp"
                         android:id="@+id/btn_item_food_addCart"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:src="@drawable/icon_add" />
-
-
                 </LinearLayout>
 
             </LinearLayout>

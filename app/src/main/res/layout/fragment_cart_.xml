@@ -4,99 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_red"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#C93142"
+        android:text="Giỏ hàng"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
     <LinearLayout
-        android:layout_weight="6"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="6"
+        android:background="@drawable/style_layout_middle"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#C93142"
-            app:title="Giỏ Hàng"
-            app:titleTextColor="@color/white" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/banner_cart"
-            />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/boder_radius_banner"
-            android:backgroundTint="#ECECEC"
-            >
+            android:background="@drawable/boder_radius_banner">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recy_fragment_cart_listFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                />
-
+                android:layout_margin="20dp" />
         </LinearLayout>
 
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
     <LinearLayout
+        android:padding="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#F8FBFF"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="4"
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:text="Tổng Tiền: "
+            android:textSize="15dp"
+            android:textStyle="bold|italic" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="Tổng Tiền: "
-                android:textSize="25dp"
-                android:textStyle="bold|italic" />
-
-            <TextView
-                android:id="@+id/tv_fragment_cart_sumPrice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="50000đ"
-                android:textColor="@color/main_red"
-                android:textSize="25dp"
-                android:textStyle="italic|bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_fragment_cart_sumPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
+            android:text="50000đ"
+            android:textColor="#FA0303"
+            android:textSize="20dp"
+            android:textStyle="italic|bold" />
+
+        <Button
             android:backgroundTint="@color/main_red"
-            android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/btn_fragment_cart_confirm"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:backgroundTint="@color/main_red"
-                android:background="@drawable/icon_confirm"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Xác Nhận"
-                />
-        </LinearLayout>
-
-
+            android:id="@+id/btn_fragment_cart_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đặt hàng" />
     </LinearLayout>
 
 
 </LinearLayout>
+

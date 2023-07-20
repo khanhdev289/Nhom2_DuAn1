@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recy_fragment_home_listFood);
 
-        ImageButton img_tápearch = view.findViewById(R.id.btn_fragment_home_tapSearch);
+        ImageButton img_tapsearch = view.findViewById(R.id.btn_fragment_home_tapSearch);
         EditText edSearch = view.findViewById(R.id.ed_fragment_home_search);
 
         viewPager = view.findViewById(R.id.viewPager);
@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
         circleIndicator.setViewPager(viewPager);
         slideAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
-        img_tápearch.setOnClickListener(new View.OnClickListener() {
+        img_tapsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edSearch.length()>0){

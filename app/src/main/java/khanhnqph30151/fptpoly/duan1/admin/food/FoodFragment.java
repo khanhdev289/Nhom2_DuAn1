@@ -2,10 +2,14 @@ package khanhnqph30151.fptpoly.duan1.admin.food;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -87,26 +91,22 @@ public class FoodFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(getContext());
-                Food food = new Food();
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_listfood_add);
 
+
+
+                Food food = new Food();
+
                 EditText ed_listfood_img,ed_listfood_name,ed_listfood_price,ed_listfood_des;
-                Button btnDialogAddCancel, btnDialogAddSubmit;
+                Button btnDialogAddSubmit;
                 ed_listfood_img = dialog.findViewById(R.id.edt_dialog_listfood_add_img);
                 ed_listfood_name = dialog.findViewById(R.id.edt_dialog_listfood_add_name);
                 ed_listfood_price = dialog.findViewById(R.id.edt_dialog_listfood_add_price);
                 ed_listfood_des = dialog.findViewById(R.id.edt_dialog_listfood_add_des);
 
-
-                btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_listfood_add_cancel);
                 btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_listfood_add_add);
 
-                btnDialogAddCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
                 btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -145,6 +145,10 @@ public class FoodFragment extends Fragment {
                     }
                 });
                 dialog.show();
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
+                dialog.getWindow().setGravity(Gravity.BOTTOM);
             }
         });
         reloadData();

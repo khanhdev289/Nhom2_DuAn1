@@ -5,11 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -67,7 +71,7 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         Picasso.get().load(img).into(holder.iv_img);
 
         holder.tv_des.setText(list.get(position).getDes());
-        holder.tv_price.setText(String.valueOf(list.get(position).getPrice()));
+        holder.tv_price.setText(String.valueOf(list.get(position).getPrice())+" VND");
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @SuppressLint("RestrictedApi")
@@ -151,6 +155,7 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         Dialog dialog = new Dialog(context);
         FoodDAO foodDAO = new FoodDAO(context);
         dialog.setContentView(R.layout.dialog_listfood_update);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         EditText ed1, ed2;
 
         EditText ed_listfood_img,ed_listfood_name,ed_listfood_price,ed_listfood_des;
@@ -166,16 +171,8 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         ed_listfood_price.setText(String.valueOf(list.get(id).getPrice()));
         ed_listfood_des.setText(list.get(id).getDes());
 
-
-        btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_listfood_update_cancel);
         btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_listfood_update_add);
 
-        btnDialogAddCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
         btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,6 +205,10 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
             }
         });
         dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
 }

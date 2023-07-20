@@ -2,8 +2,12 @@ package khanhnqph30151.fptpoly.duan1.user.cart;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import khanhnqph30151.fptpoly.duan1.ConfirmCart;
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
@@ -48,7 +53,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     CartAdapter adapter;
     History_Adapter adapterHis;
     TextView tv_sumPrice;
-    ImageButton btn_confirm;
+    Button btn_confirm;
     History_DAO historyDao;
     SharedPreferences sharedPreferences;
 
@@ -109,12 +114,12 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     }
 
     private void updateTotalSum() {
-        double totalSum = calculateTotalSum();
-        tv_sumPrice.setText(String.valueOf(totalSum));
+        int totalSum = calculateTotalSum();
+        tv_sumPrice.setText(String.valueOf(totalSum)+" VND");
     }
 
-    private double calculateTotalSum() {
-        double totalSum = 0;
+    private int calculateTotalSum() {
+        int totalSum = 0;
         for (Cart cart : listCart) {
             totalSum += cart.getSum();
         }
@@ -176,7 +181,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         for (Cart cart : listCart) {
             for (Food food : listFood) {
                 if (food.getId() == cart.getIdFood()) {
-                    cartData += "Name: " + food.getName() + ", Số Lượng: " + cart.getQuanti() + ", Giá Tiền: " + cart.getSum() + "\n";
+                    cartData += "- " + food.getName() + " (" + cart.getSum() + " VNĐ)"+ ", Số Lượng: " + cart.getQuanti() + "\n";
                     break;
                 }
             }
@@ -184,15 +189,8 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         String content = cartData;
         tvContent.setText(content);
 
-        btnDialogAddCancel = dialog.findViewById(R.id.btn_dialog_invoice_add_cancel);
         btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_invoice_add_add);
 
-        btnDialogAddCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
         btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,13 +207,13 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                 if (addrs.trim().isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else if (phoneString.trim().isEmpty()) {
-                    Toast.makeText(getContext(), "Vui lòng nhập giá tiền", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
                 } else {
                     int phone = 0;
                     try {
                         phone = Integer.parseInt(phoneString);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(getContext(), "Giá tiền phải là một số", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Số điện thoại phải là một số", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -229,7 +227,13 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
 
                     if (historyDao.insert(history) >= 0) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_LONG).show();
+                        cartDAO.DelCart(name);
+                        listCart=cartDAO.getAllData();
+                        adapter.setData(listCart);
                         dialog.dismiss();
+                        Intent i = new Intent(getContext(), ConfirmCart.class);
+                        i.putExtra("address", history.getAddress());
+                        getActivity().startActivity(i);
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
                     }
@@ -237,5 +241,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
             }
         });
         dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 }

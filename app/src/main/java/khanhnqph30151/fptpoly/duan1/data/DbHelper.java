@@ -75,16 +75,21 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
-        db.execSQL("INSERT INTO tbl_request VALUES (1, 'nhat','nhat@gmail.com','0985825597','abc')");
-
-//        db.execSQL("INSERT INTO tbl_invoice VALUES (1, 1,'0985825597','nguyễn hoàng nhật', '25/5 đường ngô quyền - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','07:00 2023-07-22')," +
-//                " (2,2 ,'0983927037','ngô quốc khánh','25/5 đường ngô quyền - thanh xuân- hà nội','07:00 2023-12-07',30000,'đã thanh toán','05:06 2023-07-13'), " +
-//                "(3,3 ,'0965656281','lê ngọc khải','25/5 đường trần hưng đạo - thanh xuân- hà nội','07:00 SA 13/07/2023',30000,'đã thanh toán','06:06 2023-07-31')");
 
 
 
-        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg', 'Thit cho', 'mota1 fdsjfjkldsjkldfjkslfjkljklsdfjklsdjklfjklsdjklfjkls', 20000), ('link2', 'ten2', 'mota2', 30000), " +
-                "('link3', 'ten3', 'mota3', 40000)");
+        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
+                ", 'Thịt chó'," +
+                " 'Ăn một bữa thịt chó, có người gỡ lại hết cả tiền thua, mà lại còn được thêm là khác. Thử hỏi trong tất cả các món ăn trên thế giới có món ăn ...'" +
+                ",80000), " +
+                "('https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-1.jpg', " +
+                "'Bún đậu', " +
+                "'Một mẹt bún đậu mắm tôm với đầy đủ các nguyên liệu hấp dẫn, sạch sẽ chắc hẳn là món ngon mà bất cứ ai cũng khó có thể chối từ.'," +
+                " 30000), " +
+                "('https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
+                " 'Gà Chiên Mắm', " +
+                "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
+                "50000)");
 
 
         db.execSQL(insert_admin);
