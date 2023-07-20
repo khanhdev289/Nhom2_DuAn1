@@ -2,6 +2,7 @@ package khanhnqph30151.fptpoly.duan1.user.cart;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import khanhnqph30151.fptpoly.duan1.ConfirmCart;
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
@@ -229,6 +231,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                         listCart=cartDAO.getAllData();
                         adapter.setData(listCart);
                         dialog.dismiss();
+                        Intent i = new Intent(getContext(), ConfirmCart.class);
+                        i.putExtra("address", history.getAddress());
+                        getActivity().startActivity(i);
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại!", Toast.LENGTH_LONG).show();
                     }
