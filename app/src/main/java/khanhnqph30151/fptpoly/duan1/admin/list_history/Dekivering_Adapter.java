@@ -57,18 +57,18 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
             @Override
             public void onClick(View v) {
 
-                if (inv.getStatus().equals("DangGiao")) {
-                    inv.setStatus("DaThanhToan");
+                if (inv.getStatus().equals("Đang Giao")) {
+                    inv.setStatus("Đã Thanh Toán");
                 } else {
-                    inv.setStatus("DaThanhToan");
+                    inv.setStatus("Đã Thanh Toán");
                 }
 
                 if (invoce_dao.update(inv) > 0) {
-                    if (inv.getStatus().equals("DangGiao")) {
-                        holder.status.setText("DaThanhToan");
+                    if (inv.getStatus().equals("Đang Giao")) {
+                        holder.status.setText("Đã Thanh Toán");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
                     } else {
-                        holder.status.setText("DaThanhToan");
+                        holder.status.setText("Đã Thanh Toán");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
                     }
                 }

@@ -54,7 +54,7 @@ public class invoce_DAO {
     @SuppressLint("Range")
     public ArrayList<invoice> SeLectDaDatHang() {
         ArrayList<invoice> list = new ArrayList<>();
-        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%DaDatHang%'  ", null);
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đã Đặt Hàng%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
@@ -78,7 +78,7 @@ public class invoce_DAO {
     @SuppressLint("Range")
     public ArrayList<invoice> SeLectDangGiao() {
         ArrayList<invoice> list = new ArrayList<>();
-        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%DangGiao%'  ", null);
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đang Giao%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
@@ -102,7 +102,7 @@ public class invoce_DAO {
     @SuppressLint("Range")
     public ArrayList<invoice> SeLectDaThanhToan() {
         ArrayList<invoice> list = new ArrayList<>();
-        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%DaThanhToan%'  ", null);
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đã Thanh Toán%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {

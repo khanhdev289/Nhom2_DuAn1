@@ -1,5 +1,6 @@
 package khanhnqph30151.fptpoly.duan1.user.history;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -47,7 +48,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
@@ -59,8 +60,8 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
         holder.status.setText(list.get(position).getStatus());
         history_dao = new History_DAO(context);
         History_model inv = list.get(position);
-        if (inv.getStatus().equals("DaDatHang")) {
-            holder.status.setOnClickListener(new View.OnClickListener() {
+        if (inv.getStatus().equals("Đã Đặt Hàng")) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

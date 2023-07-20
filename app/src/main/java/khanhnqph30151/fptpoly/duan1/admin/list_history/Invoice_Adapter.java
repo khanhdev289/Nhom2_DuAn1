@@ -70,45 +70,26 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                if (inv.getStatus().equals("DaDatHang")) {
-                    inv.setStatus("DangGiao");
+                if (inv.getStatus().equals("Đã Đặt Hàng")) {
+                    inv.setStatus("Đang Giao");
                 } else {
-                    inv.setStatus("DangGiao");
+                    inv.setStatus("Đang Giao");
                 }
 
                 if (invoce_dao.update(inv) > 0) {
-                    if (inv.getStatus().equals("DaDatHang")) {
-                        holder.status.setText("DangGiao");
+                    if (inv.getStatus().equals("Đã Đặt Hàng")) {
+                        holder.status.setText("Đang Giao");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
                     } else {
-                        holder.status.setText("DangGiao");
+                        holder.status.setText("Đang Giao");
                         holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
                     }
                 }
+                if (inv.getStatus().equals("Đã Thanh Toán")) {
+                    inv.setStatus("Đã Thanh Toán");
+                }
             }
         });
-//        holder.status.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (inv.getStatus().equals("DaDatHang")) {
-//                    inv.setStatus("DangGiao");
-//                }  else if (inv.getStatus().equals("DangGiao")) {
-//                    inv.setStatus("DaThanhToan");
-//                }
-//
-//                if (invoce_dao.update(inv) > 0) {
-//                    if (inv.getStatus().equals("DaDatHang")) {
-//                        holder.status.setText("DangGiao");
-//                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-//                    }if (inv.getStatus().equals("DangGiao")) {
-//                        holder.status.setText("DaThanhToan");
-//                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-//                    }
-//
-//                }
-//            }
-//        });
     }
 
 
