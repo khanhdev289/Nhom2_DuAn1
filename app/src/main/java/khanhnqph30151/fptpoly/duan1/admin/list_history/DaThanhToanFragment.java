@@ -21,7 +21,7 @@ public class DaThanhToanFragment extends Fragment {
     private invoce_DAO dao;
     private ArrayList<invoice> list;
 
-    private Invoice_Adapter adapter;
+    private DaThanhToan_Adapter adapter;
     RecyclerView recyclerView;
 
     public DaThanhToanFragment() {
@@ -45,7 +45,7 @@ public class DaThanhToanFragment extends Fragment {
         recyclerView =view.findViewById(R.id.invoice_ry_da_thanh_toan);
         invoce_DAO dao = new invoce_DAO(getContext());
         list = dao.SeLectDaThanhToan();
-        adapter = new Invoice_Adapter(list, getContext());
+        adapter = new DaThanhToan_Adapter(list, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
