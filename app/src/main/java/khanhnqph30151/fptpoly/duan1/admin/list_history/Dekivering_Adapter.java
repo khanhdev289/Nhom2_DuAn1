@@ -44,6 +44,9 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        invoice inv;
+        invoce_dao = new invoce_DAO(context);
+        inv=list.get(position);
         holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
@@ -52,10 +55,6 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
-        invoice inv;
-        invoce_dao = new invoce_DAO(context);
-        inv=list.get(position);
-
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,8 +65,8 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
                 setData(list);
             }
         });
-    }
 
+    }
     @Override
     public int getItemCount() {
         return list.size();
