@@ -32,9 +32,10 @@
                 android:hint="Nhập tên món ăn cần tìm"
                 android:paddingLeft="10dp" />
 
+
             <ImageButton
                 android:id="@+id/btn_fragment_home_tapSearch"
-                android:layout_width="wrap_content"
+                android:layout_width="5dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"

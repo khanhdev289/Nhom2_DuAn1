@@ -44,6 +44,13 @@ public class DeliveringFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.invoice_ry_dang_giao);
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         invoce_DAO dao = new invoce_DAO(getContext());
         list = dao.SeLectDangGiao();
         adapter = new Dekivering_Adapter(list, getContext());
@@ -52,6 +59,7 @@ public class DeliveringFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

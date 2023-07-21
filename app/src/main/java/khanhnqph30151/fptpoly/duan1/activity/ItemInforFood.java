@@ -47,7 +47,7 @@ public class ItemInforFood extends AppCompatActivity {
         Picasso.get().load(dataImage).into(iv_image);
         tv_name.setText(dataName);
         tv_content.setText(dataContent);
-        tv_price.setText(String.valueOf(dataPrice));
+        tv_price.setText(String.valueOf(dataPrice)+" VND");
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
