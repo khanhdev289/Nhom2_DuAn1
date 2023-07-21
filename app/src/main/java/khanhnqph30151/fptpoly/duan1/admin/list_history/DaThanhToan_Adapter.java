@@ -18,8 +18,9 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
     private ArrayList<invoice> list;
     private Context context;
 
-    invoice inv;
+
     private invoce_DAO invoce_dao;
+
     public DaThanhToan_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
@@ -34,20 +35,21 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View view = inflater.inflate(R.layout.item_invoice, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
-        holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
-        holder.time.setText(list.get(position).getTime());
-        holder.sum.setText(String.valueOf(list.get(position).getSum()));
-        holder.content.setText(list.get(position).getContten());
-        holder.status.setText(list.get(position).getStatus());
+        invoice inv;
+        inv=list.get(position);
+        holder.id_cart.setText(String.valueOf(inv.getId_history()));
+        holder.phone.setText(String.valueOf(inv.getPhone()));
+        holder.name.setText(inv.getName());
+        holder.address.setText(inv.getAddress());
+        holder.time.setText(inv.getTime());
+        holder.sum.setText(String.valueOf(inv.getSum()));
+        holder.content.setText(inv.getContten());
+        holder.status.setText(inv.getStatus());
     }
 
     @Override

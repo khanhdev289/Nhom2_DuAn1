@@ -33,11 +33,12 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
     private ArrayList<invoice> list;
     private Context context;
 
-    invoice inv;
+
     private invoce_DAO invoce_dao;
     public Invoice_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
+
     }
     public void setData(ArrayList<invoice> list){
         this.list = list;
@@ -62,30 +63,18 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
-
+        invoice inv;
         invoce_dao = new invoce_DAO(context);
         inv=list.get(position);
 
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (inv.getStatus().equals("Đã Đặt Hàng")) {
-                    inv.setStatus("Đang Giao");
-                }
-
-                if (invoce_dao.update(inv) > 0) {
-                    if (inv.getStatus().equals("Đã Đặt Hàng")) {
-                        holder.status.setText("Đang Giao");
-                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-                    } else {
-                        holder.status.setText("Đang Giao");
-                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    }
-                }
-                if (inv.getStatus().equals("Đã Thanh Toán")) {
-                    inv.setStatus("Đã Thanh Toán");
-                }
+                holder.status.setText("Đang giao");
+                inv.setStatus("Đang giao");
+                invoce_dao.update(inv);
+                list=invoce_dao.SeLectDaDatHang();
+                setData(list);
             }
         });
     }

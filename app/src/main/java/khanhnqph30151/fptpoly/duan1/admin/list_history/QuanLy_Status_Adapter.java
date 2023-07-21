@@ -23,7 +23,7 @@ public class QuanLy_Status_Adapter extends FragmentStateAdapter {
             case 2:
                 return new DaThanhToanFragment();
             default:
-                return new ListHistoryFragment();
+                return null;
         }
     }
 
