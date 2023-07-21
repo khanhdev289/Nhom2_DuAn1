@@ -43,14 +43,21 @@ public class DeliveringFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView =view.findViewById(R.id.invoice_ry_dang_giao);
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
         invoce_DAO dao = new invoce_DAO(getContext());
         list = dao.SeLectDangGiao();
         adapter = new Dekivering_Adapter(list, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        super.onViewCreated(view, savedInstanceState);
+        super.onResume();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

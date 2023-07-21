@@ -266,6 +266,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
             if (cartDAO.delete(id) > 0) {
                 Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
                 reloadData();
+                updateTotalSum();
             } else {
                 Toast.makeText(getContext(), "Xóa không thành công", Toast.LENGTH_SHORT).show();
 

@@ -19,6 +19,7 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
     private ArrayList<invoice> list;
     private ArrayList<invoice> list1;
     private Context context;
+    invoice inv;
 
 
 
@@ -52,7 +53,7 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
-        invoice inv;
+
         invoce_dao = new invoce_DAO(context);
         inv=list.get(position);
 
@@ -60,12 +61,18 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
             @Override
             public void onClick(View v) {
                 holder.status.setText("Đã Thanh Toán");
-                inv.setStatus("Đã Thanh Toán");
-                invoce_dao.update(inv);
-                list=invoce_dao.SeLectDangGiao();
-                setData(list);
+                statusLoad();
+
             }
         });
+    }
+    private void statusLoad(){
+        inv.setStatus("Đã Thanh Toán");
+        list.clear();
+        invoce_dao.update(inv);
+        list=invoce_dao.SeLectDangGiao();
+        setData(list);
+
     }
 
     @Override
