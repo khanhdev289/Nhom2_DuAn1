@@ -206,11 +206,8 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                 String phoneString = ed_phone.getText().toString();
                 String dateTime = tvDateTime.getText().toString();
                 String content = tvContent.getText().toString();
-
-
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
                 String name = sharedPreferences.getString("USERNAME", "");
-
 
                 if (addrs.trim().isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();

@@ -55,6 +55,9 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,@SuppressLint("RecyclerView") int position) {
+        invoice inv;
+        invoce_dao = new invoce_DAO(context);
+        inv=list.get(position);
         holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
@@ -63,9 +66,6 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
-        invoice inv;
-        invoce_dao = new invoce_DAO(context);
-        inv=list.get(position);
 
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override

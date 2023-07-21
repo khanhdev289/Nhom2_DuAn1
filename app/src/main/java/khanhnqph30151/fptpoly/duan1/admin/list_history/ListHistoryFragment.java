@@ -54,6 +54,7 @@ public class ListHistoryFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.invoice_ry);
         invoce_DAO dao = new invoce_DAO(getContext());
         list = dao.SeLectDaDatHang();
@@ -61,6 +62,6 @@ public class ListHistoryFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        super.onViewCreated(view, savedInstanceState);
     }
+
 }

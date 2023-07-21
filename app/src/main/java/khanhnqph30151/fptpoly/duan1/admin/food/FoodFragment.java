@@ -93,20 +93,14 @@ public class FoodFragment extends Fragment {
                 Dialog dialog = new Dialog(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_listfood_add);
-
-
-
                 Food food = new Food();
-
                 EditText ed_listfood_img,ed_listfood_name,ed_listfood_price,ed_listfood_des;
                 Button btnDialogAddSubmit;
                 ed_listfood_img = dialog.findViewById(R.id.edt_dialog_listfood_add_img);
                 ed_listfood_name = dialog.findViewById(R.id.edt_dialog_listfood_add_name);
                 ed_listfood_price = dialog.findViewById(R.id.edt_dialog_listfood_add_price);
                 ed_listfood_des = dialog.findViewById(R.id.edt_dialog_listfood_add_des);
-
                 btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_listfood_add_add);
-
                 btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

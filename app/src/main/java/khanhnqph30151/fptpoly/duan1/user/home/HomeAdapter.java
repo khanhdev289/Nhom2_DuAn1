@@ -35,13 +35,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private HomeDAO homeDAO;
     private CartDAO cartDAO;
     private CartAdapter adapter;
+
     public HomeAdapter(Context context, ArrayList<Home> list, HomeDAO homeDAO) {
         this.context = context;
         this.list = list;
-        this.homeDAO=homeDAO;
-        cartDAO=new CartDAO(context);
+        this.homeDAO = homeDAO;
+        cartDAO = new CartDAO(context);
     }
-    public void setData(ArrayList<Home> list){
+
+    public void setData(ArrayList<Home> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -55,13 +57,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-       listCart=cartDAO.getAllData();
+        listCart = cartDAO.getAllData();
         Home home = list.get(position);
         holder.tv_name.setText(list.get(position).getName());
         String img = list.get(position).getImg();
         Picasso.get().load(img).into(holder.iv_img);
         holder.tv_des.setText(home.getDes());
-        holder.tv_price.setText(String.valueOf(list.get(position).getPrice())+" VND");
+        holder.tv_price.setText(String.valueOf(list.get(position).getPrice()) + " VND");
         holder.btn_addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,6 +111,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 i.putExtra("foodName", list.get(position).getName());
                 i.putExtra("foodDes", list.get(position).getDes());
                 i.putExtra("foodPrice", list.get(position).getPrice());
+                i.putExtra("foodId",list.get(position).getId());
                 context.startActivity(i);
             }
         });
@@ -120,17 +123,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_img;
-        TextView tv_name,  tv_price,tv_des;
+        TextView tv_name, tv_price, tv_des;
         ImageView btn_addCart;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv_img = itemView.findViewById(R.id.iv_item_food_foodImg);
             tv_name = itemView.findViewById(R.id.tv_item_food_foodName);
             tv_price = itemView.findViewById(R.id.tv_item_food_foodPrice);
             btn_addCart = itemView.findViewById(R.id.btn_item_food_addCart);
-            tv_des=itemView.findViewById(R.id.tv_item_food_des);
+            tv_des = itemView.findViewById(R.id.tv_item_food_des);
         }
     }
 
