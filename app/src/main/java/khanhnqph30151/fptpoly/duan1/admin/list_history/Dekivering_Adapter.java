@@ -17,13 +17,16 @@ import khanhnqph30151.fptpoly.duan1.R;
 
 public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.ViewHolder> {
     private ArrayList<invoice> list;
+    private ArrayList<invoice> list1;
     private Context context;
 
-    invoice inv;
+
+
     private invoce_DAO invoce_dao;
     public Dekivering_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
+
     }
     public void setData(ArrayList<invoice> list){
         this.list = list;
@@ -49,29 +52,18 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
         holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
-
+        invoice inv;
         invoce_dao = new invoce_DAO(context);
         inv=list.get(position);
 
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (inv.getStatus().equals("Đang Giao")) {
-                    inv.setStatus("Đã Thanh Toán");
-                } else {
-                    inv.setStatus("Đã Thanh Toán");
-                }
-
-                if (invoce_dao.update(inv) > 0) {
-                    if (inv.getStatus().equals("Đang Giao")) {
-                        holder.status.setText("Đã Thanh Toán");
-                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.main_red));
-                    } else {
-                        holder.status.setText("Đã Thanh Toán");
-                        holder.status.setTextColor(ContextCompat.getColor(context, R.color.black));
-                    }
-                }
+                holder.status.setText("Đã Thanh Toán");
+                inv.setStatus("Đã Thanh Toán");
+                invoce_dao.update(inv);
+                list=invoce_dao.SeLectDangGiao();
+                setData(list);
             }
         });
     }

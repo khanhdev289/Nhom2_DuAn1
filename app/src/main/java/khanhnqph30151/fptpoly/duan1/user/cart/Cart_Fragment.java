@@ -93,11 +93,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         ItemTouchHelper.SimpleCallback simpleCallback = new RecycleViewItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
         reloadData();
-
-
         updateTotalSum();
-
-
         return view;
     }
 

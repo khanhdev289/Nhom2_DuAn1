@@ -57,6 +57,7 @@ public class Quanly_StatusFragment extends Fragment {
                     break;
                 case 2:
                     tab.setText("Đã Thanh Toán");
+
                     break;
             }
         })).attach();

@@ -23,6 +23,7 @@ public class ListHistoryFragment extends Fragment {
 
     private invoce_DAO dao;
     private ArrayList<invoice> list;
+    private ArrayList<invoice> list1;
 
     private Invoice_Adapter adapter;
     RecyclerView recyclerView;
