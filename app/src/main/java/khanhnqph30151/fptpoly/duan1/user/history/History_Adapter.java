@@ -2,17 +2,26 @@ package khanhnqph30151.fptpoly.duan1.user.history;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+
 import android.content.SharedPreferences;
+
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -94,21 +103,23 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
         }
     }
     public void showDele(int id){
-        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn xóa không?");
-        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_item_delete_invoice);
+
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        AppCompatButton btnSubmit, btnCancel;
+        btnSubmit = dialog.findViewById(R.id.btn_dialog_item_delete_submit);
+        btnCancel = dialog.findViewById(R.id.btn_dialog_item_delete_cancel);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 History_DAO dao = new History_DAO(context);
                 if (dao.delete(id) > 0) {
                     Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                    SharedPreferences sharedPreferences = dialogDL.getContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = dialog.getContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
                     String loggedInUserName = sharedPreferences.getString("USERNAME", "");
                     list = dao.getByUser(loggedInUserName);
                     setData(list);
@@ -117,9 +128,15 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
 
                 }
                 dialog.dismiss();
-
             }
         });
-        dialogDL.show();
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 }
