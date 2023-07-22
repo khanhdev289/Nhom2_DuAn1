@@ -1,13 +1,18 @@
 package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -67,11 +73,20 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.btn_addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                androidx.appcompat.app.AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-                dialogDL.setMessage("Bạn có muốn thêm không?");
-                dialogDL.setNegativeButton("Có", new DialogInterface.OnClickListener() {
+                Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.dialog_item_add_cart);
+
+                Window window = dialog.getWindow();
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                AppCompatButton btnSubmit, btnCancel;
+                btnSubmit = dialog.findViewById(R.id.btn_dialog_item_add_cart);
+                btnCancel = dialog.findViewById(R.id.btn_dialog_item_cancel_cart);
+
+                btnSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         CartDAO cartDAO = new CartDAO(context);
                         Cart cart = new Cart();
                         cart.setIdFood(home.getId());
@@ -90,17 +105,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                         } else {
                             Toast.makeText(context, "Món ăn đã được chọn", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
-                dialogDL.setPositiveButton("Không", new DialogInterface.OnClickListener() {
+                btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
+                    public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-                dialogDL.show();
+
+
+
+                dialog.show();
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
