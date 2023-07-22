@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#C93142"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    tools:context=".user.history.DangGiaoFragment">
 
 
     <LinearLayout
@@ -24,13 +23,12 @@
             android:background="@drawable/boder_radius_banner">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/History_ry"
+                android:id="@+id/history_danggiao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="20dp"/>
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
