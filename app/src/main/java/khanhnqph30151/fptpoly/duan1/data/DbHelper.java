@@ -30,6 +30,12 @@ public class DbHelper extends SQLiteOpenHelper {
             "request_phone TEXT ," +
             "request_content TEXT " +
             ")";
+    public static final String TABLE_COMMENT_CREATE = "CREATE TABLE IF NOT EXISTS " +
+            "tbl_comment (" +
+            "comment_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "comment_content TEXT ," +
+            "user_name TEXT REFERENCES tbl_user(user_name)," +
+            "food_id INTEGER REFERENCES tbl_food(food_id))";
 
     public static final String TABLE_FOOD_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_food (" +
@@ -75,7 +81,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.execSQL(TABLE_INVOICE_CREATE);
 
-
+        db.execSQL(TABLE_COMMENT_CREATE);
 
 
         db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
@@ -90,8 +96,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 " 'Gà Chiên Mắm', " +
                 "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
                 "50000)");
-
-
         db.execSQL(insert_admin);
 
 
