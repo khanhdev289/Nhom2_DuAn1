@@ -1,18 +1,21 @@
 package khanhnqph30151.fptpoly.duan1.user.request;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
+import khanhnqph30151.fptpoly.duan1.InforWebview;
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 
@@ -23,6 +26,7 @@ public class RequestFragment extends Fragment {
     private ArrayList<Request> listRequest ;
     private EditText user_rq_name, user_rq_email, user_rq_phone, user_rq_content;
     private Button btn_user_rq_send;
+    ImageView iv_facebook;
     AdapterRequest adapter;
     private View mView;
 
@@ -51,6 +55,7 @@ public class RequestFragment extends Fragment {
         dao=new DAO(getContext());
         listRequest=dao.getAllData();
         adapter=new AdapterRequest(getContext(),listRequest);
+        iv_facebook = mView.findViewById(R.id.iv_facebook);
         user_rq_name = mView.findViewById(R.id.user_rq_name);
         user_rq_email = mView.findViewById(R.id.user_rq_email);
         user_rq_phone = mView.findViewById(R.id.user_rq_phone);
@@ -61,6 +66,13 @@ public class RequestFragment extends Fragment {
             public void onClick(View view) {
 
                 sendRequestfromUserforAdmin();
+            }
+        });
+        iv_facebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), InforWebview.class);
+                startActivity(i);
             }
         });
 
