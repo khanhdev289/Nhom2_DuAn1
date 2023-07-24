@@ -5,8 +5,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+
+import android.content.SharedPreferences;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +119,9 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
                 History_DAO dao = new History_DAO(context);
                 if (dao.delete(id) > 0) {
                     Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                    list = dao.getAllData();
+                    SharedPreferences sharedPreferences = dialog.getContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+                    String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+                    list = dao.getByUser(loggedInUserName);
                     setData(list);
                 } else {
                     Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();

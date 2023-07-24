@@ -19,6 +19,7 @@ import khanhnqph30151.fptpoly.duan1.admin.list_request.ListRequestFragment;
 import khanhnqph30151.fptpoly.duan1.admin.statis.StatisFragment;
 import khanhnqph30151.fptpoly.duan1.user.cart.Cart_Fragment;
 import khanhnqph30151.fptpoly.duan1.user.history.HistoryFragment;
+import khanhnqph30151.fptpoly.duan1.user.history.History_QuanLyFragment;
 import khanhnqph30151.fptpoly.duan1.user.home.HomeFragment;
 import khanhnqph30151.fptpoly.duan1.user.request.RequestFragment;
 
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new RequestFragment());
                     return true;
                 } else if (item.getItemId() == R.id.action_History) {
-                    replaceFragment(new HistoryFragment());
+                    replaceFragment(new History_QuanLyFragment());
                     return true;
                 } else if (item.getItemId() == R.id.action_User) {
                     replaceFragment(new UserFragment());

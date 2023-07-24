@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import khanhnqph30151.fptpoly.duan1.admin.list_history.invoice;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
 import khanhnqph30151.fptpoly.duan1.setting.User;
 import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
@@ -72,7 +73,50 @@ public class History_DAO {
      @SuppressLint("Range")
      public ArrayList<History_model> getByUser(String username) {
         ArrayList<History_model> list = new ArrayList<>();
-        String query = "SELECT * FROM tbl_invoice WHERE user_name = ?";
+        String query = "SELECT * FROM tbl_invoice WHERE user_name = ? AND invoice_status LIKE '%Đã Đặt Hàng%' ";
+        Cursor cursor = sqLite.rawQuery(query, new String[]{username});
+        while (cursor.moveToNext()) {
+            History_model history = new History_model();
+            history.setId_history(cursor.getInt(cursor.getColumnIndex("invoice_id")));
+            history.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
+            history.setPhone(cursor.getInt(cursor.getColumnIndex("cart_phone")));
+            history.setName(cursor.getString(cursor.getColumnIndex("user_name")));
+            history.setAddress(cursor.getString(cursor.getColumnIndex("cart_address")));
+            history.setTime(cursor.getString(cursor.getColumnIndex("invoice_time")));
+            history.setContten(cursor.getString(cursor.getColumnIndex("invoice_content")));
+            history.setSum(cursor.getDouble(cursor.getColumnIndex("invoice_sum")));
+            history.setStatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
+            list.add(history);
+        }
+        cursor.close();
+        return list;
+    }
+    @SuppressLint("Range")
+    public ArrayList<History_model> SeLectUESeDangGiao(String username) {
+        ArrayList<History_model> list = new ArrayList<>();
+        String query = "SELECT * FROM tbl_invoice WHERE user_name = ? AND invoice_status LIKE '%Đang Giao%' ";
+        Cursor cursor = sqLite.rawQuery(query, new String[]{username});
+        while (cursor.moveToNext()) {
+            History_model history = new History_model();
+            history.setId_history(cursor.getInt(cursor.getColumnIndex("invoice_id")));
+            history.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
+            history.setPhone(cursor.getInt(cursor.getColumnIndex("cart_phone")));
+            history.setName(cursor.getString(cursor.getColumnIndex("user_name")));
+            history.setAddress(cursor.getString(cursor.getColumnIndex("cart_address")));
+            history.setTime(cursor.getString(cursor.getColumnIndex("invoice_time")));
+            history.setContten(cursor.getString(cursor.getColumnIndex("invoice_content")));
+            history.setSum(cursor.getDouble(cursor.getColumnIndex("invoice_sum")));
+            history.setStatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
+            list.add(history);
+        }
+        cursor.close();
+        return list;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<History_model> SeLectUESeDaThanhToan(String username) {
+        ArrayList<History_model> list = new ArrayList<>();
+        String query = "SELECT * FROM tbl_invoice WHERE user_name = ? AND invoice_status LIKE '%Đã Thanh Toán%' ";
         Cursor cursor = sqLite.rawQuery(query, new String[]{username});
         while (cursor.moveToNext()) {
             History_model history = new History_model();

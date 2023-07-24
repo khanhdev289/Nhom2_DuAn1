@@ -22,7 +22,7 @@ public class StatisDAO {
 
         String sql1 ="   SELECT substr(invoice_time,7,10) AS date, SUM(invoice_sum) AS doanhThu" +
              "        FROM tbl_invoice" +
-             "        where date BETWEEN ? AND ?";
+             "        where  invoice_status LIKE '%Đã Thanh Toán%' AND date BETWEEN ? AND ?";
 
 //        String sql = "SELECT SUM(invoice_sum) as doanhThu FROM tbl_invoice WHERE (invoice_time) BETWEEN ? AND ? ";
         ArrayList<Integer> list = new ArrayList<>();
