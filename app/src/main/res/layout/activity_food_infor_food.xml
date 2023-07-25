@@ -12,10 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-
-        >
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -43,67 +40,128 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/style_layout_middle"
-        android:orientation="vertical">
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="60dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="10dp">
-            <ImageView
-                android:id="@+id/iv_infor_food_img"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/style_layout_middle"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_infor_food_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/tv_infor_food_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Bún chả khánh pro"
+                android:textSize="26dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_infor_food_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="50.000 VND"
+                android:textAlignment="center"
+                android:textColor="@color/main_red"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_infor_food_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, ..."
+                android:textAlignment="center"
+                android:textSize="19sp" />
+
+            <Button
+                android:id="@+id/btn_add_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/main_red"
+                android:text="Thêm vào giỏ hàng" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đánh giá của khách hàng"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_count_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="(100)"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-        </androidx.cardview.widget.CardView>
+                android:layout_margin="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+    </ScrollView>
+    <!--        <com.google.android.material.textfield.TextInputLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:background="@color/white"-->
+    <!--            app:boxCornerRadiusBottomEnd="10dp"-->
+    <!--            app:boxCornerRadiusBottomStart="10dp"-->
+    <!--            app:boxCornerRadiusTopEnd="10dp"-->
+    <!--            app:boxCornerRadiusTopStart="10dp">-->
 
-
-        <TextView
-            android:id="@+id/tv_infor_food_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="Bún chả khánh pro"
-            android:textSize="26dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_infor_food_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="50.000 VND"
-            android:textAlignment="center"
-            android:textColor="@color/main_red"
-            android:textSize="13dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_infor_food_content"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:textSize="19sp"
-            android:text="Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, ..."
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/btn_add_cart"
-            android:backgroundTint="@color/main_red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Thêm vào giỏ hàng"
-            android:layout_gravity="center"
-            />
-    </LinearLayout>
+    <!--            <com.google.android.material.textfield.TextInputEditText-->
+    <!--                android:id="@+id/edComment"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:hint="Viết đánh giá" />-->
+    <!--        </com.google.android.material.textfield.TextInputLayout>-->
+    <!--        <Button-->
+    <!--          android:layout_gravity="end"-->
+    <!--            android:layout_marginTop="5dp"-->
+    <!--            android:layout_marginRight="10dp"-->
+    <!--            android:text="Gửi"-->
+    <!--            android:backgroundTint="@color/main_red"-->
+    <!--            android:id="@+id/btn_send_comment"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"/>-->
 
 
 </LinearLayout>
