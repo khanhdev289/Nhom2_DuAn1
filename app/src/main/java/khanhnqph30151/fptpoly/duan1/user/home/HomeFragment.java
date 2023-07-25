@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -67,6 +69,18 @@ public class HomeFragment extends Fragment {
         ImageButton img_tapsearch = view.findViewById(R.id.btn_fragment_home_tapSearch);
         EditText edSearch = view.findViewById(R.id.ed_fragment_home_search);
 
+        ImageView ivTypeFood1,ivTypeFood2,ivTypeFood3;
+        TextView tvTypeFood1,tvTypeFood2,tvTypeFood3, tvGetAll;
+
+        ivTypeFood1 = view.findViewById(R.id.iv_home_typeFood1);
+        ivTypeFood2 = view.findViewById(R.id.iv_home_typeFood2);
+        ivTypeFood3 = view.findViewById(R.id.iv_home_typeFood3);
+        tvTypeFood1 = view.findViewById(R.id.tv_home_typeFood1);
+        tvTypeFood2 = view.findViewById(R.id.tv_home_typeFood2);
+        tvTypeFood3 = view.findViewById(R.id.tv_home_typeFood3);
+        tvGetAll = view.findViewById(R.id.tv_home_getAll);
+
+
         viewPager = view.findViewById(R.id.viewPager);
         circleIndicator = view.findViewById(R.id.circle_indicator);
 
@@ -76,11 +90,13 @@ public class HomeFragment extends Fragment {
         circleIndicator.setViewPager(viewPager);
         slideAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
+
+
         img_tapsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edSearch.length()>0){
-                    String searchName = edSearch.getText().toString();
+                    String searchName = edSearch.getText().toString().trim();
                     LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
                     recyclerView.setLayoutManager(linearLayoutManager);
                     HomeDAO homeDAO1 = new HomeDAO(getContext());
@@ -91,6 +107,51 @@ public class HomeFragment extends Fragment {
                 }else {
                     reloadData();
                 }
+            }
+        });
+        ivTypeFood1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String typeName = tvTypeFood1.getText().toString();
+                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                HomeDAO homeDAO1 = new HomeDAO(getContext());
+                listHome = new ArrayList<>();
+                listHome = homeDAO1.TypeName(typeName);
+                adapter.setData(listHome);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+        ivTypeFood2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String typeName = tvTypeFood2.getText().toString();
+                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                HomeDAO homeDAO1 = new HomeDAO(getContext());
+                listHome = new ArrayList<>();
+                listHome = homeDAO1.TypeName(typeName);
+                adapter.setData(listHome);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+        ivTypeFood3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String typeName = tvTypeFood3.getText().toString();
+                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                HomeDAO homeDAO1 = new HomeDAO(getContext());
+                listHome = new ArrayList<>();
+                listHome = homeDAO1.TypeName(typeName);
+                adapter.setData(listHome);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+        tvGetAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloadData();
             }
         });
 

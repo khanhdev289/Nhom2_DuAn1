@@ -104,6 +104,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                             }
                         } else {
                             Toast.makeText(context, "Món ăn đã được chọn", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
                     }
                 });
