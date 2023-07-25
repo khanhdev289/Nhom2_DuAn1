@@ -1,5 +1,6 @@
 package khanhnqph30151.fptpoly.duan1.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -20,29 +23,50 @@ import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
 import khanhnqph30151.fptpoly.duan1.user.cart.CartDAO;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
+import khanhnqph30151.fptpoly.duan1.user.home.comment.Comment;
+import khanhnqph30151.fptpoly.duan1.user.home.comment.CommentAdapter;
+import khanhnqph30151.fptpoly.duan1.user.home.comment.CommentDAO;
 
 
 public class ItemInforFood extends AppCompatActivity {
-    ArrayList<Home> list;
-    Button btn_add;
 
+    Button btn_add;
+    RecyclerView recyclerView;
+    TextView count_cmt;
+    CommentAdapter commentAdapter;
+    CommentDAO commentDAO;
+    ArrayList<Comment> list;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_infor_food);
-
-        ImageButton btn_back = findViewById(R.id.btn_infor_food_back);
-        btn_add=findViewById(R.id.btn_add_cart);
-
-        ImageView iv_image = findViewById(R.id.iv_infor_food_img);
-        TextView tv_name = findViewById(R.id.tv_infor_food_name);
-        TextView tv_content = findViewById(R.id.tv_infor_food_content);
-        TextView tv_price = findViewById(R.id.tv_infor_food_price);
         int id_food=getIntent().getIntExtra("foodId", 0);
         String dataImage = getIntent().getStringExtra("foodImg");
         String dataName = getIntent().getStringExtra("foodName");
         String dataContent = getIntent().getStringExtra("foodDes");
         int dataPrice = getIntent().getIntExtra("foodPrice", 0);
+
+
+        ImageButton btn_back = findViewById(R.id.btn_infor_food_back);
+        btn_add=findViewById(R.id.btn_add_cart);
+        recyclerView=findViewById(R.id.recy_comment);
+        count_cmt=findViewById(R.id.tv_count_comment);
+        commentDAO=new CommentDAO(getApplicationContext());
+        list=commentDAO.getByFoodId(String.valueOf(id_food));
+        commentAdapter=new CommentAdapter(ItemInforFood.this,list);
+        recyclerView.setAdapter(commentAdapter);
+        count_cmt.setText("("+commentDAO.countCmt(String.valueOf(id_food))+")");
+
+
+
+
+        ImageView iv_image = findViewById(R.id.iv_infor_food_img);
+        TextView tv_name = findViewById(R.id.tv_infor_food_name);
+        TextView tv_content = findViewById(R.id.tv_infor_food_content);
+        TextView tv_price = findViewById(R.id.tv_infor_food_price);
+
 
         Picasso.get().load(dataImage).into(iv_image);
         tv_name.setText(dataName);

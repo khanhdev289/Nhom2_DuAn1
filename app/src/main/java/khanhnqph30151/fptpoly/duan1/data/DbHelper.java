@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "user_role TEXT" +
             ")";
     public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
-            "('admin','123','admin'), ('khanh','123','hehe')";
+            "('admin','123','admin'), ('khanh','123','hehe'),('khai','123','')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -30,12 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "request_phone TEXT ," +
             "request_content TEXT " +
             ")";
-    public static final String TABLE_COMMENT_CREATE = "CREATE TABLE IF NOT EXISTS " +
-            "tbl_comment (" +
-            "comment_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "comment_content TEXT ," +
-            "user_name TEXT REFERENCES tbl_user(user_name)," +
-            "food_id INTEGER REFERENCES tbl_food(food_id))";
+
 
     public static final String TABLE_FOOD_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_food (" +
@@ -67,6 +62,14 @@ public class DbHelper extends SQLiteOpenHelper {
             "invoice_status TEXT ," +
             "invoice_time TEXT NOT NULL" +
             ")";
+    public static final String TABLE_COMMENT_CREATE = "CREATE TABLE IF NOT EXISTS " +
+            "tbl_comment (" +
+            "comment_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "comment_content TEXT ," +
+            "user_name TEXT REFERENCES tbl_user(user_name)," +
+            "food_id INTEGER REFERENCES tbl_food(food_id))";
+    public static final String insert_cmt = "Insert into tbl_comment(comment_content,user_name,food_id) values" +
+            "('xời , tuyệt vời','khanh','1'), ('hết nước chấm','khanh','2'),('hết nước chấm','khai','1'),('xời, tuyệt vời','khai','2'),('mlem','khanh','2'),('okkkk','khai','2')";
 
 
     @Override
@@ -97,7 +100,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
                 "50000)");
         db.execSQL(insert_admin);
-
+        db.execSQL(insert_cmt);
 
     }
 
