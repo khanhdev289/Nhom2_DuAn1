@@ -99,6 +99,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 cart.setSum(food.getPrice() * quanti);
                 cartDao.updateSum(cart);
 
+                
                 if (quantityUpClickListener != null) {
                     quantityUpClickListener.onQuantityUpClick(holder.getAdapterPosition());
                 }
