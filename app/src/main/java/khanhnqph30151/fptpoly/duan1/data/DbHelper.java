@@ -30,11 +30,17 @@ public class DbHelper extends SQLiteOpenHelper {
             "request_phone TEXT ," +
             "request_content TEXT " +
             ")";
+    public static final String TABLE_TYPE_CREATE = "CREATE TABLE IF NOT EXISTS " +
+            "tbl_typeFood (" +
+            "typeFood_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "typeFood_typeName TEXT NOT NULL" +
+            ")";
 
 
     public static final String TABLE_FOOD_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_food (" +
             "food_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "typeFood_typeName TEXT REFERENCES tbl_typeFood(typeFood_typeName)," +
             "food_img TEXT NOT NULL, " +
             "food_name TEXT NOT NULL, " +
             "food_description TEXT NOT NULL, " +
@@ -83,19 +89,20 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_REQUEST_CREATE);
 
         db.execSQL(TABLE_INVOICE_CREATE);
+        db.execSQL(TABLE_TYPE_CREATE);
 
         db.execSQL(TABLE_COMMENT_CREATE);
 
-
-        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
+        db.execSQL("INSERT INTO tbl_typeFood(typeFood_typeName) VALUES ('Món chính'),('Món phụ'),('Đồ uống')");
+        db.execSQL("INSERT INTO tbl_food(typeFood_typeName,food_img,food_name,food_description,food_price) VALUES ('Món chính','https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
                 ", 'Thịt chó'," +
                 " 'Ăn một bữa thịt chó, có người gỡ lại hết cả tiền thua, mà lại còn được thêm là khác. Thử hỏi trong tất cả các món ăn trên thế giới có món ăn ...'" +
                 ",80000), " +
-                "('https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-1.jpg', " +
+                "('Món phụ','https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-1.jpg', " +
                 "'Bún đậu', " +
                 "'Một mẹt bún đậu mắm tôm với đầy đủ các nguyên liệu hấp dẫn, sạch sẽ chắc hẳn là món ngon mà bất cứ ai cũng khó có thể chối từ.'," +
                 " 30000), " +
-                "('https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
+                "('Đồ uống','https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
                 " 'Gà Chiên Mắm', " +
                 "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
                 "50000)");
