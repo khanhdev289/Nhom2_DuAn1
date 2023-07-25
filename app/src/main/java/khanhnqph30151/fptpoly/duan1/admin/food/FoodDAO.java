@@ -98,7 +98,7 @@ public class FoodDAO {
     public Food getById(int id) {
         Cursor cursor = sqLiteDatabase.query("tbl_food", null,"food_id = ?", new String[]{String.valueOf(id)}, null, null, null);
         if (cursor.moveToNext()){
-            return new Food(cursor.getInt(0), cursor.getString(1),cursor.getString(2), cursor.getString(3), cursor.getInt(4));
+            return new Food(cursor.getInt(0), cursor.getString(1),cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5));
         }else {
             return null;
         }

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -36,6 +39,7 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.activity.ItemInforFood;
+import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
 import khanhnqph30151.fptpoly.duan1.user.home.HomeAdapter;
 import khanhnqph30151.fptpoly.duan1.user.home.HomeDAO;
@@ -125,17 +129,22 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         }
     }
     public void showDele(int id){
-        AlertDialog.Builder dialogDL = new AlertDialog.Builder(context);
-        dialogDL.setMessage("Bạn có muốn xóa không?");
-        dialogDL.setNegativeButton("KHÔNG", new DialogInterface.OnClickListener() {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.dialog_item_delete_invoice);
+        TextView content = dialog.findViewById(R.id.tv_dialog_delete);
+
+        Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        AppCompatButton btnSubmit, btnCancel;
+        btnSubmit = dialog.findViewById(R.id.btn_dialog_item_delete_submit);
+        btnCancel = dialog.findViewById(R.id.btn_dialog_item_delete_cancel);
+        content.setText("Bạn có muốn xoá không ?");
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialogDL.setPositiveButton("CÓ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 FoodDAO dao = new FoodDAO(context);
                 if (dao.delete(id) > 0) {
                     Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
@@ -146,10 +155,16 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
 
                 }
                 dialog.dismiss();
-
             }
         });
-        dialogDL.show();
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
     private void updateDia(Food food, int id) {
         Dialog dialog = new Dialog(context);
