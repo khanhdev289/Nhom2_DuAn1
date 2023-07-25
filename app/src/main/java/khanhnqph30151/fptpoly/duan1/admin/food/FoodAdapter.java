@@ -154,12 +154,14 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
     private void updateDia(Food food, int id) {
         Dialog dialog = new Dialog(context);
         FoodDAO foodDAO = new FoodDAO(context);
+        TypeDAO typeDAO = new TypeDAO(context);
         dialog.setContentView(R.layout.dialog_listfood_update);
 //        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         EditText ed1, ed2;
 
         EditText ed_listfood_img,ed_listfood_name,ed_listfood_price,ed_listfood_des;
         Button btnDialogAddCancel, btnDialogAddSubmit;
+        Spinner spn = dialog.findViewById(R.id.spn_dialog_listfood_update_type);
         ed_listfood_img = dialog.findViewById(R.id.edt_dialog_listfood_update_img);
         ed_listfood_name = dialog.findViewById(R.id.edt_dialog_listfood_update_name);
         ed_listfood_price = dialog.findViewById(R.id.edt_dialog_listfood_update_price);
@@ -171,7 +173,32 @@ public class FoodAdapter extends  RecyclerView.Adapter<FoodAdapter.ViewHolder>  
         ed_listfood_price.setText(String.valueOf(list.get(id).getPrice()));
         ed_listfood_des.setText(list.get(id).getDes());
 
+
         btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_listfood_update_add);
+        ArrayList<TypeFood> typeList = typeDAO.getAllData();
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, typeDAO.name());
+        spn.setAdapter(adapter1);
+        int spIndex = 0;
+        for (TypeFood type : typeList) {
+            if (type.getTypeName().equals(food.getType())) {
+                spn.setSelection(spIndex);
+                break;
+            }
+            spIndex++;
+        }
+        spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String i = typeList.get(position).getTypeName();
+                food.setType(i);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

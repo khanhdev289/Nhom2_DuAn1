@@ -26,6 +26,7 @@ public class FoodDAO {
         while (cursor.moveToNext()){
             Food food = new Food();
             food.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_id"))));
+            food.setType(cursor.getString(cursor.getColumnIndex("typeFood_typeName")));
             food.setImg(cursor.getString(cursor.getColumnIndex("food_img")));
             food.setName(cursor.getString(cursor.getColumnIndex("food_name")));
             food.setDes(cursor.getString(cursor.getColumnIndex("food_description")));
@@ -36,6 +37,7 @@ public class FoodDAO {
     }
     public long insert(Food food){
         ContentValues values = new ContentValues();
+        values.put("typeFood_typeName", food.getType());
         values.put("food_img", food.getImg());
         values.put("food_name", food.getName());
         values.put("food_description", food.getDes());
@@ -83,7 +85,7 @@ public class FoodDAO {
     }
     public long update(Food food){
         ContentValues values = new ContentValues();
-
+        values.put("typeFood_typeName", food.getType());
         values.put("food_img", food.getImg());
         values.put("food_name", food.getName());
         values.put("food_description", food.getDes());
