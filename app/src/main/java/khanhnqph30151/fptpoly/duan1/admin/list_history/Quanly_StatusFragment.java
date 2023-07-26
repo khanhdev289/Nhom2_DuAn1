@@ -53,9 +53,12 @@ public class Quanly_StatusFragment extends Fragment {
                     tab.setText("Đã Đặt Hàng");
                     break;
                 case 1:
-                    tab.setText("Đang Giao");
+                    tab.setText("Đang Chuẩn Bị Hàng");
                     break;
                 case 2:
+                    tab.setText("Đang Giao");
+                    break;
+                case 3:
                     tab.setText("Đã Thanh Toán");
 
                     break;
