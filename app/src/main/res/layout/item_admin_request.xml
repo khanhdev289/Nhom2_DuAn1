@@ -39,7 +39,7 @@
                     android:layout_margin="10dp"
                     android:text="0983927037"
                     android:textSize="15dp"
-                    android:textStyle="bold" />
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -63,7 +63,7 @@
                     android:layout_margin="10dp"
                     android:text="nguyễn hoàng nhật"
                     android:textSize="15dp"
-                    android:textStyle="bold" />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="nghoangnhat@gmail.com"
+
                     android:textSize="15dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -110,7 +110,7 @@
                     android:layout_margin="10dp"
                     android:text="bún chả ngon, nhiều chả, nước đậm vị"
                     android:textSize="15dp"
-                    android:textStyle="bold" />
+                    />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

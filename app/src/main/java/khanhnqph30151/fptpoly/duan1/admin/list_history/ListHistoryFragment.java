@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.user.history.History_Adapter;
-import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
-import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
 
 public class ListHistoryFragment extends Fragment {
