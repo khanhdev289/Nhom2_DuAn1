@@ -1,6 +1,8 @@
 package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,6 +43,9 @@ public class HomeFragment extends Fragment {
     SlideAdapter slideAdapter;
     ArrayList<Slide> listPhoto;
     Timer timer;
+    private GradientDrawable selectedBorder;
+    private GradientDrawable normalBorder;
+    private View selectedView = null;
     public HomeFragment() {
     }
 
@@ -91,6 +96,16 @@ public class HomeFragment extends Fragment {
         slideAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
 
 
+        selectedBorder = new GradientDrawable();
+        selectedBorder.setShape(GradientDrawable.RECTANGLE);
+        selectedBorder.setStroke(5, Color.BLACK); // Màu viền khi được chọn
+        selectedBorder.setCornerRadius(10);
+
+        normalBorder = new GradientDrawable();
+        normalBorder.setShape(GradientDrawable.RECTANGLE);
+        normalBorder.setStroke(0, Color.TRANSPARENT); // Màu viền bình thường
+        normalBorder.setCornerRadius(10);
+
 
         img_tapsearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,39 +128,21 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String typeName = tvTypeFood1.getText().toString();
-                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                HomeDAO homeDAO1 = new HomeDAO(getContext());
-                listHome = new ArrayList<>();
-                listHome = homeDAO1.TypeName(typeName);
-                adapter.setData(listHome);
-                recyclerView.setAdapter(adapter);
+                selectTypeFood(v, typeName);
             }
         });
         ivTypeFood2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String typeName = tvTypeFood2.getText().toString();
-                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                HomeDAO homeDAO1 = new HomeDAO(getContext());
-                listHome = new ArrayList<>();
-                listHome = homeDAO1.TypeName(typeName);
-                adapter.setData(listHome);
-                recyclerView.setAdapter(adapter);
+                selectTypeFood(v, typeName);
             }
         });
         ivTypeFood3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String typeName = tvTypeFood3.getText().toString();
-                LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                HomeDAO homeDAO1 = new HomeDAO(getContext());
-                listHome = new ArrayList<>();
-                listHome = homeDAO1.TypeName(typeName);
-                adapter.setData(listHome);
-                recyclerView.setAdapter(adapter);
+                selectTypeFood(v, typeName);
             }
         });
         tvGetAll.setOnClickListener(new View.OnClickListener() {
@@ -159,6 +156,28 @@ public class HomeFragment extends Fragment {
         reloadData();
 
 
+    }
+    private void selectTypeFood(View view, String typeName) {
+        // Kiểm tra nếu mục được chọn trước đó không null và khác mục mới
+        if (selectedView != null && selectedView != view) {
+            // Bỏ viền của mục cũ
+            selectedView.setBackground(normalBorder);
+        }
+
+        // Set viền mới cho mục mới được chọn
+        view.setBackground(selectedBorder);
+
+        // Lưu trạng thái mục mới được chọn
+        selectedView = view;
+
+        // Xử lý logic tương ứng với việc nhấn vào từng mục ở đây
+        LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 1);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        HomeDAO homeDAO1 = new HomeDAO(getContext());
+        listHome = new ArrayList<>();
+        listHome = homeDAO1.TypeName(typeName);
+        adapter.setData(listHome);
+        recyclerView.setAdapter(adapter);
     }
     private ArrayList<Slide> getListPhoto(){
         ArrayList<Slide> list = new ArrayList<>();

@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginVertical="10dp"
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
@@ -42,13 +42,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@drawable/style_layout_middle"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:background="@drawable/style_layout_middle"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
