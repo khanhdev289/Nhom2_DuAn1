@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import khanhnqph30151.fptpoly.duan1.user.history.DangChuanBiHangFragment;
+
 public class QuanLy_Status_Adapter extends FragmentStateAdapter {
 
 
@@ -19,8 +21,10 @@ public class QuanLy_Status_Adapter extends FragmentStateAdapter {
             case 0:
                 return new ListHistoryFragment();
             case 1:
-                return new DeliveringFragment();
+                return new DangCBFragment();
             case 2:
+                return new DeliveringFragment();
+            case 3:
                 return new DaThanhToanFragment();
             default:
                 return null;
@@ -29,6 +33,6 @@ public class QuanLy_Status_Adapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

@@ -100,6 +100,31 @@ public class invoce_DAO {
         return list;
     }
     @SuppressLint("Range")
+    public ArrayList<invoice> SeLectDangchuanbi() {
+        ArrayList<invoice> list = new ArrayList<>();
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đang Chuẩn Bị Hàng%'  ", null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            do {
+                invoice i = new invoice();
+                i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
+                i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
+                i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
+                i.setName(cursor.getString(cursor.getColumnIndex("user_name")));
+                i.setAddress(cursor.getString(cursor.getColumnIndex("cart_address")));
+                i.setTime(cursor.getString(cursor.getColumnIndex("invoice_time")));
+                i.setContten(cursor.getString(cursor.getColumnIndex("invoice_content")));
+                i.setSum(Double.parseDouble(cursor.getString(cursor.getColumnIndex("invoice_sum"))));
+                i.setStatus(cursor.getString(cursor.getColumnIndex("invoice_status")));
+                list.add(i);
+
+            }
+            while (cursor.moveToNext());
+        }
+        return list;
+    }
+
+    @SuppressLint("Range")
     public ArrayList<invoice> SeLectDaThanhToan() {
         ArrayList<invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đã Thanh Toán%'  ", null);
