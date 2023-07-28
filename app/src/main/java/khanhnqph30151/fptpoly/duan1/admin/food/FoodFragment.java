@@ -28,15 +28,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.user.home.Home;
-import khanhnqph30151.fptpoly.duan1.user.home.HomeAdapter;
-import khanhnqph30151.fptpoly.duan1.user.home.HomeDAO;
+
 
 
 public class FoodFragment extends Fragment {
     RecyclerView recyclerView;
     FoodDAO foodDAO;
     ArrayList<Food> listFood;
+    ArrayList<TypeFood> llist;
     FoodAdapter adapter;
     Context context;
 
@@ -91,16 +90,32 @@ public class FoodFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Dialog dialog = new Dialog(getContext());
+                TypeDAO typeDAO = new TypeDAO(getContext());
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.dialog_listfood_add);
                 Food food = new Food();
                 EditText ed_listfood_img,ed_listfood_name,ed_listfood_price,ed_listfood_des;
+                Spinner spn = dialog.findViewById(R.id.spn_dialog_listfood_add_type);
                 Button btnDialogAddSubmit;
                 ed_listfood_img = dialog.findViewById(R.id.edt_dialog_listfood_add_img);
                 ed_listfood_name = dialog.findViewById(R.id.edt_dialog_listfood_add_name);
                 ed_listfood_price = dialog.findViewById(R.id.edt_dialog_listfood_add_price);
                 ed_listfood_des = dialog.findViewById(R.id.edt_dialog_listfood_add_des);
                 btnDialogAddSubmit = dialog.findViewById(R.id.btn_dialog_listfood_add_add);
+                ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, typeDAO.name());
+                spn.setAdapter(adapter1);
+                spn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        llist = typeDAO.getAllData();
+                        food.setType((llist.get(position).getTypeName()));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
                 btnDialogAddSubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -21,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "user_role TEXT" +
             ")";
     public static final String insert_admin = "Insert into tbl_user(user_name,user_pass,user_role) values" +
-            "('admin','123','admin'), ('khanh','123','hehe')";
+            "('admin','123','admin'), ('khanh','123','hehe'),('khai','123','')";
     public static final String TABLE_REQUEST_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_request (" +
             "request_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -30,10 +30,17 @@ public class DbHelper extends SQLiteOpenHelper {
             "request_phone TEXT ," +
             "request_content TEXT " +
             ")";
+    public static final String TABLE_TYPE_CREATE = "CREATE TABLE IF NOT EXISTS " +
+            "tbl_typeFood (" +
+            "typeFood_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "typeFood_typeName TEXT NOT NULL" +
+            ")";
+
 
     public static final String TABLE_FOOD_CREATE = "CREATE TABLE IF NOT EXISTS " +
             "tbl_food (" +
             "food_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "typeFood_typeName TEXT REFERENCES tbl_typeFood(typeFood_typeName)," +
             "food_img TEXT NOT NULL, " +
             "food_name TEXT NOT NULL, " +
             "food_description TEXT NOT NULL, " +
@@ -61,6 +68,15 @@ public class DbHelper extends SQLiteOpenHelper {
             "invoice_status TEXT ," +
             "invoice_time TEXT NOT NULL" +
             ")";
+    public static final String TABLE_COMMENT_CREATE = "CREATE TABLE IF NOT EXISTS " +
+            "tbl_comment (" +
+            "comment_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "comment_content TEXT ," +
+            "user_name TEXT REFERENCES tbl_user(user_name)," +
+            "food_id INTEGER REFERENCES tbl_food(food_id)," +
+            "rating INTEGER )";
+    public static final String insert_cmt = "Insert into tbl_comment(comment_content,user_name,food_id,rating) values" +
+            "('xời , tuyệt vời','khanh','1','4'), ('hết nước chấm','khanh','2','5'),('hết nước chấm','khai','1','5'),('xời, tuyệt vời','khai','2','3'),('mlem','khanh','2','5'),('okkkk','khai','2','4')";
 
 
     @Override
@@ -74,26 +90,25 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_REQUEST_CREATE);
 
         db.execSQL(TABLE_INVOICE_CREATE);
+        db.execSQL(TABLE_TYPE_CREATE);
 
+        db.execSQL(TABLE_COMMENT_CREATE);
 
-
-
-        db.execSQL("INSERT INTO tbl_food(food_img,food_name,food_description,food_price) VALUES ('https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
+        db.execSQL("INSERT INTO tbl_typeFood(typeFood_typeName) VALUES ('Món chính'),('Món phụ'),('Đồ uống')");
+        db.execSQL("INSERT INTO tbl_food(typeFood_typeName,food_img,food_name,food_description,food_price) VALUES ('Món chính','https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
                 ", 'Thịt chó'," +
                 " 'Ăn một bữa thịt chó, có người gỡ lại hết cả tiền thua, mà lại còn được thêm là khác. Thử hỏi trong tất cả các món ăn trên thế giới có món ăn ...'" +
                 ",80000), " +
-                "('https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-1.jpg', " +
+                "('Món phụ','https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-1.jpg', " +
                 "'Bún đậu', " +
                 "'Một mẹt bún đậu mắm tôm với đầy đủ các nguyên liệu hấp dẫn, sạch sẽ chắc hẳn là món ngon mà bất cứ ai cũng khó có thể chối từ.'," +
                 " 30000), " +
-                "('https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
+                "('Đồ uống','https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
                 " 'Gà Chiên Mắm', " +
                 "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
                 "50000)");
-
-
         db.execSQL(insert_admin);
-
+        db.execSQL(insert_cmt);
 
     }
 

@@ -16,21 +16,22 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
-
-public class History_DaThanhToanFragment extends Fragment {
+public class DangChuanBiHangFragment extends Fragment {
 
     private History_DAO dao;
     private ArrayList<History_model> list;
 
-    private History_Adapter_DaThanhToan adapter;
+    private History_Adapter adapter;
     RecyclerView recyclerView;
 
-    public History_DaThanhToanFragment() {
+
+    public DangChuanBiHangFragment() {
         // Required empty public constructor
     }
 
-    public static History_DaThanhToanFragment newInstance(String param1, String param2) {
-        History_DaThanhToanFragment fragment = new History_DaThanhToanFragment();
+
+    public static DangChuanBiHangFragment newInstance(String param1, String param2) {
+        DangChuanBiHangFragment fragment = new DangChuanBiHangFragment();
 
         return fragment;
     }
@@ -44,18 +45,20 @@ public class History_DaThanhToanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_history__da_thanh_toan, container, false);
-        recyclerView = view.findViewById(R.id.history_DaThanhToan);
+        View view = inflater.inflate(R.layout.fragment_dang_chuan_bi_hang, container, false);
+        recyclerView =view.findViewById(R.id.history_dangcb);
         reloadData();
         return view;
+
     }
     public void reloadData(){
         dao = new History_DAO(getActivity());
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
-        list = dao.SeLectUESeDaThanhToan(loggedInUserName);
-        adapter = new History_Adapter_DaThanhToan(list, getContext(), dao);
+        list = dao.SeLectUESeDangCB(loggedInUserName);
+        adapter = new History_Adapter(list, getContext(), dao);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     }
+
 }

@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+
 import android.content.SharedPreferences;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +32,7 @@ import khanhnqph30151.fptpoly.duan1.user.home.comment.Comment;
 import khanhnqph30151.fptpoly.duan1.user.home.comment.CommentDAO;
 import khanhnqph30151.fptpoly.duan1.user.home.comment.RatingStarView;
 
-public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHolder> {
+public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Adapter_DaThanhToan.ViewHolder> {
     private ArrayList<History_model> list;
     private Context context;
 
@@ -37,7 +40,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     CommentDAO commentDAO;
     FoodDAO foodDAO;
 
-    public History_Adapter(ArrayList<History_model> list, Context context, History_DAO history_dao) {
+    public History_Adapter_DaThanhToan(ArrayList<History_model> list, Context context, History_DAO history_dao) {
         this.list = list;
         this.context = context;
         this.history_dao = history_dao;
@@ -54,7 +57,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_history_user, parent, false);
+        View view = inflater.inflate(R.layout.item_history_user_danhgia, parent, false);
 
         return new ViewHolder(view);
     }
@@ -81,7 +84,65 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
                 }
             });
         }
+        holder.btn_cmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_cmt);
+                ArrayList<String> lst_foodName=new ArrayList<>();
+                ArrayList<Integer> lst_foodID=new ArrayList<>();
+                RatingStarView ratingStarView=dialog.findViewById(R.id.rating);
+                EditText ed_cmt=dialog.findViewById(R.id.ed_cmt);
+                Button btn_send_cmt=dialog.findViewById(R.id.btn_send_cmt);
+                TextView tv_start=dialog.findViewById(R.id.tv_rating);
+                String content=history.getContten();
+                char startChar = '-';
+                char endChar = '(';
 
+                for (int i = 0; i < content.length(); i++) {
+                    if (content.charAt(i) == startChar) {
+                        for (int j = i+1; j < content.length(); j++) {
+                            if (content.charAt(j) == endChar) {
+                                String substring = content.substring(i+1,j);
+                                lst_foodName.add(substring);
+                            }
+
+                        }
+                    }
+                }
+                for(String foodName: lst_foodName){
+                 int id_food= foodDAO.getbyName(foodName);
+                 if(id_food>=0){
+                     lst_foodID.add(id_food);
+                 }
+                }
+                btn_send_cmt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String cmt=ed_cmt.getText().toString();
+                        int rating=ratingStarView.getRating();
+                        for(int id_food: lst_foodID){
+                            Comment comment=new Comment();
+                            comment.setFood_id(id_food);
+                            comment.setUser_name(list.get(position).getName());
+                            comment.setRating(rating);
+                            comment.setComment_content(cmt);
+                            if(commentDAO.insert(comment)>0){
+                                Toast.makeText(context, "Cảm ơn bạn đã đánh giá ", Toast.LENGTH_SHORT).show();
+                            } else{
+                                Toast.makeText(context, "Chưa ổn r ", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+                dialog.show();
+            }
+        });
     }
 
     @Override
@@ -93,7 +154,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView id_cart, phone, name,address,sum,time,conten,status;
-
+        Button btn_cmt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             id_cart =itemView.findViewById(R.id.id_cart);
@@ -104,7 +165,7 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
             time =itemView.findViewById(R.id.id_time);
             conten=itemView.findViewById(R.id.id_noidung);
             status=itemView.findViewById(R.id.history_status);
-
+            btn_cmt=itemView.findViewById(R.id.btn_cmt);
 
         }
     }

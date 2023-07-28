@@ -38,7 +38,7 @@
             <ImageButton
                 android:id="@+id/btn_fragment_listFood_tapSearch"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@drawable/icon_search1" />

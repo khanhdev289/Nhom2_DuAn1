@@ -11,21 +11,25 @@ import java.util.ArrayList;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
 import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
 import khanhnqph30151.fptpoly.duan1.user.home.Home;
+import khanhnqph30151.fptpoly.duan1.user.home.comment.Comment;
 
 public class FoodDAO {
     DbHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
-    public FoodDAO(Context contex){
+
+    public FoodDAO(Context contex) {
         dbHelper = new DbHelper(contex);
         sqLiteDatabase = dbHelper.getWritableDatabase();
     }
+
     @SuppressLint("Range")
-    public ArrayList<Food> getData(String sql, String... SelectAvg){
+    public ArrayList<Food> getData(String sql, String... SelectAvg) {
         ArrayList<Food> list = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM tbl_food", SelectAvg);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Food food = new Food();
             food.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("food_id"))));
+            food.setType(cursor.getString(cursor.getColumnIndex("typeFood_typeName")));
             food.setImg(cursor.getString(cursor.getColumnIndex("food_img")));
             food.setName(cursor.getString(cursor.getColumnIndex("food_name")));
             food.setDes(cursor.getString(cursor.getColumnIndex("food_description")));
@@ -34,22 +38,27 @@ public class FoodDAO {
         }
         return list;
     }
-    public long insert(Food food){
+
+    public long insert(Food food) {
         ContentValues values = new ContentValues();
+        values.put("typeFood_typeName", food.getType());
         values.put("food_img", food.getImg());
         values.put("food_name", food.getName());
         values.put("food_description", food.getDes());
         values.put("food_price", food.getPrice());
         return sqLiteDatabase.insert("tbl_food", null, values);
     }
-    public ArrayList<Food> getAllData(){
+
+    public ArrayList<Food> getAllData() {
         String sql = "SELECT * FROM tbl_food";
         return getData(sql);
     }
+
     public ArrayList<String> name() {
         String name = "SELECT food_name FROM tbl_food";
         return getName(name);
     }
+
     public ArrayList<String> getName(String sql, String... SelectAvgs) {
         ArrayList<String> lst = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sql, SelectAvgs);
@@ -60,12 +69,13 @@ public class FoodDAO {
         return lst;
 
     }
+
     @SuppressLint("Range")
     public ArrayList<Food> Search(String ten) {
         SQLiteDatabase sqLite = dbHelper.getWritableDatabase();
         ArrayList<Food> list = new ArrayList<>();
-        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_food WHERE food_name LIKE '%"+ ten +"%' ", null);
-        if(cursor.getCount()>0) {
+        Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_food WHERE food_name LIKE '%" + ten + "%' ", null);
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
                 Food food = new Food();
@@ -81,25 +91,40 @@ public class FoodDAO {
         }
         return list;
     }
-    public long update(Food food){
-        ContentValues values = new ContentValues();
 
+    public long update(Food food) {
+        ContentValues values = new ContentValues();
+        values.put("typeFood_typeName", food.getType());
         values.put("food_img", food.getImg());
         values.put("food_name", food.getName());
         values.put("food_description", food.getDes());
         values.put("food_price", food.getPrice());
         return sqLiteDatabase.update("tbl_food", values, "food_id = ?", new String[]{String.valueOf(food.getId())});
     }
+
     public int delete(int ID) {
         return sqLiteDatabase.delete("tbl_food", "food_id = ?", new String[]{String.valueOf(ID)});
     }
+
     public Food getById(int id) {
-        Cursor cursor = sqLiteDatabase.query("tbl_food", null,"food_id = ?", new String[]{String.valueOf(id)}, null, null, null);
-        if (cursor.moveToNext()){
-            return new Food(cursor.getInt(0), cursor.getString(1),cursor.getString(2), cursor.getString(3), cursor.getInt(4));
-        }else {
+        Cursor cursor = sqLiteDatabase.query("tbl_food", null, "food_id = ?", new String[]{String.valueOf(id)}, null, null, null);
+        if (cursor.moveToNext()) {
+            return new Food(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5));
+        } else {
             return null;
         }
     }
+    public int getbyName(String foodName){
+        int foodId = -1;
+        String sql = "SELECT food_id FROM tbl_food WHERE food_name = ?";
+        Cursor cursor=sqLiteDatabase.rawQuery(sql, new String[]{foodName});
+        if(cursor.moveToNext()){
+            foodId=cursor.getInt(0);
+        }
+        return foodId;
+    }
+
+
+
 
 }
