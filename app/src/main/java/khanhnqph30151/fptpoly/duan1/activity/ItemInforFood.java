@@ -26,6 +26,7 @@ import khanhnqph30151.fptpoly.duan1.user.home.Home;
 import khanhnqph30151.fptpoly.duan1.user.home.comment.Comment;
 import khanhnqph30151.fptpoly.duan1.user.home.comment.CommentAdapter;
 import khanhnqph30151.fptpoly.duan1.user.home.comment.CommentDAO;
+import khanhnqph30151.fptpoly.duan1.user.home.comment.RatingStarView;
 
 
 public class ItemInforFood extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class ItemInforFood extends AppCompatActivity {
     CommentDAO commentDAO;
     ArrayList<Comment> list;
 
+    TextView tv_avgRating;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class ItemInforFood extends AppCompatActivity {
         String dataContent = getIntent().getStringExtra("foodDes");
         int dataPrice = getIntent().getIntExtra("foodPrice", 0);
 
-
+        tv_avgRating=findViewById(R.id.AVG_rating);
         ImageButton btn_back = findViewById(R.id.btn_infor_food_back);
         btn_add=findViewById(R.id.btn_add_cart);
         recyclerView=findViewById(R.id.recy_comment);
@@ -58,7 +60,8 @@ public class ItemInforFood extends AppCompatActivity {
         commentAdapter=new CommentAdapter(ItemInforFood.this,list);
         recyclerView.setAdapter(commentAdapter);
         count_cmt.setText("("+commentDAO.countCmt(String.valueOf(id_food))+")");
-
+        float rating_avg=commentDAO.getAVG(String.valueOf(id_food));
+        tv_avgRating.setText(String.format("%.1f",rating_avg)+"/5");
 
 
 

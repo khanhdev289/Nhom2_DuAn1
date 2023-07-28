@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="370dp"
+    android:layout_height="250dp"
+    android:orientation="vertical">
+
+    <khanhnqph30151.fptpoly.duan1.user.home.comment.RatingStarView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Đánh giá về sản phẩm này"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/ed_cmt"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/boder_radius_infor_item"
+        android:hint="Bạn thích hay không thích điều gì "
+        android:paddingHorizontal="5dp"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btn_send_cmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/main_red"
+        android:text="Gửi" />
+
+
+</LinearLayout>
