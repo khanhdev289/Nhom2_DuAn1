@@ -2,7 +2,6 @@ package khanhnqph30151.fptpoly.duan1.user.cart;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,13 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -36,11 +31,10 @@ import java.util.Locale;
 import khanhnqph30151.fptpoly.duan1.ConfirmCart;
 import khanhnqph30151.fptpoly.duan1.R;
 import khanhnqph30151.fptpoly.duan1.admin.food.Food;
-import khanhnqph30151.fptpoly.duan1.admin.food.FoodAdapter;
 import khanhnqph30151.fptpoly.duan1.admin.food.FoodDAO;
 import khanhnqph30151.fptpoly.duan1.setting.User;
 import khanhnqph30151.fptpoly.duan1.setting.UserDAO;
-import khanhnqph30151.fptpoly.duan1.user.history.History_Adapter;
+import khanhnqph30151.fptpoly.duan1.user.history.History_Adapter_DaThanhToan;
 import khanhnqph30151.fptpoly.duan1.user.history.History_DAO;
 import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
@@ -55,7 +49,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
     ArrayList<History_model> listHis;
     ArrayList<User> listUser;
     CartAdapter adapter;
-    History_Adapter adapterHis;
+    History_Adapter_DaThanhToan adapterHis;
     TextView tv_sumPrice;
     Button btn_confirm;
     History_DAO historyDao;
@@ -189,7 +183,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
         for (Cart cart : listCart) {
             for (Food food : listFood) {
                 if (food.getId() == cart.getIdFood()) {
-                    cartData += "- " + food.getName() + " (" + cart.getSum() + " VNĐ)" + ", Số Lượng: " + cart.getQuanti() + "\n";
+                    cartData += "-" + food.getName() + "(" + cart.getSum() + " VNĐ)" + ", Số Lượng: " + cart.getQuanti() + "\n";
                     break;
                 }
             }

@@ -1,10 +1,16 @@
 package khanhnqph30151.fptpoly.duan1.user.home.comment;
 
 public class Comment {
-    int comment_id,food_id;
+    int comment_id,food_id,rating;
     String user_name,comment_content;
 
+    public int getRating() {
+        return rating;
+    }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     public int getComment_id() {
         return comment_id;
