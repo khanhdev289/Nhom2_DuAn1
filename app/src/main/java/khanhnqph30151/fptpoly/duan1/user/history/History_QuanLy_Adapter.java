@@ -21,9 +21,11 @@ public class History_QuanLy_Adapter extends FragmentStateAdapter {
             case 0:
                 return new HistoryFragment();
             case 1:
-                return new DangGiaoFragment();
+                return new DangChuanBiHangFragment();
             case 2:
-                return new History_DaThanhToanFragment();
+                return new DangGiaoFragment();
+            case 3:
+                return new DaThanhToanFragment();
             default:
                 return null;
         }
@@ -31,6 +33,6 @@ public class History_QuanLy_Adapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }
