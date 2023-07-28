@@ -73,9 +73,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "comment_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "comment_content TEXT ," +
             "user_name TEXT REFERENCES tbl_user(user_name)," +
-            "food_id INTEGER REFERENCES tbl_food(food_id))";
-    public static final String insert_cmt = "Insert into tbl_comment(comment_content,user_name,food_id) values" +
-            "('xời , tuyệt vời','khanh','1'), ('hết nước chấm','khanh','2'),('hết nước chấm','khai','1'),('xời, tuyệt vời','khai','2'),('mlem','khanh','2'),('okkkk','khai','2')";
+            "food_id INTEGER REFERENCES tbl_food(food_id)," +
+            "rating INTEGER )";
+    public static final String insert_cmt = "Insert into tbl_comment(comment_content,user_name,food_id,rating) values" +
+            "('xời , tuyệt vời','khanh','1','4'), ('hết nước chấm','khanh','2','5'),('hết nước chấm','khai','1','5'),('xời, tuyệt vời','khai','2','3'),('mlem','khanh','2','5'),('okkkk','khai','2','4')";
 
 
     @Override

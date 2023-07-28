@@ -22,7 +22,7 @@ public class History_DaThanhToanFragment extends Fragment {
     private History_DAO dao;
     private ArrayList<History_model> list;
 
-    private History_Adapter adapter;
+    private History_Adapter_DaThanhToan adapter;
     RecyclerView recyclerView;
 
     public History_DaThanhToanFragment() {
@@ -54,7 +54,7 @@ public class History_DaThanhToanFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
         list = dao.SeLectUESeDaThanhToan(loggedInUserName);
-        adapter = new History_Adapter(list, getContext(), dao);
+        adapter = new History_Adapter_DaThanhToan(list, getContext(), dao);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     }

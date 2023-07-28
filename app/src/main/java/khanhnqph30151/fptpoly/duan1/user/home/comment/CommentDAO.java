@@ -30,16 +30,17 @@ public class CommentDAO {
             comment.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
             comment.setComment_content(cursor.getString(cursor.getColumnIndex("comment_content")));
             comment.setFood_id(cursor.getInt(cursor.getColumnIndex("food_id")));
+            comment.setRating(cursor.getInt(cursor.getColumnIndex("rating")));
             list.add(comment);
         }
         return list;
     }
     public long insert(Comment comment){
         ContentValues values = new ContentValues();
-        values.put("comment_id", comment.getComment_id());
         values.put("user_name", comment.getUser_name());
         values.put("comment_content", comment.getComment_content());
         values.put("food_id", comment.getFood_id());
+        values.put("rating",comment.getRating());
         return sqLiteDatabase.insert("tbl_comment", null, values);
     }
 //    public ArrayList<Comment> getAllData(){
@@ -54,6 +55,7 @@ public class CommentDAO {
         values.put("user_name", comment.getUser_name());
         values.put("comment_content", comment.getComment_content());
         values.put("food_id", comment.getFood_id());
+        values.put("rating",comment.getRating());
         return sqLiteDatabase.update("tbl_comment", values, "comment_id = ?", new String[]{String.valueOf(comment.getComment_id())});
     }
     public int delete(int ID) {
@@ -75,5 +77,16 @@ public class CommentDAO {
         }
 
         return count;
+    }
+    public float getAVG(String foodID){
+        String query = "SELECT AVG(rating) FROM tbl_comment WHERE food_id=?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{foodID});
+        float averageRating = 0;
+        if (cursor.moveToFirst()) {
+            averageRating = cursor.getFloat(0);
+        }
+        cursor.close();
+        return averageRating;
+
     }
 }

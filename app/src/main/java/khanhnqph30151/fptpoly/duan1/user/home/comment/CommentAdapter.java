@@ -45,6 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment comment=list.get(position);
         holder.tv_user.setText(comment.getUser_name());
         holder.tv_cmt.setText(comment.getComment_content());
+        holder.ratingStarView.setRating(comment.getRating());
     }
 
     @Override
@@ -54,11 +55,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_user, tv_cmt;
+        RatingStarView ratingStarView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_user=itemView.findViewById(R.id.tv_user_cmt);
             tv_cmt=itemView.findViewById(R.id.tv_content_cmt);
+            ratingStarView=itemView.findViewById(R.id.ratingstarview);
 
         }
     }
