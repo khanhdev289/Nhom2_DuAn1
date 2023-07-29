@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -26,7 +27,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import khanhnqph30151.fptpoly.duan1.Notification;
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.notification.NotiAdapter;
 
 
 public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHolder>{
@@ -77,7 +80,12 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
                 setData(list);
             }
         });
+        Intent intent = new Intent(context, NotiAdapter.class);
+        intent.putExtra("daXN_time", list.get(position).getTime());
+        intent.putExtra("daXN_status", list.get(position).getStatus());
+        context.startActivity(intent);
     }
+
 
 
     @Override
