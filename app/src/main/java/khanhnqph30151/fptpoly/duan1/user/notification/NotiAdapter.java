@@ -40,6 +40,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvTime.setText(list.get(position).getTime());
         holder.tvStatus.setText(list.get(position).getStatus());
+        holder.tvcontent.setText(list.get(position).getContent());
     }
 
     @Override
@@ -48,11 +49,12 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView tvTime, tvStatus;
+        TextView tvTime, tvStatus,tvcontent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvStatus = itemView.findViewById(R.id.tv_item_noti_status);
             tvTime = itemView.findViewById(R.id.tv_item_noti_time);
+            tvcontent=itemView.findViewById(R.id.tv_item_noti_content);
         }
     }
 }

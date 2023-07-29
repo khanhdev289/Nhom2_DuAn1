@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,8 +30,7 @@ public class Notification extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         btnBack = findViewById(R.id.btn_noti_back);
         recyNoti = findViewById(R.id.recy_noti);
-        String timeData = getIntent().getStringExtra("daXN_time");
-        String statusData = getIntent().getStringExtra("daXN_status");
+
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +42,11 @@ public class Notification extends AppCompatActivity {
         reloadData();
     }
     private void reloadData(){
+
         dao = new NotiDAO(this);
-        list = dao.getAllData();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("USER_FILE", getApplicationContext().MODE_PRIVATE);
+        String loggedInUserName = sharedPreferences.getString("USERNAME", "");
+        list = dao.getByuserName(loggedInUserName);
         adapter = new NotiAdapter(this,list);
         adapter.setData(list);
         recyNoti.setAdapter(adapter);

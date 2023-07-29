@@ -6,13 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.notification.Noti;
+import khanhnqph30151.fptpoly.duan1.user.notification.NotiDAO;
 
 public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapter.ViewHolder>{
     private ArrayList<invoice> list;
@@ -21,9 +28,11 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
 
     private invoce_DAO invoce_dao;
 
+
     public DaThanhToan_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
+
     }
     public void setData(ArrayList<invoice> list){
         this.list = list;
@@ -50,6 +59,10 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
         holder.sum.setText(String.valueOf(inv.getSum()));
         holder.content.setText(inv.getContten());
         holder.status.setText(inv.getStatus());
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+
     }
 
     @Override

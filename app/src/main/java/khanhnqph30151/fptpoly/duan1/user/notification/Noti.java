@@ -3,15 +3,22 @@ package khanhnqph30151.fptpoly.duan1.user.notification;
 public class Noti {
     private int id;
     private String status;
-    private String time;
+    private String time,user_name,content;
 
-    public Noti() {
+    public String getUser_name() {
+        return user_name;
     }
 
-    public Noti(int id, String status, String time) {
-        this.id = id;
-        this.status = status;
-        this.time = time;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getId() {

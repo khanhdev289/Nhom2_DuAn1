@@ -80,7 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
             "noti_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "noti_time TEXT NOT NULL, " +
             "invoice_content TEXT REFERENCES tbl_invoice(invoice_content), " +
-            "invoice_status TEXT REFERENCES tbl_invoice(invoice_status)," +
+            "invoice_status TEXT  REFERENCES tbl_invoice(invoice_status)," +
             "user_name TEXT REFERENCES tbl_invoice(user_name)" +
             ")";
     public static final String insert_cmt = "Insert into tbl_comment(comment_content,user_name,food_id,rating) values" +
@@ -103,7 +103,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_COMMENT_CREATE);
         db.execSQL(TABLE_NOTI_CREATE);
 
-        db.execSQL("INSERT INTO tbl_noti(noti_time,noti_status) VALUES ('20:20','Đã thanh toán'),('30:20','Đang giao hàng')");
+//        db.execSQL("INSERT INTO tbl_noti(noti_time,noti_status) VALUES ('20:20','Đã thanh toán'),('30:20','Đang giao hàng')");
         db.execSQL("INSERT INTO tbl_typeFood(typeFood_typeName) VALUES ('Món chính'),('Món phụ'),('Đồ uống')");
         db.execSQL("INSERT INTO tbl_food(typeFood_typeName,food_img,food_name,food_description,food_price) VALUES ('Món chính','https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
                 ", 'Thịt chó'," +
