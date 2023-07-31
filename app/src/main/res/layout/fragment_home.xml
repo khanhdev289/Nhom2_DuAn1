@@ -67,7 +67,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="7"
                 android:background="@color/white"
-                android:hint="Bạn có muốn đớp gì không ?"
+                android:hint="Bạn có muốn ăn gì không ?"
 
                 android:paddingLeft="10dp" />
 
