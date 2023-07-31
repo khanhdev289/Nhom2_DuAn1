@@ -4,7 +4,6 @@ public class Noti {
     private int id;
     private String status;
     private String time,user_name,content;
-
     public String getUser_name() {
         return user_name;
     }

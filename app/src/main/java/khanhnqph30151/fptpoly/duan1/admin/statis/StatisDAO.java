@@ -18,13 +18,9 @@ public class StatisDAO {
         sqLiteDatabase = helper.getWritableDatabase();
     }
     public int getDoanhThu(String tuNgay, String denNgay) {
-
-
         String sql1 ="   SELECT substr(invoice_time,7,10) AS date, SUM(invoice_sum) AS doanhThu" +
              "        FROM tbl_invoice" +
              "        where  invoice_status LIKE '%Đã Thanh Toán%' AND date BETWEEN ? AND ?";
-
-//        String sql = "SELECT SUM(invoice_sum) as doanhThu FROM tbl_invoice WHERE (invoice_time) BETWEEN ? AND ? ";
         ArrayList<Integer> list = new ArrayList<>();
         Cursor c = sqLiteDatabase.rawQuery(sql1, new String[]{tuNgay,denNgay});
         while (c.moveToNext()) {
