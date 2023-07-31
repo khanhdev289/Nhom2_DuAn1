@@ -25,7 +25,7 @@ public class History_QuanLy_Adapter extends FragmentStateAdapter {
             case 2:
                 return new DangGiaoFragment();
             case 3:
-                return new DaThanhToanFragment();
+                return new History_DaThanhToanFragment();
             default:
                 return null;
         }

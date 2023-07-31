@@ -74,16 +74,7 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
         holder.conten.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
         history_dao = new History_DAO(context);
-        History_model inv = list.get(position);
-        if (inv.getStatus().equals("Đã Đặt Hàng")) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                        showDele(list.get(position).getId_history());
-                }
-            });
-        }
         holder.btn_cmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,42 +160,6 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
 
         }
     }
-    public void showDele(int id){
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_item_delete_invoice);
 
-        Window window = dialog.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        AppCompatButton btnSubmit, btnCancel;
-        btnSubmit = dialog.findViewById(R.id.btn_dialog_item_delete_submit);
-        btnCancel = dialog.findViewById(R.id.btn_dialog_item_delete_cancel);
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                History_DAO dao = new History_DAO(context);
-                if (dao.delete(id) > 0) {
-                    Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-                    SharedPreferences sharedPreferences = dialog.getContext().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
-                    String loggedInUserName = sharedPreferences.getString("USERNAME", "");
-                    list = dao.getByUser(loggedInUserName);
-                    setData(list);
-                } else {
-                    Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-
-                }
-                dialog.dismiss();
-            }
-        });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-
-    }
 
 }
