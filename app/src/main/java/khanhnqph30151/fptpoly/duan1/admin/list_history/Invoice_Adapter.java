@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -24,21 +25,31 @@ import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
+import khanhnqph30151.fptpoly.duan1.Notification;
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.notification.Noti;
+import khanhnqph30151.fptpoly.duan1.user.notification.NotiAdapter;
+import khanhnqph30151.fptpoly.duan1.user.notification.NotiDAO;
 
 
 public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHolder>{
     private ArrayList<invoice> list;
     private Context context;
 
-
     private invoce_DAO invoce_dao;
+
+    private NotiDAO notiDAO;
+
     public Invoice_Adapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
-
+        notiDAO=new NotiDAO(context);
     }
     public void setData(ArrayList<invoice> list){
         this.list = list;
@@ -75,10 +86,26 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
                 invoce_dao.update(inv);
                 list=invoce_dao.SeLectDaDatHang();
                 setData(list);
+
+                Calendar calendar = Calendar.getInstance();
+                Date currentDate = calendar.getTime();
+
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                String formattedTime = timeFormat.format(currentDate);
+                Noti noti=new Noti();
+                noti.setStatus(inv.getStatus());
+                noti.setContent(inv.getContten());
+                noti.setUser_name(inv.getName());
+                noti.setTime(formattedTime);
+                if(notiDAO.insert(noti)>0){
+                    Toast.makeText(context, "okkkk", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, "cccc", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-    }
 
+    }
 
     @Override
     public int getItemCount() {

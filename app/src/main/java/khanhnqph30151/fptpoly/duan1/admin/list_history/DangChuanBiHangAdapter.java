@@ -7,23 +7,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.notification.Noti;
+import khanhnqph30151.fptpoly.duan1.user.notification.NotiDAO;
 
 public class DangChuanBiHangAdapter extends RecyclerView.Adapter<DangChuanBiHangAdapter.ViewHolder>{
     private ArrayList<invoice> list;
     private Context context;
-
+    private NotiDAO notiDAO;
 
     private invoce_DAO invoce_dao;
     public DangChuanBiHangAdapter(ArrayList<invoice> list, Context context){
         this.list = list;
         this.context = context;
+        notiDAO =new NotiDAO(context);
 
     }
     public void setData(ArrayList<invoice> list){
@@ -61,6 +69,21 @@ public class DangChuanBiHangAdapter extends RecyclerView.Adapter<DangChuanBiHang
                 invoce_dao.update(inv);
                 list=invoce_dao.SeLectDangchuanbi();
                 setData(list);
+                Calendar calendar = Calendar.getInstance();
+                Date currentDate = calendar.getTime();
+
+                SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+                String formattedTime = timeFormat.format(currentDate);
+                Noti noti=new Noti();
+                noti.setStatus(inv.getStatus());
+                noti.setContent(inv.getContten());
+                noti.setUser_name(inv.getName());
+                noti.setTime(formattedTime);
+                if(notiDAO.insert(noti)>0){
+                    Toast.makeText(context, "okkkk", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, "cccc", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

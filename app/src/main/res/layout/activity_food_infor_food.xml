@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_red"
+    android:background="#F8FBFF"
     android:orientation="vertical"
     tools:context=".activity.ItemInforFood">
 
     <RelativeLayout
+        android:background="@color/main_red"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginVertical="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center">
 
         <androidx.cardview.widget.CardView
@@ -40,31 +41,31 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-
+        android:layout_height="0dp"
+        android:layout_weight="8.3"
         android:background="@drawable/style_layout_middle"
-        android:layout_height="match_parent">
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <androidx.cardview.widget.CardView
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 app:cardCornerRadius="10dp">
-
                 <ImageView
                     android:id="@+id/iv_infor_food_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY" />
             </androidx.cardview.widget.CardView>
-
 
             <TextView
                 android:id="@+id/tv_infor_food_name"
@@ -84,7 +85,7 @@
                 android:text="50.000 VND"
                 android:textAlignment="center"
                 android:textColor="@color/main_red"
-                android:textSize="13dp"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -96,16 +97,6 @@
                 android:text="Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, ..."
                 android:textAlignment="center"
                 android:textSize="19sp" />
-
-            <Button
-                android:id="@+id/btn_add_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/main_red"
-                android:text="Thêm vào giỏ hàng" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,47 +131,33 @@
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_gravity="center_vertical"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:text="4.8/5"
                     android:id="@+id/AVG_rating"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
                 android:id="@+id/recy_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
-    </ScrollView>
-    <!--        <com.google.android.material.textfield.TextInputLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_margin="10dp"-->
-    <!--            android:background="@color/white"-->
-    <!--            app:boxCornerRadiusBottomEnd="10dp"-->
-    <!--            app:boxCornerRadiusBottomStart="10dp"-->
-    <!--            app:boxCornerRadiusTopEnd="10dp"-->
-    <!--            app:boxCornerRadiusTopStart="10dp">-->
+    </androidx.core.widget.NestedScrollView>
+    <Button
+        android:layout_marginHorizontal="15dp"
+        android:id="@+id/btn_add_cart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/main_red"
+        android:text="Thêm vào giỏ hàng" />
 
-    <!--            <com.google.android.material.textfield.TextInputEditText-->
-    <!--                android:id="@+id/edComment"-->
-    <!--                android:layout_width="match_parent"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:hint="Viết đánh giá" />-->
-    <!--        </com.google.android.material.textfield.TextInputLayout>-->
-    <!--        <Button-->
-    <!--          android:layout_gravity="end"-->
-    <!--            android:layout_marginTop="5dp"-->
-    <!--            android:layout_marginRight="10dp"-->
-    <!--            android:text="Gửi"-->
-    <!--            android:backgroundTint="@color/main_red"-->
-    <!--            android:id="@+id/btn_send_comment"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"/>-->
 
 
 </LinearLayout>

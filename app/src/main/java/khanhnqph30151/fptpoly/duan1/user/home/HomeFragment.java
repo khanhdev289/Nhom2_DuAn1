@@ -1,6 +1,7 @@
 package khanhnqph30151.fptpoly.duan1.user.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import khanhnqph30151.fptpoly.duan1.Notification;
 import khanhnqph30151.fptpoly.duan1.R;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -72,6 +74,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recy_fragment_home_listFood);
 
         ImageButton img_tapsearch = view.findViewById(R.id.btn_fragment_home_tapSearch);
+        ImageButton img_noti = view.findViewById(R.id.btn_fragment_home_noti);
         EditText edSearch = view.findViewById(R.id.ed_fragment_home_search);
 
         ImageView ivTypeFood1,ivTypeFood2,ivTypeFood3;
@@ -106,7 +109,13 @@ public class HomeFragment extends Fragment {
         normalBorder.setStroke(0, Color.TRANSPARENT); // Màu viền bình thường
         normalBorder.setCornerRadius(10);
 
-
+        img_noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Notification.class);
+                startActivity(i);
+            }
+        });
         img_tapsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
