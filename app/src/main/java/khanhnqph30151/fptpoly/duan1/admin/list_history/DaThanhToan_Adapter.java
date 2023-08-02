@@ -59,8 +59,7 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
         holder.sum.setText(String.valueOf(inv.getSum()));
         holder.content.setText(inv.getContten());
         holder.status.setText(inv.getStatus());
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
+
 
 
     }
