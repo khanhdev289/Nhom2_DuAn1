@@ -11,24 +11,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/id_time"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="#119117"
+            android:gravity="center"
+            android:text="13/07/2023"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/holo_red_dark" />
+<!--        <LinearLayout-->
+
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:text="Mã Đơn:"-->
+<!--                android:textColor="@android:color/holo_red_light"-->
+<!--                android:textSize="15dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/id_cart"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="vn-001"-->
+<!--                android:textSize="15dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--        </LinearLayout>-->
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:text="Mã Đơn:"
-                android:textColor="@android:color/holo_red_light"
+                android:text="Họ tên:"
                 android:textSize="15dp"
                 android:textStyle="bold"
+                android:textColor="#F44336"
                 android:layout_margin="10dp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/id_cart"
+                android:id="@+id/id_hoten"
                 android:textStyle="bold"
-                android:text="vn-001"
                 android:textSize="15dp"
+                android:text="nguyễn hoàng nhật"
+                android:textColor="#F44336"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -55,27 +93,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Họ tên:"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/id_hoten"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="nguyễn hoàng nhật"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
         <LinearLayout
 
             android:layout_width="match_parent"
@@ -98,46 +116,46 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <LinearLayout
+<!--        <LinearLayout-->
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Time:"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/id_time"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="1 bún trả ngày 13/07/2023"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:text="Time:"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/id_time"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="15dp"-->
+<!--                android:text="1 bún trả ngày 13/07/2023"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:text="Nội Dung:"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/id_noidung"
-                android:textStyle="bold"
-                android:textSize="15dp"
-                android:text="1 bún trả ngày 13/07/2023"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal">-->
+<!--            <TextView-->
+<!--                android:text="Nội Dung:"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--            <TextView-->
+<!--                android:id="@+id/id_noidung"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="15dp"-->
+<!--                android:text="1 bún trả ngày 13/07/2023"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
 
@@ -149,6 +167,7 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:layout_width="100dp"
+                android:textColor="#119117"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/id_sum"
@@ -157,12 +176,12 @@
                 android:layout_marginLeft="10dp"
                 android:text="500000"
                 android:textSize="15dp"
-                android:textColor="@color/main_red"
+                android:textColor="#119117"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:text="đ"
-                android:textColor="@color/main_red"
+                android:textColor="#119117"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"

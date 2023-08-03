@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                         startActivity(i);
                     }else {
-                        Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Tài Khoản Đã Tồn Tại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

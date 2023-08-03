@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.user.home.HomeAdapter;
 import khanhnqph30151.fptpoly.duan1.user.home.HomeDAO;
@@ -47,6 +48,7 @@ public class Notification extends AppCompatActivity {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("USER_FILE", getApplicationContext().MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
         list = dao.getByuserName(loggedInUserName);
+        Collections.reverse(list);
         adapter = new NotiAdapter(this,list);
         adapter.setData(list);
         recyNoti.setAdapter(adapter);

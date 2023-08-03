@@ -48,6 +48,7 @@ public class Quanly_StatusFragment extends Fragment {
         quanLy_status_adapter = new QuanLy_Status_Adapter(getActivity());
         vpstatus.setAdapter(quanLy_status_adapter);
         new TabLayoutMediator(tabLayoutstatus, vpstatus, ((tab, position) -> {
+
             switch (position) {
                 case 0:
                     tab.setText("Đã Đặt Hàng");

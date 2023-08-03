@@ -13,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
@@ -73,7 +75,7 @@ public class StatisFragment extends Fragment {
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         Date selectedDate = myCalendar.getTime();
                         SimpleDateFormat dateFormatter = new SimpleDateFormat(
-                                "dd-MM-yyyy");
+                                "dd/MM/yyyy");
                         tv_tuNgay.setText(dateFormatter.format(selectedDate));
 
                     }
@@ -93,7 +95,7 @@ public class StatisFragment extends Fragment {
                         myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         Date selectedDate = myCalendar.getTime();
                         SimpleDateFormat dateFormatter = new SimpleDateFormat(
-                                "dd-MM-yyyy");
+                                "dd/MM/yyyy");
                         tv_denNgay.setText(dateFormatter.format(selectedDate));
 
                     }
@@ -107,7 +109,27 @@ public class StatisFragment extends Fragment {
             public void onClick(View view) {
                 String tuNgay=tv_tuNgay.getText().toString();
                 String denNgay=tv_denNgay.getText().toString();
-                tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,denNgay)+""+" VND");
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    Date date1 = sdf.parse(tuNgay);
+                    Date date2=sdf.parse(denNgay);
+                    Date date=new Date();
+                    int comparisonResult = date2.compareTo(date);
+                if (comparisonResult > 0) {
+                        System.out.println("Ngày 1 đến sau ngày 2.");
+                        date2=date;
+                        String date3=sdf.format(date2);
+                    tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,date3)+""+" VND");
+                    }
+                else{
+                    tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,denNgay)+""+" VND");
+                }
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+
+
             }
         });
     }

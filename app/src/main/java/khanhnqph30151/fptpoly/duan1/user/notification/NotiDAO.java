@@ -43,7 +43,7 @@ public class NotiDAO {
         return sqLiteDatabase.insert("tbl_noti", null, values);
     }
     public ArrayList<Noti> getAllData(){
-        String sql = "SELECT * FROM tbl_noti";
+        String sql = "SELECT * FROM tbl_noti ORDER BY noti_time ASC";
         return getData(sql);
     }
     public ArrayList<Noti> getByuserName(String userName) {

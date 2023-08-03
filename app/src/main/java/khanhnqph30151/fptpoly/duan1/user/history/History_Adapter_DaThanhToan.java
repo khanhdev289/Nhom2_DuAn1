@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import android.graphics.Color;
@@ -65,14 +66,29 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         History_model history=list.get(position);
-        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
+//        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
-        holder.conten.setText(list.get(position).getContten());
-        holder.status.setText(list.get(position).getStatus());
+//        holder.conten.setText(list.get(position).getContten());
+//        holder.status.setText(list.get(position).getStatus());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context,ItemInforHistory.class);
+                i.putExtra("id_cart",list.get(position).getId_history());
+                i.putExtra("phone", list.get(position).getPhone());
+                i.putExtra("name", list.get(position).getName());
+                i.putExtra("address", list.get(position).getAddress());
+                i.putExtra("time", list.get(position).getTime());
+                i.putExtra("sum",(list.get(position).getSum()));
+                i.putExtra("content",list.get(position).getContten());
+                i.putExtra("status",list.get(position).getStatus());
+                context.startActivity(i);
+            }
+        });
         history_dao = new History_DAO(context);
 
         holder.btn_cmt.setOnClickListener(new View.OnClickListener() {
@@ -148,14 +164,14 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
         Button btn_cmt;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            id_cart =itemView.findViewById(R.id.id_cart);
-            phone =itemView.findViewById(R.id.id_phone);
-            name =itemView.findViewById(R.id.id_hoten);
-            address =itemView.findViewById(R.id.id_address);
-            sum =itemView.findViewById(R.id.id_sum);
-            time =itemView.findViewById(R.id.id_time);
-            conten=itemView.findViewById(R.id.id_noidung);
-            status=itemView.findViewById(R.id.history_status);
+//            id_cart =itemView.findViewById(R.id.id_cart);
+            phone =itemView.findViewById(R.id.danhgia_id_phone);
+            name =itemView.findViewById(R.id.danhgia_id_hoten);
+            address =itemView.findViewById(R.id.danhgia_id_address);
+            sum =itemView.findViewById(R.id.danhgia_id_sum);
+            time =itemView.findViewById(R.id.danhgia_id_time);
+//            conten=itemView.findViewById(R.id.id_noidung);
+//            status=itemView.findViewById(R.id.history_status);
             btn_cmt=itemView.findViewById(R.id.btn_cmt);
 
         }
