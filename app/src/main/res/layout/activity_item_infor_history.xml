@@ -5,9 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/main_red"
     tools:context=".user.history.ItemInforHistory">
 
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Thông Tin Chi Tiết Đơn Hàng "
+    android:textStyle="bold"
+    android:textSize="25dp"
+    android:layout_margin="10dp"
+    android:textColor="@color/black"
+    android:gravity="center"/>
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -18,11 +27,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
+        android:background="@drawable/style_layout_middle"
         android:orientation="vertical">
         <ImageView
-            android:layout_margin="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/da_giao"/>
