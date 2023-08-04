@@ -98,7 +98,7 @@ public class ItemInforFood extends AppCompatActivity {
                         Toast.makeText(ItemInforFood.this, "Đã Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        Toast.makeText(ItemInforFood.this, "Đéo Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ItemInforFood.this, "không Thêm Vào Giỏ Hàng", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ItemInforFood.this, "Món ăn đã được chọn", Toast.LENGTH_SHORT).show();

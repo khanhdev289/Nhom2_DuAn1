@@ -33,6 +33,7 @@ import java.util.Locale;
 
 import khanhnqph30151.fptpoly.duan1.Notification;
 import khanhnqph30151.fptpoly.duan1.R;
+import khanhnqph30151.fptpoly.duan1.user.history.ItemInforHistory;
 import khanhnqph30151.fptpoly.duan1.user.notification.Noti;
 import khanhnqph30151.fptpoly.duan1.user.notification.NotiAdapter;
 import khanhnqph30151.fptpoly.duan1.user.notification.NotiDAO;
@@ -69,13 +70,13 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         invoice inv;
         invoce_dao = new invoce_DAO(context);
         inv=list.get(position);
-        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
+//        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
         holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
-        holder.content.setText(list.get(position).getContten());
+//        holder.content.setText(list.get(position).getContten());
         holder.status.setText(list.get(position).getStatus());
 
         holder.status.setOnClickListener(new View.OnClickListener() {
@@ -98,10 +99,25 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
                 noti.setUser_name(inv.getName());
                 noti.setTime(formattedTime);
                 if(notiDAO.insert(noti)>0){
-                    Toast.makeText(context, "okkkk", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Đang Chuẩn Bị Hàng", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(context, "cccc", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "thay đổi thát bại ", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ItemInforHistory.class);
+                i.putExtra("id_cart",list.get(position).getId_history());
+                i.putExtra("phone", list.get(position).getPhone());
+                i.putExtra("name", list.get(position).getName());
+                i.putExtra("address", list.get(position).getAddress());
+                i.putExtra("time", list.get(position).getTime());
+                i.putExtra("sum",(list.get(position).getSum()));
+                i.putExtra("content",list.get(position).getContten());
+                i.putExtra("status",list.get(position).getStatus());
+                context.startActivity(i);
             }
         });
 
@@ -118,14 +134,14 @@ public class Invoice_Adapter extends RecyclerView.Adapter<Invoice_Adapter.ViewHo
         TextView id_cart, phone, name,address,sum,time,status,content;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            id_cart =itemView.findViewById(R.id.id_cart);
+//            id_cart =itemView.findViewById(R.id.id_cart);
             phone =itemView.findViewById(R.id.id_phone);
             name =itemView.findViewById(R.id.id_hoten);
             address =itemView.findViewById(R.id.id_address);
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
             status=itemView.findViewById(R.id.status);
-            content=itemView.findViewById(R.id.id_noidung);
+//            content=itemView.findViewById(R.id.id_noidung);
 
         }
     }
