@@ -128,8 +128,6 @@ public class StatisFragment extends Fragment {
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
         });
     }

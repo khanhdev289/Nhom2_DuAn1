@@ -60,6 +60,7 @@ public class ListRequestFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.list_frag_admin_request);
 
+
         reloadData();
     }
     private void reloadData(){
