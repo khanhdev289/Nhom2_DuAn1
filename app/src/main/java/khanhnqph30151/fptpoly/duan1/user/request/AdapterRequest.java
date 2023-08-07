@@ -4,17 +4,15 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 
 public class AdapterRequest extends BaseAdapter {
     private Context context;
     private ArrayList<Request> listrq;
-    private DAO dao;
+    private RequestDAO dao;
 
     public AdapterRequest(Context context, ArrayList<Request> listrq) {
         this.context = context;
@@ -62,4 +60,5 @@ public class AdapterRequest extends BaseAdapter {
 //        request_content.setText(objRequest.getNoidung());
         return row;
     }
+
 }

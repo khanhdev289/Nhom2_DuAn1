@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
 
-public class DAO {
+public class RequestDAO {
     private DbHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
-    public DAO(Context contex){
+    public RequestDAO(Context contex){
         dbHelper = new DbHelper(contex);
         sqLiteDatabase = dbHelper.getWritableDatabase();
     }
@@ -67,5 +67,8 @@ public class DAO {
         contentValues.put("request_phone", ph.getSodienthoai());
         contentValues.put("request_content", ph.getNoidung());
         return sqLiteDatabase.insert("tbl_request", null, contentValues);
+    }
+    public int delete(int ID) {
+        return sqLiteDatabase.delete("tbl_request", "request_id = ?", new String[]{String.valueOf(ID)});
     }
 }
