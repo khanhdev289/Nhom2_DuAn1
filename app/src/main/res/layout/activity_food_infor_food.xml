@@ -85,7 +85,7 @@
                 android:text="50.000 VND"
                 android:textAlignment="center"
                 android:textColor="@color/main_red"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
