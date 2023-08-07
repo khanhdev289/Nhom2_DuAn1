@@ -15,7 +15,7 @@ import khanhnqph30151.fptpoly.duan1.setting.User;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText edUsername_regis,edUserpass_regis,edUserRePass;
-    Button btn_register;
+    Button btn_register, btn_register_back;
     UserDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,15 @@ public class RegisterActivity extends AppCompatActivity {
         edUserpass_regis=findViewById(R.id.edUserpass_regis);
         edUserRePass=findViewById(R.id.edUserRePass);
         btn_register=findViewById(R.id.btn_Register);
+        btn_register_back = findViewById(R.id.btn_Register_back);
         dao=new UserDAO(this);
+        btn_register_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                         startActivity(i);
                     }else {
-                        Toast.makeText(getApplicationContext(), "them that bai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Tài Khoản Đã Tồn Tại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

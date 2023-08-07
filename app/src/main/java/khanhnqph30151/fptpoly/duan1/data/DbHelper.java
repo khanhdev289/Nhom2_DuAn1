@@ -113,7 +113,67 @@ public class DbHelper extends SQLiteOpenHelper {
                 "'Bún đậu', " +
                 "'Một mẹt bún đậu mắm tôm với đầy đủ các nguyên liệu hấp dẫn, sạch sẽ chắc hẳn là món ngon mà bất cứ ai cũng khó có thể chối từ.'," +
                 " 30000), " +
-                "('Đồ uống','https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
+                "('Món phụ','https://cdn.tgdd.vn/2021/09/CookDishThumb/cach-lam-nem-nuong-nha-trang-bang-noi-chien-khong-dau-thom-thumb-620x620-1.jpg', " +
+                "'Nem Nướng Nha Trang', " +
+                "'Cách làm nem nướng Nha Trang thơm ngon khó cưỡng bằng nồi chiên không dầu cực kỳ đơn giản tại nhà ...'," +
+                " 50000), " +
+                "('Món chính','https://cdn.tgdd.vn/Files/2022/01/25/1412805/cach-nau-pho-bo-nam-dinh-chuan-vi-thom-ngon-nhu-hang-quan-202201250230038502.jpg', " +
+                "'Phở Boà', " +
+                "'Vị bò thơm ngọt nhiều dưỡng chất, bánh phở dai dai cùng với nước dùng đậm đà, hoà huyện với hương thơm của các loai rau thơm ăn kèm.'," +
+                " 35000), " +
+                "('Món chính','https://statics.vinpearl.com/bun-ca-ha-noi-1_1686916725.png', " +
+                "'Bún Cá', " +
+                "'Trụng bún qua nước sôi xếp vào tô, thêm cá rán, cà chua, rau cần chần, hành lá, rau thì là rồi múc nước dùng chan nóng lên. Ăn kèm với rau sống'," +
+                " 30000), " +
+                "('Món chính','https://ict-imgs.vgcloud.vn/2022/09/25/20/quan-com-tho-mo-rong-18-chi-nhanh-trong-2-nam-covid-nho-bat-tay-ung-dung-cong-nghe.png', " +
+                "'Cơm Thố', " +
+                "'Cơm thố là cách thức làm chín gạo trong một thố cơm nhỏ bằng cách chưng cách thủy. Mỗi một thố cơm tương đương với một chén nhỏ.'," +
+                " 40000), " +
+                "('Món phụ','https://cdn.tgdd.vn/Files/2020/03/23/1243844/lam-nem-chua-ran-chien-xu-chuan-vi-ha-noi-tai-nha-202003230644238881.jpg', " +
+                "'Nem Chua Rán', " +
+                "'Nem chua rán là một loại nem đặc biệt làm từ thịt heo xay và bì heo theo công thức đặc trưng. Tuy ở nhiều nơi có công thức chế biến khác nhau'," +
+                " 5000), " +
+                "('Món phụ','https://khoinguonsangtao.vn/wp-content/uploads/2022/10/hinh-anh-xuc-xich.jpg', " +
+                "'Chúc Chích Rán', " +
+                "'Xúc xích là một món ăn vặt quen thuộc với tất cả mọi người, đặc biệt là các bạn nhỏ. Tuy nhiên, xúc xích chiên thông thường ăn nhiều cũng ngán'," +
+                " 7000), " +
+                "('Món phụ','https://media.cooky.vn/article/s640/cooky-article-cover-b4644.jpg', " +
+                "'Chả Mực Hạ Long', " +
+                "'Chả mực Hạ Long có hương vị thơm ngon đặc biệt, từng miếng chả thơm nức, vàng ruộm, giòn sần sật, nếu đã thưởng thức một lần thì khó mà quên'," +
+                " 10000), " +
+                "('Món phụ','https://cdn.tgdd.vn/Files/2020/07/24/1273398/cach-lam-trung-cut-lon-xao-me-don-gian-ma-thom-ngon-202201110950108775.jpeg', " +
+                "'Cút lộn xào me', " +
+                "'Điểm đặc biệt của cút lộn xào me đến từ chính hương vị của nó. Cái vị chua chua ngọt ngọt đấy cực kích thích vị giác và khó mà diễn tả thành lời. '," +
+                " 40000), " +
+                "('Món chính','https://haisancoto.com/uploads/images/muc-chien-toi-thom-ngon.jpg', " +
+                "'Mực cháy tỏi', " +
+                "'Mực chiên tỏi thơm lừng, hình thức vô cùng bắt mắt, thịt mực săn chắc bên trong mọng nước, tỏi cháy giòn và thơm xen lẫn vị cay cay của ớt hoà quyện'," +
+                " 70000), " +
+
+                "('Đồ uống','https://product.hstatic.net/200000356473/product/cocacola-chai-390ml_7214ffae946e4e63826e8f38a45ed5fa.jpg', " +
+                "'Cocacola', " +
+                "'Coca-Cola (hay còn gọi là Coca, Coke) là một thương hiệu nước ngọt có ga chứa nước cacbon dioxide bão hòa được sản xuất bởi Công ty Coca-Cola.'," +
+                " 10000), " +
+                "('Đồ uống','https://storage.googleapis.com/onelife-public/8934588012112.jpg', " +
+                "'Pepsi', " +
+                "'Pepsi một đồ uống giải khát có gas, lần đầu tiên được sản xuất bởi Caleb Bradham. Ban đầu, Ông pha chế ra một loại nước uống dễ hấp thụ làm từ nước cacbonat, đường, vani và một ít dầu ăn dưới tên'," +
+                " 10000), " +
+                "('Đồ uống','https://www.coca-cola.com/content/dam/onexp/vn/home-image/fanta/Fanta_Orange_RCG_320ml_Desktop.png', " +
+                "'Fanta', " +
+                "'Fanta cho niềm vui thêm trọn vẹn. Nước ngọt có gas Fanta, với hương vị trái cây đậm đà và đầy màu sắc, giúp bạn cảm thấy sống động'," +
+                " 10000), " +
+                "('Đồ uống','https://cdn.tgdd.vn/Files/2021/08/23/1377290/cach-lam-tra-chanh-hong-kong-ngon-chuan-vi-ngoai-quan-202201210008425468.jpeg', " +
+                "'Trà chanh', " +
+                "'Trà chanh là một thức uống giải khát được kết hợp cân bằng giữa vị thanh chát dịu của trà cùng vị chua của chanh tạo nên thứ đồ uống độc đáo'," +
+                " 15000), " +
+                "('Đồ uống','https://img.tastykitchen.vn/2022/03/28/tra-dao-cam-sa-927c.jpg', " +
+                "'Trà đào cam sả', " +
+                "'Trà Đào Cam Sả là thức uống vô cùng được ưa chuộng trong vài năm trở lại đây và không hề có dấu hiệu giảm nhiệt.'," +
+                " 15000), " +
+
+
+
+                "('Món chính','https://i.ytimg.com/vi/S2bfZr2s-1g/maxresdefault.jpg'," +
                 " 'Gà Chiên Mắm', " +
                 "'Hương vị thơm ngon, hấp dẫn của món cánh gà chiên mắm vừa giúp thay đổi khẩu vị vừa khiến bạn cảm thấy ngon miệng hơn.', " +
                 "50000)");

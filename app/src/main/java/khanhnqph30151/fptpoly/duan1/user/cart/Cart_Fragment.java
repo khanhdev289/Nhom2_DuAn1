@@ -210,6 +210,7 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                 } else if (content.isEmpty()){
                     Toast.makeText(getContext(), "Hãy chọn món ăn trước khi đặt hàng", Toast.LENGTH_SHORT).show();
                 }else {
+
                     int phone = 0;
                     try {
                         phone = Integer.parseInt(phoneString);
