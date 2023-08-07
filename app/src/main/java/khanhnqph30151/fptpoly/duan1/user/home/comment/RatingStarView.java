@@ -52,7 +52,6 @@ public class RatingStarView extends LinearLayout {
             }else{
                 stars[i].setImageResource(R.drawable.baseline_star_outline_24);
             }
-            ///kkkk
         }
     }
     public int getRating(){
