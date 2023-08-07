@@ -207,7 +207,9 @@ public class Cart_Fragment extends Fragment implements CartAdapter.OnQuantityUpC
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else if (phoneString.trim().isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập số điện thoại", Toast.LENGTH_SHORT).show();
-                } else if (content.isEmpty()){
+                } else if(!phoneString.matches("^(03[2|3|4|5|6|7|8|9]|07[0|6|7|8|9]|08[1|2|3|4|5]|09[0|1|2|3|4|5|6|7|8|9])(\\d{7})$")){
+                    Toast.makeText(getContext(), "Số điện thoại không hợp lệ!", Toast.LENGTH_SHORT).show();
+                }else if (content.isEmpty()){
                     Toast.makeText(getContext(), "Hãy chọn món ăn trước khi đặt hàng", Toast.LENGTH_SHORT).show();
                 }else {
 
