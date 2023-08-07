@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,13 +23,13 @@ import java.util.Locale;
 import khanhnqph30151.fptpoly.duan1.R;
 
 
-
 public class StatisFragment extends Fragment {
 
-    Button btn_tuNgay,btn_denNgay,btn_doanhThu;
-    TextView tv_tuNgay,tv_denNgay,tv_doanhThu;
+    Button btn_tuNgay, btn_denNgay, btn_doanhThu;
+    TextView tv_tuNgay, tv_denNgay, tv_doanhThu;
     StatisDAO statisDAO;
     private final Calendar myCalendar = Calendar.getInstance();
+
     public StatisFragment() {
         // Required empty public constructor
     }
@@ -57,13 +58,13 @@ public class StatisFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btn_tuNgay=view.findViewById(R.id.btn_tuNgay);
-        btn_denNgay=view.findViewById(R.id.btn_denNgay);
-        btn_doanhThu=view.findViewById(R.id.btn_doanhThu);
-        tv_tuNgay=view.findViewById(R.id.tv_tuNgay);
-        tv_denNgay=view.findViewById(R.id.tv_denNgay);
-        tv_doanhThu=view.findViewById(R.id.tv_doanhThu);
-        statisDAO=new StatisDAO(getContext());
+        btn_tuNgay = view.findViewById(R.id.btn_tuNgay);
+        btn_denNgay = view.findViewById(R.id.btn_denNgay);
+        btn_doanhThu = view.findViewById(R.id.btn_doanhThu);
+        tv_tuNgay = view.findViewById(R.id.tv_tuNgay);
+        tv_denNgay = view.findViewById(R.id.tv_denNgay);
+        tv_doanhThu = view.findViewById(R.id.tv_doanhThu);
+        statisDAO = new StatisDAO(getContext());
         btn_tuNgay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,26 +108,30 @@ public class StatisFragment extends Fragment {
         btn_doanhThu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tuNgay=tv_tuNgay.getText().toString();
-                String denNgay=tv_denNgay.getText().toString();
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
                 try {
+                    String tuNgay = tv_tuNgay.getText().toString();
+                    String denNgay = tv_denNgay.getText().toString();
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date date1 = sdf.parse(tuNgay);
-                    Date date2=sdf.parse(denNgay);
-                    Date date=new Date();
+                    Date date2 = sdf.parse(denNgay);
+                    Date date = new Date();
                     int comparisonResult = date2.compareTo(date);
-                if (comparisonResult > 0) {
-                        System.out.println("Ngày 1 đến sau ngày 2.");
-                        date2=date;
-                        String date3=sdf.format(date2);
-                    tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,date3)+""+" VND");
+                    int compare =date2.compareTo(date1);
+                    if(compare<0){
+                        Toast.makeText(getContext(), "Chọn ngày thống kê không hợp lệ", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                else{
-                    tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay,denNgay)+""+" VND");
-                }
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
+                    if (comparisonResult > 0) {
+                        date2 = date;
+                        String date3 = sdf.format(date2);
+                        tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay, date3) + "" + " VND");
+                    } else {
+                        tv_doanhThu.setText(statisDAO.getDoanhThu(tuNgay, denNgay) + "" + " VND");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
