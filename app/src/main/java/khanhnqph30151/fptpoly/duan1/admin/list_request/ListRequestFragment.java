@@ -9,21 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.admin.list_history.Invoice_Adapter;
-import khanhnqph30151.fptpoly.duan1.admin.list_history.invoce_DAO;
-import khanhnqph30151.fptpoly.duan1.admin.list_history.invoice;
-import khanhnqph30151.fptpoly.duan1.user.request.DAO;
+import khanhnqph30151.fptpoly.duan1.user.request.RequestDAO;
 import khanhnqph30151.fptpoly.duan1.user.request.Request;
 
 
 public class ListRequestFragment extends Fragment {
-    private DAO dao;
+    private RequestDAO dao;
     private ArrayList<Request> list;
 
     private ListReQuest_Adapter adapter;
@@ -64,7 +60,7 @@ public class ListRequestFragment extends Fragment {
         reloadData();
     }
     private void reloadData(){
-        dao = new DAO(getContext());
+        dao = new RequestDAO(getContext());
         list = dao.getAllData();
         adapter = new ListReQuest_Adapter( getContext(),list,dao);
         adapter.setData(list);
