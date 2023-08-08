@@ -65,12 +65,12 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         History_model history = list.get(position);
 //        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
-        holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
+//        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
+//        holder.name.setText(list.get(position).getName());
+//        holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
-//        holder.conten.setText(list.get(position).getContten());
+        holder.conten.setText(list.get(position).getContten());
 //        holder.status.setText(list.get(position).getStatus());
         history_dao = new History_DAO(context);
         History_model inv = list.get(position);
@@ -113,12 +113,12 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 //            id_cart =itemView.findViewById(R.id.id_cart);
-            phone =itemView.findViewById(R.id.id_phone);
-            name =itemView.findViewById(R.id.id_hoten);
-            address =itemView.findViewById(R.id.id_address);
+//            phone =itemView.findViewById(R.id.id_phone);
+//            name =itemView.findViewById(R.id.id_hoten);
+//            address =itemView.findViewById(R.id.id_address);
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
-//            conten=itemView.findViewById(R.id.id_noidung);
+            conten=itemView.findViewById(R.id.id_noidung_history);
 //            status=itemView.findViewById(R.id.history_status);
 
 

@@ -54,12 +54,12 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
         invoice inv;
         inv=list.get(position);
 //        holder.id_cart.setText(String.valueOf(inv.getId_history()));
-        holder.phone.setText(String.valueOf(inv.getPhone()));
-        holder.name.setText(inv.getName());
-        holder.address.setText(inv.getAddress());
+//        holder.phone.setText(String.valueOf(inv.getPhone()));
+//        holder.name.setText(inv.getName());
+//        holder.address.setText(inv.getAddress());
         holder.time.setText(inv.getTime());
         holder.sum.setText(String.valueOf(inv.getSum()));
-//        holder.content.setText(inv.getContten());
+        holder.content.setText(inv.getContten());
         holder.status.setText(inv.getStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +90,13 @@ public class DaThanhToan_Adapter  extends RecyclerView.Adapter<DaThanhToan_Adapt
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 //            id_cart =itemView.findViewById(R.id.id_cart);
-            phone =itemView.findViewById(R.id.id_phone);
-            name =itemView.findViewById(R.id.id_hoten);
-            address =itemView.findViewById(R.id.id_address);
+//            phone =itemView.findViewById(R.id.id_phone);
+//            name =itemView.findViewById(R.id.id_hoten);
+//            address =itemView.findViewById(R.id.id_address);
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
             status=itemView.findViewById(R.id.status);
-//            content=itemView.findViewById(R.id.id_noidung);
+            content=itemView.findViewById(R.id.id_noidung);
 
         }
     }

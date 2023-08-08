@@ -58,9 +58,9 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
         invoce_dao = new invoce_DAO(context);
         invoice inv = list.get(position);
 //        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
-        holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
+//        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
+//        holder.name.setText(list.get(position).getName());
+//        holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
 //        holder.content.setText(list.get(position).getContten());
@@ -119,13 +119,13 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 //            id_cart = itemView.findViewById(R.id.id_cart);
-            phone = itemView.findViewById(R.id.id_phone);
-            name = itemView.findViewById(R.id.id_hoten);
-            address = itemView.findViewById(R.id.id_address);
+//            phone = itemView.findViewById(R.id.id_phone);
+//            name = itemView.findViewById(R.id.id_hoten);
+//            address = itemView.findViewById(R.id.id_address);
             sum = itemView.findViewById(R.id.id_sum);
             time = itemView.findViewById(R.id.id_time);
             status = itemView.findViewById(R.id.status);
-//            content = itemView.findViewById(R.id.id_noidung);
+            content = itemView.findViewById(R.id.id_noidung);
 
         }
     }

@@ -67,12 +67,12 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         History_model history=list.get(position);
 //        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
-        holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
+//        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
+//        holder.name.setText(list.get(position).getName());
+//        holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
         holder.sum.setText(String.valueOf(list.get(position).getSum()));
-//        holder.conten.setText(list.get(position).getContten());
+        holder.conten.setText(list.get(position).getContten());
 //        holder.status.setText(list.get(position).getStatus());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,12 +165,12 @@ public class History_Adapter_DaThanhToan extends RecyclerView.Adapter<History_Ad
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 //            id_cart =itemView.findViewById(R.id.id_cart);
-            phone =itemView.findViewById(R.id.danhgia_id_phone);
-            name =itemView.findViewById(R.id.danhgia_id_hoten);
-            address =itemView.findViewById(R.id.danhgia_id_address);
+//            phone =itemView.findViewById(R.id.danhgia_id_phone);
+//            name =itemView.findViewById(R.id.danhgia_id_hoten);
+//            address =itemView.findViewById(R.id.danhgia_id_address);
             sum =itemView.findViewById(R.id.danhgia_id_sum);
             time =itemView.findViewById(R.id.danhgia_id_time);
-//            conten=itemView.findViewById(R.id.id_noidung);
+            conten=itemView.findViewById(R.id.id_noidung);
 //            status=itemView.findViewById(R.id.history_status);
             btn_cmt=itemView.findViewById(R.id.btn_cmt);
 
