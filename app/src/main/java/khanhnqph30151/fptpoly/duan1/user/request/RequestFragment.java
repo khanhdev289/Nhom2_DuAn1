@@ -2,6 +2,7 @@ package khanhnqph30151.fptpoly.duan1.user.request;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class RequestFragment extends Fragment {
     private ArrayList<Request> listRequest;
     private EditText user_rq_name, user_rq_email, user_rq_phone, user_rq_content;
     private Button btn_user_rq_send;
-    ImageView iv_facebook;
+    ImageView iv_facebook, iv_call, iv_ins;
     AdapterRequest adapter;
     private View mView;
 
@@ -55,24 +56,29 @@ public class RequestFragment extends Fragment {
         listRequest = dao.getAllData();
         adapter = new AdapterRequest(getContext(), listRequest);
         iv_facebook = mView.findViewById(R.id.iv_facebook);
+        iv_call = mView.findViewById(R.id.request_btn_call);
+        iv_ins = mView.findViewById(R.id.request_btn_ins);
         user_rq_name = mView.findViewById(R.id.user_rq_name);
         user_rq_email = mView.findViewById(R.id.user_rq_email);
         user_rq_phone = mView.findViewById(R.id.user_rq_phone);
         user_rq_content = mView.findViewById(R.id.user_rq_content);
         btn_user_rq_send = mView.findViewById(R.id.btn_user_rq_send);
-        btn_user_rq_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                sendRequestfromUserforAdmin();
-            }
+        btn_user_rq_send.setOnClickListener(view -> sendRequestfromUserforAdmin());
+        iv_facebook.setOnClickListener(v -> {
+            Uri webpage = Uri.parse("https://www.facebook.com/jirai.bee/");
+            Intent webIns = new Intent(Intent.ACTION_VIEW, webpage);
+            startActivity(webIns);
         });
-        iv_facebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), InforWebview.class);
-                startActivity(i);
-            }
+        iv_call.setOnClickListener(view -> {
+            Uri number = Uri.parse("tel:035551234");
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+            startActivity(callIntent);
+        });
+
+        iv_ins.setOnClickListener(view -> {
+            Uri webpage = Uri.parse("https://www.instagram.com/accounts/login/");
+            Intent webIns = new Intent(Intent.ACTION_VIEW, webpage);
+            startActivity(webIns);
         });
 
         return mView;
