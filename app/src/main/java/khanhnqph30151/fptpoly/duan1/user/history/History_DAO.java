@@ -8,10 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import khanhnqph30151.fptpoly.duan1.admin.list_history.invoice;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
-import khanhnqph30151.fptpoly.duan1.setting.User;
-import khanhnqph30151.fptpoly.duan1.user.cart.Cart;
 
 public class History_DAO {
     DbHelper dbHelper;

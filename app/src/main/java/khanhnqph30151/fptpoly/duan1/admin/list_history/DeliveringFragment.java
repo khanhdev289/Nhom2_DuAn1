@@ -13,13 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
 
 public class DeliveringFragment extends Fragment {
-    private invoce_DAO dao;
-    private ArrayList<invoice> list;
+    private Invoce_DAO dao;
+    private ArrayList<Invoice> list;
 
     private Dekivering_Adapter adapter;
     RecyclerView recyclerView;
@@ -44,15 +45,22 @@ public class DeliveringFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.invoice_ry_dang_giao);
+        Invoce_DAO dao = new Invoce_DAO(getContext());
+        list = dao.SeLectDangGiao();
+        Collections.reverse(list);
+        adapter = new Dekivering_Adapter(list, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        invoce_DAO dao = new invoce_DAO(getContext());
+        Invoce_DAO dao = new Invoce_DAO(getContext());
         list = dao.SeLectDangGiao();
+        Collections.reverse(list);
         adapter = new Dekivering_Adapter(list, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

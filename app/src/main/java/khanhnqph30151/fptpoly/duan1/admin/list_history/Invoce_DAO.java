@@ -8,25 +8,23 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import khanhnqph30151.fptpoly.duan1.admin.food.Food;
 import khanhnqph30151.fptpoly.duan1.data.DbHelper;
-import khanhnqph30151.fptpoly.duan1.user.history.History_model;
 
-public class invoce_DAO {
+public class Invoce_DAO {
     DbHelper dbHelper;
     private SQLiteDatabase sqLite;
 
-    public invoce_DAO(Context context) {
+    public Invoce_DAO(Context context) {
         dbHelper = new DbHelper(context);
         sqLite = dbHelper.getWritableDatabase();
     }
 
     @SuppressLint("Range")
-    public ArrayList<invoice> getDaTaInvoice(String sql, String... SelectAvg) {
-        ArrayList<invoice> list = new ArrayList<>();
+    public ArrayList<Invoice> getDaTaInvoice(String sql, String... SelectAvg) {
+        ArrayList<Invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice", SelectAvg);
         while (cursor.moveToNext()) {
-            invoice i = new invoice();
+            Invoice i = new Invoice();
             i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
             i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
             i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
@@ -41,24 +39,24 @@ public class invoce_DAO {
         return list;
     }
 
-    public ArrayList<invoice> getAllData() {
+    public ArrayList<Invoice> getAllData() {
         String sql = "SELECT * FROM tbl_invoice";
         return getDaTaInvoice(sql);
     }
 
-    public long update(invoice i) {
+    public long update(Invoice i) {
         ContentValues values = new ContentValues();
         values.put("invoice_status", i.getStatus());
         return sqLite.update("tbl_invoice", values, "invoice_id = ?", new String[]{String.valueOf(i.getId_history())});
     }
     @SuppressLint("Range")
-    public ArrayList<invoice> SeLectDaDatHang() {
-        ArrayList<invoice> list = new ArrayList<>();
+    public ArrayList<Invoice> SeLectDaDatHang() {
+        ArrayList<Invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đã Đặt Hàng%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
-                invoice i = new invoice();
+                Invoice i = new Invoice();
                 i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
                 i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
                 i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
@@ -76,13 +74,13 @@ public class invoce_DAO {
         return list;
     }
     @SuppressLint("Range")
-    public ArrayList<invoice> SeLectDangGiao() {
-        ArrayList<invoice> list = new ArrayList<>();
+    public ArrayList<Invoice> SeLectDangGiao() {
+        ArrayList<Invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đang Giao%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
-                invoice i = new invoice();
+                Invoice i = new Invoice();
                 i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
                 i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
                 i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
@@ -100,13 +98,13 @@ public class invoce_DAO {
         return list;
     }
     @SuppressLint("Range")
-    public ArrayList<invoice> SeLectDangchuanbi() {
-        ArrayList<invoice> list = new ArrayList<>();
+    public ArrayList<Invoice> SeLectDangchuanbi() {
+        ArrayList<Invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đang Chuẩn Bị Hàng%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
-                invoice i = new invoice();
+                Invoice i = new Invoice();
                 i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
                 i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
                 i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));
@@ -125,13 +123,13 @@ public class invoce_DAO {
     }
 
     @SuppressLint("Range")
-    public ArrayList<invoice> SeLectDaThanhToan() {
-        ArrayList<invoice> list = new ArrayList<>();
+    public ArrayList<Invoice> SeLectDaThanhToan() {
+        ArrayList<Invoice> list = new ArrayList<>();
         Cursor cursor = sqLite.rawQuery("SELECT * FROM tbl_invoice WHERE invoice_status LIKE '%Đã Thanh Toán%'  ", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
-                invoice i = new invoice();
+                Invoice i = new Invoice();
                 i.setId_history(Integer.parseInt(cursor.getString(cursor.getColumnIndex("invoice_id"))));
                 i.setId_cart(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_id"))));
                 i.setPhone(Integer.parseInt(cursor.getString(cursor.getColumnIndex("cart_phone"))));

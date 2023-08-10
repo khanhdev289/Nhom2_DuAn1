@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
 
 public class ListHistoryFragment extends Fragment {
 
-    private invoce_DAO dao;
-    private ArrayList<invoice> list;
-    private ArrayList<invoice> list1;
+    private Invoce_DAO dao;
+    private ArrayList<Invoice> list;
+    private ArrayList<Invoice> list1;
 
     private Invoice_Adapter adapter;
     RecyclerView recyclerView;
@@ -53,9 +54,11 @@ public class ListHistoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.invoice_ry);
-        invoce_DAO dao = new invoce_DAO(getContext());
+        Invoce_DAO dao = new Invoce_DAO(getContext());
         list = dao.SeLectDaDatHang();
+        Collections.reverse(list);
         adapter = new Invoice_Adapter(list, getContext());
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
