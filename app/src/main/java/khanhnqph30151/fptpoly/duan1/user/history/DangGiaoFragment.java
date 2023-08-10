@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
@@ -56,6 +57,7 @@ public class DangGiaoFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
         list = dao.SeLectUESeDangGiao(loggedInUserName);
+        Collections.reverse(list);
         adapter = new History_Adapter(list, getContext(), dao);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
