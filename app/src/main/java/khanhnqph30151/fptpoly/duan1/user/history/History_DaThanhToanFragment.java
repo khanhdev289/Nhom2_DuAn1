@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
@@ -54,6 +55,7 @@ public class History_DaThanhToanFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String loggedInUserName = sharedPreferences.getString("USERNAME", "");
         list = dao.SeLectUESeDaThanhToan(loggedInUserName);
+        Collections.reverse(list);
         adapter = new History_Adapter_DaThanhToan(list, getContext(), dao);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
