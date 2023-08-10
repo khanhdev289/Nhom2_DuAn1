@@ -1,13 +1,10 @@
 package khanhnqph30151.fptpoly.duan1.admin.list_history;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,15 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
-import khanhnqph30151.fptpoly.duan1.user.cart.CartAdapter;
-import khanhnqph30151.fptpoly.duan1.user.cart.CartDAO;
 
 
 public class DaThanhToanFragment extends Fragment {
-    private invoce_DAO dao;
-    private ArrayList<invoice> list;
+    private Invoce_DAO dao;
+    private ArrayList<Invoice> list;
 
     private DaThanhToan_Adapter adapter;
     RecyclerView recyclerView;
@@ -57,8 +53,9 @@ public class DaThanhToanFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.invoice_ry_da_thanh_toan);
-        dao = new invoce_DAO(getContext());
+        dao = new Invoce_DAO(getContext());
         list = dao.SeLectDaThanhToan();
+        Collections.reverse(list);
         adapter = new DaThanhToan_Adapter(list, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -69,6 +66,7 @@ public class DaThanhToanFragment extends Fragment {
     public void onResume() {
         super.onResume();
         list=dao.SeLectDaThanhToan();
+        Collections.reverse(list);
         adapter.setData(list);
     }
 }

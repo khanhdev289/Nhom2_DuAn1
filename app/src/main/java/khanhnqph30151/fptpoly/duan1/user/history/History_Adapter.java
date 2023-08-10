@@ -64,14 +64,10 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         History_model history = list.get(position);
-//        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
         holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
+        holder.content.setText(list.get(position).getContten());
         holder.time.setText(list.get(position).getTime());
-        holder.sum.setText(String.valueOf(list.get(position).getSum()));
-//        holder.conten.setText(list.get(position).getContten());
-//        holder.status.setText(list.get(position).getStatus());
+        holder.sum.setText(String.format("%.0f",list.get(position).getSum())+ " VND");
         history_dao = new History_DAO(context);
         History_model inv = list.get(position);
         if (inv.getStatus().equals("Đã Đặt Hàng")) {
@@ -108,18 +104,15 @@ public class History_Adapter extends RecyclerView.Adapter<History_Adapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView id_cart, phone, name,address,sum,time,conten,status;
+        TextView name,sum,time,content;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            id_cart =itemView.findViewById(R.id.id_cart);
-            phone =itemView.findViewById(R.id.id_phone);
             name =itemView.findViewById(R.id.id_hoten);
-            address =itemView.findViewById(R.id.id_address);
             sum =itemView.findViewById(R.id.id_sum);
             time =itemView.findViewById(R.id.id_time);
-//            conten=itemView.findViewById(R.id.id_noidung);
-//            status=itemView.findViewById(R.id.history_status);
+            content=itemView.findViewById(R.id.id_content);
+
 
 
         }

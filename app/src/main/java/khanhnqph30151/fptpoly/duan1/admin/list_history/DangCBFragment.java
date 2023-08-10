@@ -14,14 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import khanhnqph30151.fptpoly.duan1.R;
 
 
 public class DangCBFragment extends Fragment {
 
-    private invoce_DAO dao;
-    private ArrayList<invoice> list;
+    private Invoce_DAO dao;
+    private ArrayList<Invoice> list;
 
     private DangChuanBiHangAdapter adapter;
     RecyclerView recyclerView;
@@ -53,12 +54,23 @@ public class DangCBFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView =view.findViewById(R.id.invoice_ry_danghuanbi);
-        invoce_DAO dao = new invoce_DAO(getContext());
+        Invoce_DAO dao = new Invoce_DAO(getContext());
         list = dao.SeLectDangchuanbi();
+        Collections.reverse(list);
         adapter = new DangChuanBiHangAdapter(list, getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Invoce_DAO dao = new Invoce_DAO(getContext());
+        list = dao.SeLectDangchuanbi();
+        Collections.reverse(list);
+        adapter = new DangChuanBiHangAdapter(list, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
     }
 

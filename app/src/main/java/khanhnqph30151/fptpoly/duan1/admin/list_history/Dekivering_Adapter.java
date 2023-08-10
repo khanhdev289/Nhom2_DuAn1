@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -25,21 +24,21 @@ import khanhnqph30151.fptpoly.duan1.user.notification.Noti;
 import khanhnqph30151.fptpoly.duan1.user.notification.NotiDAO;
 
 public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.ViewHolder> {
-    private ArrayList<invoice> list;
-    private ArrayList<invoice> list1;
+    private ArrayList<Invoice> list;
+    private ArrayList<Invoice> list1;
     private Context context;
     private NotiDAO notiDAO;
 
-    private invoce_DAO invoce_dao;
+    private Invoce_DAO invoce_dao;
 
-    public Dekivering_Adapter(ArrayList<invoice> list, Context context) {
+    public Dekivering_Adapter(ArrayList<Invoice> list, Context context) {
         this.list = list;
         this.context = context;
-        invoce_dao=new invoce_DAO(context);
+        invoce_dao=new Invoce_DAO(context);
         notiDAO=new NotiDAO(context);
     }
 
-    public void setData(ArrayList<invoice> list) {
+    public void setData(ArrayList<Invoice> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -55,15 +54,12 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        invoce_dao = new invoce_DAO(context);
-        invoice inv = list.get(position);
-//        holder.id_cart.setText(String.valueOf(list.get(position).getId_history()));
-        holder.phone.setText(String.valueOf(list.get(position).getPhone()));
+        invoce_dao = new Invoce_DAO(context);
+        Invoice inv = list.get(position);
         holder.name.setText(list.get(position).getName());
-        holder.address.setText(list.get(position).getAddress());
         holder.time.setText(list.get(position).getTime());
-        holder.sum.setText(String.valueOf(list.get(position).getSum()));
-//        holder.content.setText(list.get(position).getContten());
+        holder.sum.setText(String.format("%.0f",list.get(position).getSum())+ " VND");
+        holder.content.setText(list.get(position).getContten());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,10 +114,8 @@ public class Dekivering_Adapter extends RecyclerView.Adapter<Dekivering_Adapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            id_cart = itemView.findViewById(R.id.id_cart);
-            phone = itemView.findViewById(R.id.id_phone);
+            content=itemView.findViewById(R.id.id_content);
             name = itemView.findViewById(R.id.id_hoten);
-            address = itemView.findViewById(R.id.id_address);
             sum = itemView.findViewById(R.id.id_sum);
             time = itemView.findViewById(R.id.id_time);
             status = itemView.findViewById(R.id.status);

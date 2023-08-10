@@ -1,6 +1,6 @@
 package khanhnqph30151.fptpoly.duan1.admin.list_history;
 
-public class invoice {
+public class Invoice {
     private int id_history;
     private int id_cart;
     private int phone;
@@ -11,10 +11,10 @@ public class invoice {
     private String status;
     private double sum;
 
-    public invoice() {
+    public Invoice() {
     }
 
-    public invoice(int id_history, int id_cart, int phone, String name, String address, String time, String contten, String status, double sum) {
+    public Invoice(int id_history, int id_cart, int phone, String name, String address, String time, String contten, String status, double sum) {
         this.id_history = id_history;
         this.id_cart = id_cart;
         this.phone = phone;
