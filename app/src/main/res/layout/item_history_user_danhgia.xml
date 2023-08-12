@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="15dp"
+  >
+    <LinearLayout
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Họ tên:"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/danhgia_id_hoten"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="nguyễn hoàng nhật"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Đơn hàng:"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_content_danhgia"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="25/5 trần hưng đạo - thanh xuân- hà nội "
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#119117"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Ngày đặt hàng:"
+                android:textSize="15dp"
+                android:layout_margin="5dp"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/danhgia_id_time"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="13/07/2023"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="@android:color/holo_red_dark" />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Tổng Tiền:"
+                android:textColor="#F44336"
+                android:layout_margin="5dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/danhgia_id_sum"
+                android:textStyle="bold"
+                android:layout_margin="5dp"
+                android:text="500000"
+                android:textSize="15dp"
+                android:textColor="#F44336"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_cmt"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@color/main_red"
+            android:text="Đánh giá"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
