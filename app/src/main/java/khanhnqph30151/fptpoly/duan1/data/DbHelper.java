@@ -104,6 +104,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_NOTI_CREATE);
 
 //        db.execSQL("INSERT INTO tbl_noti(noti_time,noti_status) VALUES ('20:20','Đã thanh toán'),('30:20','Đang giao hàng')");
+
+        db.execSQL("INSERT INTO tbl_request(request_name,request_email,request_phone,request_content ) VALUES ('Khanh','khanhdev289@gmail.com','0378332809','Món thịt chó rất là ngon nhưng quán cho hơi ít rau'),('Khai','khailn321@gmail.com','0379987987','Chả mực ngon hết nước chấm')");
         db.execSQL("INSERT INTO tbl_typeFood(typeFood_typeName) VALUES ('Món chính'),('Món phụ'),('Đồ uống')");
         db.execSQL("INSERT INTO tbl_food(typeFood_typeName,food_img,food_name,food_description,food_price) VALUES ('Món chính','https://image.vtc.vn/resize/th/upload/2020/03/17/cay-to-7-mon-08364272.jpg'" +
                 ", 'Thịt chó'," +
